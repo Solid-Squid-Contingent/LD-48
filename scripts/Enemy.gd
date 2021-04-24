@@ -29,12 +29,27 @@ export var drunkPathfinding: bool = false
 export var demolition: bool = true
 export var speed: int = 200
 
+var health = 100;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	layout = get_tree().get_nodes_in_group('Layout')[0]
 	player = get_tree().get_nodes_in_group('Player')[0]
 	treasurePosition = get_tree().get_nodes_in_group('Treasure')[0].global_position
 	cellSize = layout.cell_size
+
+func collideWithSpikes():
+	changeHealth(-100)
+	print('oh snap!')
+
+func die():
+	queue_free()
+
+func changeHealth(amount: int):
+	health += amount
+	if health <= 0:
+		die()
+	
 
 func positionInMap():
 	return layout.world_to_map(layout.to_local(global_position))
@@ -150,3 +165,6 @@ func _physics_process(delta):
 		demolish(delta)
 	
 	move_and_slide((nextWaypoint-position).normalized() * speed)
+	for collisionIndex in range(get_slide_count()):
+		var collision = get_slide_collision(collisionIndex)
+		collision.collider.collideWith(self)
