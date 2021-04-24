@@ -31,11 +31,11 @@ class Stats:
 	var drunkPathfinding: bool = false
 	var demolition: bool = true
 	var speed: int = 200
-	var maxHealth: int = 200
+	var maxHealth: int = 100
+	var health: int = maxHealth
 
-var individualStats = [Stats.new(), Stats.new()]
+var individualStats = [Stats.new(), Stats.new(), Stats.new(), Stats.new(), Stats.new(), Stats.new(), Stats.new()]
 var groupStats = Stats.new()
-var health = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,6 +43,7 @@ func _ready():
 	player = get_tree().get_nodes_in_group('Player')[0]
 	treasurePosition = get_tree().get_nodes_in_group('Treasure')[0].global_position
 	cellSize = layout.cell_size
+	updateGroupStats()
 
 func collideWithSpikes():
 	changeHealth(-100)
@@ -52,9 +53,18 @@ func die():
 	queue_free()
 
 func changeHealth(amount: int):
-	health += amount
-	if health <= 0:
+	groupStats.health += amount
+	if groupStats.health <= 0:
 		die()
+		return
+	
+	while amount <= 0:
+		var hitIndividualIndex = randi() % individualStats.size()
+		var previousHealth = individualStats[hitIndividualIndex].health
+		individualStats[hitIndividualIndex].health += amount
+		amount += previousHealth
+		if individualStats[hitIndividualIndex].health <= 0:
+			individualStats.remove(hitIndividualIndex)
 	
 
 func positionInMap():
@@ -103,6 +113,7 @@ func updateGroupStats():
 	groupStats.demolition = false
 	groupStats.speed = 0
 	groupStats.maxHealth = 0
+	groupStats.health = 0
 	
 	for stat in individualStats:
 		if !stat.drunkPathfinding:
@@ -111,6 +122,7 @@ func updateGroupStats():
 			groupStats.demolition = true
 		groupStats.speed += stat.speed
 		groupStats.maxHealth += stat.maxHealth
+		groupStats.health += stat.health
 	
 	groupStats.speed /= individualStats.size()
 
@@ -127,7 +139,7 @@ func seperateGroup(stats, i):
 	
 func getNextWaypoint():
 	if (treasurePosition - global_position).length() < 5:
-		player.health -= 10
+		player.health -= 10 * individualStats.size()
 		queue_free()
 	
 	treasureRayCast.cast_to = treasurePosition - global_position
@@ -177,20 +189,21 @@ func getNextWaypoint():
 			else:
 				var enemiesPerPath = individualStats.size() / currentTreeNode.children.size()
 				for i in range(currentTreeNode.children.size() - 1):
-					seperateGroup(individualStats.slice(i * enemiesPerPath, (i + 1) * enemiesPerPath), i)
+					seperateGroup(individualStats.slice(i * enemiesPerPath, (i + 1) * enemiesPerPath - 1), i)
 					
-				currentTreeNode = currentTreeNode.children.back()
 					
 				individualStats = individualStats.slice(
-							currentTreeNode.children.size() * enemiesPerPath,
+							(currentTreeNode.children.size() - 1) * enemiesPerPath,
 							individualStats.size())
+							
+				currentTreeNode = currentTreeNode.children.back()
 				updateGroupStats()
 		else:
 			currentTreeNode = currentTreeNode.children[0]
 		
 		if layout.get_cellv(currentTreeNode.tileIndex) != 1:
-				resetNavigation()
-				return getNextWaypoint()
+			resetNavigation()
+			return getNextWaypoint()
 			
 		return centeredWorldPosition(currentTreeNode.tileIndex)
 
@@ -208,13 +221,17 @@ func demolish(delta):
 			var dynamite = dynamiteScene.instance()
 			dynamite.position = centeredWorldPosition(demolishPos)
 			get_parent().add_child(dynamite)
-	
+
+func _process(delta):
+	$Label.text = String(individualStats.size())
+
 func _physics_process(delta):
 	if (nextWaypoint-position).length() < 5 or nextWaypoint.x < 0:
 		nextWaypoint = getNextWaypoint()
 	
 	if groupStats.demolition:
 		demolish(delta)
+	
 	
 	move_and_slide((nextWaypoint-position).normalized() * groupStats.speed)
 	for collisionIndex in range(get_slide_count()):
