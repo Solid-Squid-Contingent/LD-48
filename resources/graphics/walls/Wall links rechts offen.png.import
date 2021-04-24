@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spikes.png-5613dbcbc8b1c6dadff8b0dbdaed4058.stex"
+path="res://.import/Wall links rechts offen.png-b988109537b94fb4813c1f9a11b3098a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/spikes.png"
-dest_files=[ "res://.import/spikes.png-5613dbcbc8b1c6dadff8b0dbdaed4058.stex" ]
+source_file="res://resources/graphics/walls/Wall links rechts offen.png"
+dest_files=[ "res://.import/Wall links rechts offen.png-b988109537b94fb4813c1f9a11b3098a.stex" ]
 
 [params]
 

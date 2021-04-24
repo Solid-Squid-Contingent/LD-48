@@ -15,13 +15,11 @@ func _ready():
 
 
 func activateTraps():
-	print("pressed")
 	for trap in connectedTraps:
 		trap.activate()
 	
 func connectToTrap(node):
 	connectedTraps.append(node)
-	print("connected something")
 
 func _on_PressurePlate_body_entered(_body):
 	if bodiesOnPlate == 0:

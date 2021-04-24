@@ -34,8 +34,8 @@ class Stats:
 	var maxHealth: int = 100
 	var health: int = maxHealth
 
-var individualStats = [Stats.new(), Stats.new(), Stats.new(), Stats.new(), Stats.new(), Stats.new(), Stats.new()]
-var groupStats = Stats.new()
+var individualStats = [Stats.new()]
+var groupStats: Stats = Stats.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -69,7 +69,8 @@ func changeHealth(amount: int):
 		amount += previousHealth
 		if individualStats[hitIndividualIndex].health <= 0:
 			individualStats.remove(hitIndividualIndex)
-	
+			
+	updateRendering()
 
 func positionInMap():
 	return layout.world_to_map(layout.to_local(global_position))
@@ -129,6 +130,7 @@ func updateGroupStats():
 		groupStats.health += stat.health
 	
 	groupStats.speed /= individualStats.size()
+	updateRendering()
 
 func seperateGroup(stats, i):
 	var enemy : Enemy = enemyScene.instance()
@@ -230,7 +232,7 @@ func demolish(delta):
 			dynamite.position = centeredWorldPosition(demolishPos)
 			get_parent().add_child(dynamite)
 
-func _process(_delta):
+func updateRendering():
 	$Label.text = String(individualStats.size())
 
 func _physics_process(delta):

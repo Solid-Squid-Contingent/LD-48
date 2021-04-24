@@ -21,6 +21,8 @@ var mode = MODES.DEFAULT
 
 var connectOrigin
 
+var waveScreen
+
 
 onready var lampScene = preload("res://scenes/Lamp.tscn")
 onready var pressurePlateScene = preload("res://scenes/PressurePlate.tscn")
@@ -44,6 +46,7 @@ onready var currentItem = placeableItems[0]
 
 func _ready():
 	layout = get_tree().get_nodes_in_group('Layout')[0]
+	waveScreen = get_tree().get_nodes_in_group('WaveScreen')[0]
 
 func connectTrap(node):
 	connectOrigin.connectToTrap(node)
@@ -56,12 +59,10 @@ func changeToConnectModeFrom(node):
 	connectOrigin = node
 	mode = MODES.CONNECTING_TRAPS
 	$Sprite.texture = buildingImage
-	print(mode)
 
 func changeToDefaultMode():
 	mode = MODES.DEFAULT
 	$Sprite.texture = pharaohImage
-	print(mode)
 
 func positionInMap(pos):
 	return layout.world_to_map(layout.to_local(pos))
@@ -121,3 +122,7 @@ func _physics_process(_delta):
 	get_input()
 	look_at(position + velocity)
 	velocity = move_and_slide(velocity)
+	if position.x < 0 or position.x > 1000 or position.y < 0 or position.y > 600:
+		waveScreen.show()
+		position.x = clamp(position.x, 0, 1000)
+		position.y = clamp(position.y, 0, 600)

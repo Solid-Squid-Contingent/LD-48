@@ -34,3 +34,11 @@ shadow_color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.7, 0.7 )
+limit_left = 0
+limit_top = 0
+limit_right = 1000
+limit_bottom = 600
