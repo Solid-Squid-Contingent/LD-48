@@ -1,7 +1,9 @@
 extends KinematicBody2D
 
 var layout: TileMap
-export (int) var speed = 200
+export var speed : int = 200
+
+const INTERACT_RANGE = 100
 
 var velocity = Vector2()
 
@@ -13,10 +15,10 @@ func positionInMap(pos):
 	return layout.world_to_map(layout.to_local(pos))
 
 func _input(event):
-	if event.is_action_pressed("click"):
+	if event.is_action_pressed("build"):
 		var target = get_global_mouse_position()
 		
-		if (target - global_position).length() < 100:
+		if (target - global_position).length() < INTERACT_RANGE:
 			var index = positionInMap(target)
 			layout.set_cellv(index, 1 - layout.get_cellv(index))
 

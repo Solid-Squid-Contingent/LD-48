@@ -19,7 +19,11 @@ class TreeNode:
 var currentTreeNode : TreeNode = null
 var explored = {}
 
+var dynamiteScene = preload("res://scenes/Dynamite.tscn")
+
 export var drunkPathfinding: bool = false
+export var demolition: bool = true
+export var speed: int = 200
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,11 +49,11 @@ func getAdjacentCells():
 	adjacentCells.append(pairOfCellAndPosition(Vector2(0,-1)))
 	return adjacentCells
 
-func getMoveableDirections():
+func getMoveableDirections(tileId = 1):
 	var adjacentCells = getAdjacentCells()
 	var moveableDirections = []
 	for cell in adjacentCells:
-		if cell[0] == 1:
+		if cell[0] == tileId:
 			moveableDirections.append(cell[1])
 	
 	return moveableDirections
@@ -106,10 +110,28 @@ func getNextWaypoint():
 				return getNextWaypoint()
 			
 		return centeredWorldPosition(currentTreeNode.tileIndex)
+
+const MAX_DEMOLITION_COOLDOWN = 4.0
+var demolitionCooldown = MAX_DEMOLITION_COOLDOWN
+func demolish(delta):
+	if demolitionCooldown > 0.0:
+		demolitionCooldown -= delta
+	else:
+		var moveableDirections = getMoveableDirections(0)
+		if !moveableDirections.empty():
+			demolitionCooldown = MAX_DEMOLITION_COOLDOWN
+			var demolishPos = positionInMap() + moveableDirections[randi() % moveableDirections.size()]
 			
+			var dynamite = dynamiteScene.instance()
+			dynamite.position = centeredWorldPosition(demolishPos)
+			get_parent().add_child(dynamite)
+		
 	
-func _physics_process(_delta):
+func _physics_process(delta):
 	if (nextWaypoint-position).length() < 5 or nextWaypoint.x < 0:
 		nextWaypoint = getNextWaypoint()
 	
-	move_and_slide((nextWaypoint-position).normalized() * 200)
+	if demolition:
+		demolish(delta)
+	
+	move_and_slide((nextWaypoint-position).normalized() * speed)

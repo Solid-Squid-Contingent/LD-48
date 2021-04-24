@@ -64,4 +64,6 @@ position = Vector2( 869.444, 126.256 )
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
 position = Vector2( 323.896, 424.138 )
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
+[node name="Player" parent="." groups=[
+"Player",
+] instance=ExtResource( 4 )]
