@@ -9,12 +9,10 @@ func _ready():
 	pass # Replace with function body.
 	
 
-func _on_Arrow_body_entered(body):
+func _on_Arrow_body_entered(_body):
 	if $Stuck.is_stopped():
 		sleeping = true
-		mode = MODE_STATIC
-		contact_monitor = false
-		$CollisionShape2D.disabled = true
+		set_deferred("mode", MODE_STATIC)
 		$Stuck.start()
 
 

@@ -33,3 +33,14 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MergeArea" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MergeArea"]
+position = Vector2( -2.06644, 0.314659 )
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="MergeArea" to="." method="_on_MergeArea_area_entered"]
+[connection signal="area_exited" from="MergeArea" to="." method="_on_MergeArea_area_exited"]

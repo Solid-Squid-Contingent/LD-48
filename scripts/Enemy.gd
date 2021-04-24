@@ -30,7 +30,7 @@ onready var enemyScene = load("res://scenes/Enemy.tscn")
 class Stats:
 	var drunkPathfinding: bool = false
 	var demolition: bool = true
-	var speed: int = 200
+	var speed: int = 100
 	var maxHealth: int = 100
 	var health: int = maxHealth
 
@@ -171,8 +171,12 @@ func getNextWaypoint():
 			
 			currentTreeNode.completed = true
 		
-		while !currentTreeNode.children.empty() and explored.has(currentTreeNode.children[0].tileIndex):
-			currentTreeNode.children.remove(0)
+		var curChildIndex = 0
+		while curChildIndex < currentTreeNode.children.size():
+			if explored.has(currentTreeNode.children[curChildIndex].tileIndex):
+				currentTreeNode.children.remove(curChildIndex)
+			else:
+				curChildIndex += 1
 		
 		if currentTreeNode.children.empty():
 			if currentTreeNode.parent:
@@ -226,7 +230,7 @@ func demolish(delta):
 			dynamite.position = centeredWorldPosition(demolishPos)
 			get_parent().add_child(dynamite)
 
-func _process(delta):
+func _process(_delta):
 	$Label.text = String(individualStats.size())
 
 func _physics_process(delta):
@@ -242,3 +246,19 @@ func _physics_process(delta):
 		var collision = get_slide_collision(collisionIndex)
 		if collision.collider.has_method("collideWith"):
 			collision.collider.collideWith(self)
+
+
+var mergeable = false
+func _on_MergeArea_area_entered(area):
+	var enemy : Enemy = area.get_parent()
+	if mergeable and enemy.mergeable and !is_queued_for_deletion():
+		enemy.queue_free()
+		for stat in enemy.individualStats:
+			individualStats.append(stat)
+		updateGroupStats()
+		for explore in enemy.explored:
+			explored[explore] = true
+
+
+func _on_MergeArea_area_exited(_area):
+	mergeable = true
