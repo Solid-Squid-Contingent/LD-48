@@ -22,7 +22,6 @@ func activate():
 
 func _input(event):
 	if event.is_action_pressed('interact'):
-		print("arrowTrap was clicked")
 		var target = get_global_mouse_position()
 		if (target - global_position).length() < 100 and \
 			(target - player.global_position).length() < player.INTERACT_RANGE:

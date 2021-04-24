@@ -17,5 +17,4 @@ func _on_Arrow_body_entered(_body):
 
 
 func _on_Stuck_timeout():
-	print("i am free")
 	queue_free()
