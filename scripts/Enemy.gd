@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Enemy
 
 onready var treasureRayCast = $TreasureRayCast
 var treasurePosition
@@ -24,12 +25,17 @@ var currentTreeNode : TreeNode = null
 var explored = {}
 
 var dynamiteScene = preload("res://scenes/Dynamite.tscn")
+onready var enemyScene = load("res://scenes/Enemy.tscn")
 
-export var drunkPathfinding: bool = false
-export var demolition: bool = true
-export var speed: int = 200
+class Stats:
+	var drunkPathfinding: bool = false
+	var demolition: bool = true
+	var speed: int = 200
+	var maxHealth: int = 200
 
-var health = 100;
+var individualStats = [Stats.new(), Stats.new()]
+var groupStats = Stats.new()
+var health = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -91,6 +97,32 @@ func getRandomAdjacentWaypoint():
 func resetNavigation():
 	currentTreeNode = null
 	explored.clear()
+
+func updateGroupStats():
+	groupStats.drunkPathfinding = true
+	groupStats.demolition = false
+	groupStats.speed = 0
+	groupStats.maxHealth = 0
+	
+	for stat in individualStats:
+		if !stat.drunkPathfinding:
+			groupStats.drunkPathfinding = false
+		if stat.demolition:
+			groupStats.demolition = true
+		groupStats.speed += stat.speed
+		groupStats.maxHealth += stat.maxHealth
+	
+	groupStats.speed /= individualStats.size()
+
+func seperateGroup(stats, i):
+	var enemy : Enemy = enemyScene.instance()
+	enemy.explored = explored
+	enemy.individualStats = stats
+	enemy.updateGroupStats()
+	enemy.currentTreeNode = currentTreeNode.children[i]
+	enemy.position = position
+	enemy.nextWaypoint = centeredWorldPosition(enemy.currentTreeNode.tileIndex)
+	get_parent().add_child(enemy)
 	
 func getNextWaypoint():
 	if (treasurePosition - global_position).length() < 5:
@@ -102,7 +134,7 @@ func getNextWaypoint():
 	if !treasureRayCast.is_colliding():
 		return treasurePosition
 	
-	if drunkPathfinding:
+	if groupStats.drunkPathfinding:
 		return getRandomAdjacentWaypoint()
 	else:
 		var posInMap = positionInMap()
@@ -127,11 +159,31 @@ func getNextWaypoint():
 		
 		if currentTreeNode.children.empty():
 			if currentTreeNode.parent:
+				currentTreeNode.parent.children.erase(currentTreeNode)
 				currentTreeNode = currentTreeNode.parent
-				currentTreeNode.children.remove(0)
 			else:
 				resetNavigation()
 				return getNextWaypoint()
+		elif currentTreeNode.children.size() > 1 and individualStats.size() > 1:
+			if currentTreeNode.children.size() >= individualStats.size():
+				for i in range(individualStats.size() - 1):
+					seperateGroup([individualStats[i]], i)
+					
+				currentTreeNode = currentTreeNode.children[individualStats.size() - 1]
+				
+				individualStats = [individualStats[individualStats.size() - 1]]
+				updateGroupStats()
+			else:
+				var enemiesPerPath = individualStats.size() / currentTreeNode.children.size()
+				for i in range(currentTreeNode.children.size() - 1):
+					seperateGroup(individualStats.slice(i * enemiesPerPath, (i + 1) * enemiesPerPath), i)
+					
+				currentTreeNode = currentTreeNode.children.back()
+					
+				individualStats = individualStats.slice(
+							currentTreeNode.children.size() * enemiesPerPath,
+							individualStats.size())
+				updateGroupStats()
 		else:
 			currentTreeNode = currentTreeNode.children[0]
 		
@@ -155,16 +207,16 @@ func demolish(delta):
 			var dynamite = dynamiteScene.instance()
 			dynamite.position = centeredWorldPosition(demolishPos)
 			get_parent().add_child(dynamite)
-		
 	
 func _physics_process(delta):
 	if (nextWaypoint-position).length() < 5 or nextWaypoint.x < 0:
 		nextWaypoint = getNextWaypoint()
 	
-	if demolition:
+	if groupStats.demolition:
 		demolish(delta)
 	
-	move_and_slide((nextWaypoint-position).normalized() * speed)
+	move_and_slide((nextWaypoint-position).normalized() * groupStats.speed)
 	for collisionIndex in range(get_slide_count()):
 		var collision = get_slide_collision(collisionIndex)
-		collision.collider.collideWith(self)
+		if collision.collider.has_method("collideWith"):
+			collision.collider.collideWith(self)
