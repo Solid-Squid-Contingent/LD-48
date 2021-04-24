@@ -36,6 +36,13 @@ func get_input():
 	if Input.is_action_pressed("up"):
 		velocity.y -= 1
 	velocity = velocity.normalized() * speed
+	
+func _process(delta):
+	var inWallSnapped = layout.get_cellv(positionInMap(global_position.snapped(Vector2.ONE))) == 0
+	var inWallUnsnapped = layout.get_cellv(positionInMap(global_position)) == 0
+	var inWall = inWallSnapped or inWallUnsnapped
+	$Light.visible = !inWall
+	$WallLight.visible = inWall
 
 func _physics_process(_delta):
 	get_input()

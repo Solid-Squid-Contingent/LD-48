@@ -240,7 +240,7 @@ func _physics_process(delta):
 	if groupStats.demolition:
 		demolish(delta)
 	
-	
+	# warning-ignore:return_value_discarded
 	move_and_slide((nextWaypoint-position).normalized() * groupStats.speed)
 	for collisionIndex in range(get_slide_count()):
 		var collision = get_slide_collision(collisionIndex)
