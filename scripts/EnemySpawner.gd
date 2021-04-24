@@ -2,6 +2,16 @@ extends Sprite
 
 onready var enemyScene = preload("res://scenes/Enemy.tscn")
 
+#drunkPathfinding: bool
+#demolition: bool
+#speed: int
+#maxHealth: int
+#texturePath: String
+var enemyTypes = [
+	Enemy.Stats.new(false, false, 100, 100, "evilBellPepper.png"),
+	Enemy.Stats.new(false, true, 50, 100, "fancyBellPepper.png")
+]
+
 var waves = []
 
 func _ready():
@@ -12,11 +22,19 @@ func generateWave():
 	for _i in range(rand_range(2,10)):
 		var enemy : Enemy = enemyScene.instance()
 		enemy.individualStats = []
+		var type = null
+		if randf() <= 0.5:
+			type = enemyTypes[randi() % enemyTypes.size()]
+			
 		for _u in range(rand_range(2,5)):
-			enemy.individualStats.append(Enemy.Stats.new())
+			if type:
+				enemy.individualStats.append(type.duplicate())
+			else:
+				enemy.individualStats.append(enemyTypes[randi() % enemyTypes.size()].duplicate())
 		enemy.updateGroupStats()
 		wave.append(enemy)
 	waves.append(wave)
+	
 func spawnEnemy():
 	while waves.size() < 3:
 		generateWave()

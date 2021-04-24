@@ -2,8 +2,8 @@ extends Area2D
 
 var bodiesOnPlate = 0
 
-var notPressedImage = preload("res://resources/graphics/pressurePlate.png")
-var pressedImage = preload("res://resources/graphics/pressurePlatePressed.png")
+var notPressedImage = preload("res://resources/graphics/traps/pressurePlate.png")
+var pressedImage = preload("res://resources/graphics/traps/pressurePlatePressed.png")
 
 var player
 

@@ -1,8 +1,8 @@
 extends KinematicBody2D
 class_name Player
 
-var pharaohImage = preload("res://resources/graphics/player.png")
-var buildingImage = preload("res://resources/graphics/buildingPharaoh.png")
+var pharaohImage = preload("res://resources/graphics/player/player.png")
+var buildingImage = preload("res://resources/graphics/player/buildingPharaoh.png")
 
 var layout: TileMap
 export var speed : int = 200

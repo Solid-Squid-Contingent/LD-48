@@ -28,11 +28,30 @@ var dynamiteScene = preload("res://scenes/Dynamite.tscn")
 onready var enemyScene = load("res://scenes/Enemy.tscn")
 
 class Stats:
-	var drunkPathfinding: bool = false
-	var demolition: bool = true
-	var speed: int = 100
-	var maxHealth: int = 100
-	var health: int = maxHealth
+	var drunkPathfinding: bool
+	var demolition: bool
+	var speed: int
+	var maxHealth: int
+	var health: int
+	var texturePath: String
+		
+	func _init(drunkPathfinding_ = false,
+		demolition_ = false,
+		speed_ = 100,
+		maxHealth_ = 100,
+		texturePath_ = "evilBellPepper.png"):
+			
+		drunkPathfinding = drunkPathfinding_
+		demolition = demolition_
+		speed = speed_
+		maxHealth = maxHealth_
+		health = maxHealth
+		texturePath = texturePath_
+	
+	func duplicate():
+		var s = Stats.new(drunkPathfinding, demolition, speed, maxHealth, texturePath)
+		s.health = health
+		return s
 
 var individualStats = [Stats.new()]
 var groupStats: Stats = Stats.new()
@@ -119,6 +138,7 @@ func updateGroupStats():
 	groupStats.speed = 0
 	groupStats.maxHealth = 0
 	groupStats.health = 0
+	groupStats.texturePath = individualStats[0].texturePath
 	
 	for stat in individualStats:
 		if !stat.drunkPathfinding:
@@ -128,6 +148,8 @@ func updateGroupStats():
 		groupStats.speed += stat.speed
 		groupStats.maxHealth += stat.maxHealth
 		groupStats.health += stat.health
+		if stat.texturePath != groupStats.texturePath:
+			groupStats.texturePath = "mixedBellPepper.png"
 	
 	groupStats.speed /= individualStats.size()
 	updateRendering()
@@ -234,6 +256,7 @@ func demolish(delta):
 
 func updateRendering():
 	$Label.text = String(individualStats.size())
+	$Sprite.texture = load("res://resources/graphics/enemies/" + groupStats.texturePath)
 
 func _physics_process(delta):
 	if (nextWaypoint-position).length() < 5 or nextWaypoint.x < 0:
