@@ -62,6 +62,10 @@ func getRandomAdjacentWaypoint():
 	if moveableDirections.empty():
 		return position
 	return directionToWaypoint(moveableDirections[randi() % moveableDirections.size()])
+
+func resetNavigation():
+	currentTreeNode = null
+	explored.clear()
 	
 func getNextWaypoint():
 	if drunkPathfinding:
@@ -92,9 +96,14 @@ func getNextWaypoint():
 				currentTreeNode = currentTreeNode.parent
 				currentTreeNode.children.remove(0)
 			else:
-				return getRandomAdjacentWaypoint()
+				resetNavigation()
+				return getNextWaypoint()
 		else:
 			currentTreeNode = currentTreeNode.children[0]
+		
+		if layout.get_cellv(currentTreeNode.tileIndex) != 1:
+				resetNavigation()
+				return getNextWaypoint()
 			
 		return centeredWorldPosition(currentTreeNode.tileIndex)
 			
