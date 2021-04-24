@@ -75,7 +75,7 @@ script = ExtResource( 4 )
 position = Vector2( 869.444, 126.256 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 323.896, 424.138 )
+position = Vector2( 526.896, 578.138 )
 collision_layer = 4
 
 [node name="Spikes" parent="." instance=ExtResource( 5 )]
