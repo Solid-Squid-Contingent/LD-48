@@ -116,10 +116,11 @@ func updateGroupStats():
 
 func seperateGroup(stats, i):
 	var enemy : Enemy = enemyScene.instance()
-	enemy.explored = explored
+	enemy.explored = explored.duplicate()
 	enemy.individualStats = stats
 	enemy.updateGroupStats()
-	enemy.currentTreeNode = currentTreeNode.children[i]
+	var enemyTreeRoot = TreeNode.new(currentTreeNode.tileIndex, null)
+	enemy.currentTreeNode = TreeNode.new(currentTreeNode.children[i].tileIndex, enemyTreeRoot)
 	enemy.position = position
 	enemy.nextWaypoint = centeredWorldPosition(enemy.currentTreeNode.tileIndex)
 	get_parent().add_child(enemy)
