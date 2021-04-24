@@ -23,19 +23,19 @@ func connectToTrap(node):
 	connectedTraps.append(node)
 	print("connected something")
 
-func _on_PressurePlate_body_entered(body):
+func _on_PressurePlate_body_entered(_body):
 	if bodiesOnPlate == 0:
 		$Sprite.texture = pressedImage
 		activateTraps()
 	bodiesOnPlate += 1
 
-func _on_PressurePlate_body_exited(body):
+func _on_PressurePlate_body_exited(_body):
 	bodiesOnPlate -= 1
 	if bodiesOnPlate == 0:
 		$Sprite.texture = notPressedImage
 
 
-func _on_PressurePlate_input_event(viewport, event, shape_idx):
+func _on_PressurePlate_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed('interact'):
 		var target = get_global_mouse_position()
 		if (target - global_position).length() < 100 and \

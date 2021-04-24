@@ -1,7 +1,9 @@
 extends RigidBody2D 
 
-func collideWith(body): 
-	body.collideWithArrow()
+func collideWith(body):
+	if !is_queued_for_deletion():
+		body.collideWithArrow()
+		queue_free()
 
 
 # Called when the node enters the scene tree for the first time.

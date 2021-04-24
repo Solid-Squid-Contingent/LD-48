@@ -110,7 +110,7 @@ func get_input():
 		velocity.y -= 1
 	velocity = velocity.normalized() * speed
 	
-func _process(delta):
+func _process(_delta):
 	var inWallSnapped = layout.get_cellv(positionInMap(global_position.snapped(Vector2.ONE))) == 0
 	var inWallUnsnapped = layout.get_cellv(positionInMap(global_position)) == 0
 	var inWall = inWallSnapped or inWallUnsnapped
