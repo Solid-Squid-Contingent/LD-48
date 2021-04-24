@@ -5,13 +5,36 @@ export var speed : int = 200
 
 const INTERACT_RANGE = 100
 
+enum MODES{
+	DEFAULT,
+	CONNECTING_TRAPS
+}
+
 var velocity = Vector2()
 var money = 100
 var health = 100
+var mode = MODES.DEFAULT
+
+var connectOrigin
+
 
 func _ready():
 	layout = get_tree().get_nodes_in_group('Layout')[0]
 
+func connectTrap(node):
+	connectOrigin.connectToTrap(node)
+
+func isInConnectMode():
+	return mode == MODES.CONNECTING_TRAPS
+
+func changeToConnectModeFrom(node):
+	connectOrigin = node
+	mode = MODES.CONNECTING_TRAPS
+	print(mode)
+
+func changeToDefaultMode():
+	mode = MODES.DEFAULT
+	print(mode)
 
 func positionInMap(pos):
 	return layout.world_to_map(layout.to_local(pos))
@@ -24,6 +47,7 @@ func _input(event):
 			var index = positionInMap(target)
 			money -= 10
 			layout.set_cellv(index, 1 - layout.get_cellv(index))
+		
 
 func get_input():
 	velocity = Vector2()

@@ -10,6 +10,8 @@ func _ready():
 	
 
 func _on_Arrow_body_entered(body):
+	if body.has_method("collideWithArrow"):
+		body.collideWithArrow()
 	if $Stuck.is_stopped():
 		sleeping = true
 		mode = MODE_STATIC
