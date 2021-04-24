@@ -22,20 +22,25 @@ var mode = MODES.DEFAULT
 var connectOrigin
 
 
-const placeableItems = [
+onready var lampScene = preload("res://scenes/Lamp.tscn")
+onready var pressurePlateScene = preload("res://scenes/PressurePlate.tscn")
+onready var arrowTrapScene = preload("res://scenes/ArrowTrap.tscn")
+onready var spikesScene = preload("res://scenes/Spikes.tscn")
+
+onready var placeableItems = [
 	["", "placeNothing"],
 	["Wall", "toggleWall"],
-	["Lamp", "placeLamp"],
-	["", "placeNothing"],
-	["", "placeNothing"],
-	["", "placeNothing"],
+	["Lamp", lampScene],
+	["Pressure Plate", pressurePlateScene],
+	["Arrow Trap", arrowTrapScene],
+	["Spike Trap", spikesScene],
 	["", "placeNothing"],
 	["", "placeNothing"],
 	["", "placeNothing"],
 	["", "placeNothing"]
 ]
-var currentItem = placeableItems[0]
-onready var lampScene = preload("res://scenes/Lamp.tscn")
+
+onready var currentItem = placeableItems[0]
 
 func _ready():
 	layout = get_tree().get_nodes_in_group('Layout')[0]
@@ -66,11 +71,25 @@ func _input(event):
 		var target = get_global_mouse_position()
 		
 		if (target - global_position).length() < INTERACT_RANGE:
-			call(currentItem[1], target)
+			placeItem(currentItem[1], target)
+			# call(currentItem[1], target)
 	elif event is InputEventKey and event.pressed:
 		if event.scancode >= KEY_0 and event.scancode <= KEY_9:
 			currentItem = placeableItems[event.scancode - KEY_0]
 
+func placeItem(item, target):
+	if item is String:
+		call(item, target)
+		return
+	if money >= 10:
+		var index = positionInMap(target)
+		if layout.get_cellv(index) == 1:
+			money -= 10
+			var newItem = item.instance()
+			newItem.position = target
+			get_parent().add_child(newItem)
+	
+	
 func placeNothing(_target):
 	pass
 	
@@ -79,15 +98,6 @@ func toggleWall(target):
 		var index = positionInMap(target)
 		money -= 10
 		layout.set_cellv(index, 1 - layout.get_cellv(index))
-
-func placeLamp(target):
-	if money >= 10:
-		var index = positionInMap(target)
-		if layout.get_cellv(index) == 1:
-			money -= 10
-			var lamp = lampScene.instance()
-			lamp.position = target
-			get_parent().add_child(lamp)
 
 func get_input():
 	velocity = Vector2()
