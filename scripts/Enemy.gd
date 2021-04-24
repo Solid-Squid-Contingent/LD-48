@@ -41,6 +41,10 @@ func _ready():
 func collideWithSpikes():
 	changeHealth(-100)
 	print('oh snap!')
+	
+func collideWithArrow():
+	changeHealth(-30)
+	print('arrowed!')
 
 func die():
 	queue_free()

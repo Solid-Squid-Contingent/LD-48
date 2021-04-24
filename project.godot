@@ -14,11 +14,6 @@ config/name="Test"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
-[layer_names]
-
-2d_physics/layer_1="Walls"
-2d_physics/layer_2="Traps"
-2d_physics/layer_3="Enemies"
 [display]
 
 window/size/width=1000
@@ -55,6 +50,12 @@ interact={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Walls"
+2d_physics/layer_2="Traps"
+2d_physics/layer_3="Enemies"
 
 [physics]
 

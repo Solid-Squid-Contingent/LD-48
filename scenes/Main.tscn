@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://resources/graphics/path.png" type="Texture" id=1]
 [ext_resource path="res://resources/graphics/wall.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://resources/fonts/OpenSans-Bold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://scenes/UI.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Arrow.tscn" type="PackedScene" id=9]
+[ext_resource path="res://resources/graphics/arrowTrap.png" type="Texture" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 50, 50, 0, 50, 0, 0, 50, 0 )
@@ -110,3 +112,9 @@ align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ArrowTrap" type="Sprite" parent="."]
+position = Vector2( 124.732, 35.652 )
+texture = ExtResource( 10 )
+
+[node name="Arrow" parent="." instance=ExtResource( 9 )]
