@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/path.png-2a1cfaf84b34aef07e986282eb6b84b0.stex"
+path="res://.import/dynamite.png-a3818809016c24c9430694ca2884333f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/path.png"
-dest_files=[ "res://.import/path.png-2a1cfaf84b34aef07e986282eb6b84b0.stex" ]
+source_file="res://resources/graphics/dynamite.png"
+dest_files=[ "res://.import/dynamite.png-a3818809016c24c9430694ca2884333f.stex" ]
 
 [params]
 

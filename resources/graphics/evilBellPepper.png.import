@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/evilBellPepper.png-24d12e5e817d0fa0f08f94c7a0dfc3d6.stex"
+path="res://.import/evilBellPepper.png-74ad2ae13314c3c1e969168e3a244835.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/evilBellPepper.png"
-dest_files=[ "res://.import/evilBellPepper.png-24d12e5e817d0fa0f08f94c7a0dfc3d6.stex" ]
+source_file="res://resources/graphics/evilBellPepper.png"
+dest_files=[ "res://.import/evilBellPepper.png-74ad2ae13314c3c1e969168e3a244835.stex" ]
 
 [params]
 
