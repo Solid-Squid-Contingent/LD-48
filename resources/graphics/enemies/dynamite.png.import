@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pressurePlatePressed.png-eecc90c45b6f0ac4b823b49fcba3d167.stex"
+path="res://.import/dynamite.png-108600696c1842d3a3f1a8462be3611b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/pressurePlatePressed.png"
-dest_files=[ "res://.import/pressurePlatePressed.png-eecc90c45b6f0ac4b823b49fcba3d167.stex" ]
+source_file="res://resources/graphics/enemies/dynamite.png"
+dest_files=[ "res://.import/dynamite.png-108600696c1842d3a3f1a8462be3611b.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WavesScreen.png-942b1e7f9359ec4b8f276d88ca93cdb7.stex"
+path="res://.import/pressurePlate.png-ce5247c52debda9d41e10498b1fb75e9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/WavesScreen.png"
-dest_files=[ "res://.import/WavesScreen.png-942b1e7f9359ec4b8f276d88ca93cdb7.stex" ]
+source_file="res://resources/graphics/traps/pressurePlate.png"
+dest_files=[ "res://.import/pressurePlate.png-ce5247c52debda9d41e10498b1fb75e9.stex" ]
 
 [params]
 

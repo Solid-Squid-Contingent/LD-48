@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spawner.png-e63b1863bc03aa16b4ade8583718e477.stex"
+path="res://.import/WavesScreen.png-570e6d98116dcbd6f44d382bb4d56628.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/Spawner.png"
-dest_files=[ "res://.import/Spawner.png-e63b1863bc03aa16b4ade8583718e477.stex" ]
+source_file="res://resources/graphics/ui/WavesScreen.png"
+dest_files=[ "res://.import/WavesScreen.png-570e6d98116dcbd6f44d382bb4d56628.stex" ]
 
 [params]
 

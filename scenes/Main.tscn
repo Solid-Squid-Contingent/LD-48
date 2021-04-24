@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/Spikes.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/EnemySpawner.tscn" type="PackedScene" id=7]
-[ext_resource path="res://resources/graphics/WavesScreen.png" type="Texture" id=8]
+[ext_resource path="res://resources/graphics/ui/WavesScreen.png" type="Texture" id=8]
 [ext_resource path="res://scenes/ArrowTrap.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/PressurePlate.tscn" type="PackedScene" id=10]
 

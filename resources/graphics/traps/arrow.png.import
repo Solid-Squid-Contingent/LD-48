@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/buildingPharaoh.png-d8417014b0aed8ac6b647ba4a7319791.stex"
+path="res://.import/arrow.png-1bf67e8995a9cec968c104ec31224482.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/buildingPharaoh.png"
-dest_files=[ "res://.import/buildingPharaoh.png-d8417014b0aed8ac6b647ba4a7319791.stex" ]
+source_file="res://resources/graphics/traps/arrow.png"
+dest_files=[ "res://.import/arrow.png-1bf67e8995a9cec968c104ec31224482.stex" ]
 
 [params]
 
