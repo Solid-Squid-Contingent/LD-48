@@ -14,7 +14,7 @@ func activate():
 	newArrow.position = position
 	newArrow.rotation = rotation
 	newArrow.add_central_force(Vector2(0, 300).rotated(rotation).rotated(inAccuracy))
-	get_parent().add_child(newArrow)
+	get_parent().call_deferred("add_child", newArrow)
 
 func _input(event):
 	if event.is_action_pressed('interact'):
