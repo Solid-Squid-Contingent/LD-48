@@ -11,11 +11,15 @@ func _ready():
 	pass # Replace with function body.
 	
 
-func _on_Arrow_body_entered(_body):
-	if $Stuck.is_stopped():
-		sleeping = true
-		set_deferred("mode", MODE_STATIC)
-		$Stuck.start()
+func _on_Arrow_body_entered(body):
+	if body is TileMap:
+		if $Stuck.is_stopped():
+			sleeping = true
+			set_deferred("mode", MODE_STATIC)
+			$CollisionShape2D.set_deferred("disabled", true)
+			$Stuck.start()
+	else:
+		collideWith(body)
 
 
 func _on_Stuck_timeout():
