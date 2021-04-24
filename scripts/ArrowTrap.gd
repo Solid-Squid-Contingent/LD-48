@@ -9,12 +9,16 @@ func _ready():
 	player = get_tree().get_nodes_in_group('Player')[0]
 
 func activate():
-	var newArrow = arrowScene.instance()
-	var inAccuracy = (randf() - 0.5) * 0.05
-	newArrow.position = position
-	newArrow.rotation = rotation
-	newArrow.add_central_force(Vector2(0, 300).rotated(rotation).rotated(inAccuracy))
-	get_parent().add_child(newArrow)
+	if $ShootInterval.is_stopped():
+		$ShootInterval.start()
+		var newArrow = arrowScene.instance()
+		var inAccuracy = (randf() - 0.5) * 0.05
+		newArrow.position = position
+		newArrow.rotation = rotation
+		newArrow.add_central_force(Vector2(0, 300).rotated(rotation).rotated(inAccuracy))
+		get_parent().add_child(newArrow)
+	else:
+		print("tschhrkkk (Cooldown!)")
 
 func _input(event):
 	if event.is_action_pressed('interact'):
@@ -24,3 +28,5 @@ func _input(event):
 			(target - player.global_position).length() < player.INTERACT_RANGE:
 				if player.isInConnectMode():
 					player.connectTrap(self)
+				else: 
+					activate()

@@ -88,8 +88,7 @@ func placeItem(item, target):
 			var newItem = item.instance()
 			newItem.position = target
 			get_parent().add_child(newItem)
-	
-	
+
 func placeNothing(_target):
 	pass
 	
