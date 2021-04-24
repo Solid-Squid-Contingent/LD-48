@@ -6,6 +6,8 @@ export var speed : int = 200
 const INTERACT_RANGE = 100
 
 var velocity = Vector2()
+var money = 100
+var health = 100
 
 func _ready():
 	layout = get_tree().get_nodes_in_group('Layout')[0]
@@ -18,8 +20,9 @@ func _input(event):
 	if event.is_action_pressed("build"):
 		var target = get_global_mouse_position()
 		
-		if (target - global_position).length() < INTERACT_RANGE:
+		if (target - global_position).length() < INTERACT_RANGE and money >= 10:
 			var index = positionInMap(target)
+			money -= 10
 			layout.set_cellv(index, 1 - layout.get_cellv(index))
 
 func get_input():

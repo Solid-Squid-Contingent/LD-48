@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+onready var treasureRayCast = $TreasureRayCast
+var treasurePosition
+var player
+
 var layout: TileMap
 var cellSize: Vector2
 
@@ -28,6 +32,8 @@ export var speed: int = 200
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	layout = get_tree().get_nodes_in_group('Layout')[0]
+	player = get_tree().get_nodes_in_group('Player')[0]
+	treasurePosition = get_tree().get_nodes_in_group('Treasure')[0].global_position
 	cellSize = layout.cell_size
 
 func positionInMap():
@@ -72,6 +78,15 @@ func resetNavigation():
 	explored.clear()
 	
 func getNextWaypoint():
+	if (treasurePosition - global_position).length() < 5:
+		player.health -= 10
+		queue_free()
+	
+	treasureRayCast.cast_to = treasurePosition - global_position
+	treasureRayCast.force_raycast_update()
+	if !treasureRayCast.is_colliding():
+		return treasurePosition
+	
 	if drunkPathfinding:
 		return getRandomAdjacentWaypoint()
 	else:
