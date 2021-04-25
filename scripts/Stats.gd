@@ -2,7 +2,7 @@ extends Reference
 class_name Stats
 
 enum DamageTypes {
-	NORMAL, FIRE
+	NORMAL, FIRE, CROCODILES
 }
 
 var drunkPathfinding: bool
@@ -38,8 +38,8 @@ func _init(drunkPathfinding_ = false,
 	corpseTexturePath = corpseTexturePath_
 	
 	for damageType in DamageTypes:
-		if !resistances.has(int(damageType)):
-			resistances[int(damageType)] = 0
+		if !resistances.has(DamageTypes[damageType]):
+			resistances[DamageTypes[damageType]] = 0
 
 func duplicate():
 	var s = get_script().new(drunkPathfinding, demolition, speed, maxHealth,
@@ -58,8 +58,6 @@ func getActualSpeed():
 	return speed * speedMultiplier
 
 func changeHealth(amount: int, damageType, individualStats):
-	health += amount * (1.0 - resistances[damageType])
-	
 	var deaths = []
 	
 	while amount <= 0 and !individualStats.empty():
@@ -72,6 +70,8 @@ func changeHealth(amount: int, damageType, individualStats):
 		if stat.health <= 0:
 			deaths.append(stat.corpseTexturePath)
 			individualStats.remove(hitIndividualIndex)
+	
+	update(individualStats)
 	
 	return deaths
 
@@ -92,9 +92,12 @@ func changeBravery(amount: int, individualStats):
 				remainingAmount += stat.bravery
 				stat.bravery = 0
 	
-	bravery += amount
+	update(individualStats)
 
 func update(individualStats):
+	if individualStats.empty():
+		return
+		
 	drunkPathfinding = true
 	demolition = false
 	speed = 0

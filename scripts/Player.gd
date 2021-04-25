@@ -7,9 +7,9 @@ var buildingImage = preload("res://resources/graphics/player/buildingPharaoh.png
 var layout: TileMap
 var level: Node
 var layoutIndex: int
-export var speed : int = 200
+export var speed : int = 1000
 
-const INTERACT_RANGE = 100
+const INTERACT_RANGE = 750
 
 enum MODES{
 	DEFAULT,
@@ -33,12 +33,13 @@ const spikesScene = preload("res://scenes/Spikes.tscn")
 var currentItem = null
 var canPlaceCurrentItem = true
 
+var topLeftMapCorner
+var bottomRightMapCorner
+
 
 func _ready():
-	updateLayout()
 	waveScreen = get_tree().get_nodes_in_group('WaveScreen')[0]
-
-func updateLayout():
+	
 	var i = 0
 	for l in get_tree().get_nodes_in_group('Layout'):
 		if l.visible:
@@ -47,6 +48,17 @@ func updateLayout():
 			level = get_tree().get_nodes_in_group('PyramidLevel')[layoutIndex]
 			break
 		i += 1
+	
+	updateCameraLimits()
+
+func updateCameraLimits():
+	var indexRect : Rect2 = layout.get_used_rect()
+	topLeftMapCorner = layout.map_to_world(indexRect.position)
+	bottomRightMapCorner = layout.map_to_world(indexRect.end)
+	$Camera.limit_left = topLeftMapCorner.x
+	$Camera.limit_top = topLeftMapCorner.y
+	$Camera.limit_right = bottomRightMapCorner.x
+	$Camera.limit_bottom = bottomRightMapCorner.y
 
 func connectTrap(node):
 	connectOrigin.connectToTrap(node)
@@ -85,6 +97,8 @@ func _input(event):
 			level = levels[layoutIndex]
 			level.visible = true
 			layout.occluder_light_mask = 1
+			
+			updateCameraLimits()
 
 func placeItem(item, target):
 	if item == null:
@@ -125,7 +139,7 @@ func _physics_process(_delta):
 	get_input()
 	look_at(position + velocity)
 	velocity = move_and_slide(velocity)
-	if position.x < 0 or position.x > 1920 or position.y < 0 or position.y > 1080:
+	if position < topLeftMapCorner or position > bottomRightMapCorner:
 		waveScreen.show()
 		position.x = clamp(position.x, 0, 1920)
 		position.y = clamp(position.y, 0, 1080)

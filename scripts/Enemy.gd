@@ -42,13 +42,14 @@ func findInCurrentLevel(name, setLayoutIndex = false):
 			return l
 		i += 1
 
+func collideWithCrocodiles():
+	changeHealth(-200, Stats.DamageTypes.CROCODILES)
+	
 func collideWithSpikes():
 	changeHealth(-100, Stats.DamageTypes.NORMAL)
-	print('oh snap!')
 	
 func collideWithArrow():
 	changeHealth(-100, Stats.DamageTypes.NORMAL)
-	print('arrowed!')
 
 func collideWithGoo():
 	groupStats.isSlowed = true
@@ -65,7 +66,7 @@ func changeHealth(amount: int, damageType):
 		corpse.position = position
 		get_parent().add_child(corpse)
 		
-	if groupStats.health <= 0:
+	if individualStats.empty():
 		die()
 	updateRendering()
 	
