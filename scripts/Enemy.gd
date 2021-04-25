@@ -28,54 +28,25 @@ func _ready():
 	updateGroupStats()
 
 func collideWithSpikes():
-	changeHealth(-100)
+	changeHealth(-100, Stats.DamageTypes.NORMAL)
 	print('oh snap!')
 	
 func collideWithArrow():
-	changeHealth(-100)
+	changeHealth(-100, Stats.DamageTypes.NORMAL)
 	print('arrowed!')
 
 func die():
 	queue_free()
 
-func changeHealth(amount: int):
-	groupStats.health += amount
+func changeHealth(amount: int, damageType):
+	groupStats.changeHealth(amount, damageType, individualStats)	
 	if groupStats.health <= 0:
 		die()
-		return
-	
-	while amount <= 0:
-		var hitIndividualIndex = randi() % individualStats.size()
-		var previousHealth = individualStats[hitIndividualIndex].health
-		individualStats[hitIndividualIndex].health += amount
-		amount += previousHealth
-		if individualStats[hitIndividualIndex].health <= 0:
-			individualStats.remove(hitIndividualIndex)
-			
 	updateRendering()
 	
 func changeBravery(amount: int):
+	groupStats.changeBravery(amount, individualStats)
 	if groupStats.bravery <= 0:
-		return
-		
-	var remainingAmount = amount
-	for stat in individualStats:
-		remainingAmount += stat.bravery
-		stat.bravery += amount * stat.bravery / groupStats.bravery
-	
-	if remainingAmount < 0:
-		for stat in individualStats:
-			if stat.bravery > -remainingAmount:
-				stat.bravery += remainingAmount
-			else:
-				remainingAmount += stat.bravery
-				stat.bravery = 0
-	
-	groupStats.bravery += amount
-	if groupStats.bravery <= 0:
-		for stat in individualStats:
-			stat.speed *= 5
-		updateGroupStats()
 		nextWaypoint = getNextWaypoint()
 			
 	updateRendering()
@@ -204,7 +175,6 @@ func getNextWaypoint():
 				for i in range(currentTreeNode.children.size() - 1):
 					seperateGroup(individualStats.slice(i * enemiesPerPath, (i + 1) * enemiesPerPath - 1), i)
 					
-					
 				individualStats = individualStats.slice(
 							(currentTreeNode.children.size() - 1) * enemiesPerPath,
 							individualStats.size())
@@ -240,6 +210,8 @@ func updateRendering():
 	$Sprite.texture = load("res://resources/graphics/enemies/" + groupStats.texturePath)
 	$BraveryProgress.max_value = groupStats.maxBravery
 	$BraveryProgress.value = groupStats.bravery
+	$HealthProgress.max_value = groupStats.maxHealth
+	$HealthProgress.value = groupStats.health
 
 func _physics_process(delta):
 	if (nextWaypoint-position).length() < 5 or nextWaypoint.x < 0:
@@ -250,7 +222,7 @@ func _physics_process(delta):
 	
 	var dir = nextWaypoint-position
 	# warning-ignore:return_value_discarded
-	move_and_slide(dir.normalized() * min(groupStats.speed, dir.length() / delta))
+	move_and_slide(dir.normalized() * min(groupStats.getActualSpeed(), dir.length() / delta))
 	for collisionIndex in range(get_slide_count()):
 		var collision = get_slide_collision(collisionIndex)
 		if collision.collider.has_method("collideWith"):
@@ -260,7 +232,10 @@ func _physics_process(delta):
 var mergeable = false
 func _on_MergeArea_area_entered(area):
 	var enemy = area.get_parent()
-	if mergeable and enemy.mergeable and !is_queued_for_deletion():
+	if mergeable and enemy.mergeable and \
+		groupStats.bravery > 0 and enemy.groupStats.bravery > 0 and \
+		!is_queued_for_deletion():
+			
 		enemy.queue_free()
 		for stat in enemy.individualStats:
 			individualStats.append(stat)
