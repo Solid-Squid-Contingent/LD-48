@@ -6,7 +6,7 @@ func setSprite(name):
 	$Sprite.texture = load("res://resources/graphics/enemies/" + name)
 	
 func setText(text):
-	$QuoteLabel.text = text[0]
+	$QuoteLabel.text = "\"" + text[0] + "\""
 	$InfoLabel.text = text[1]
 
 func show():

@@ -1,6 +1,7 @@
 extends ItemList
 
 var selectableScenes = [
+	preload("res://scenes/ToggleWall.tscn"),
 	preload("res://scenes/Spikes.tscn"),
 	preload("res://scenes/CrocodilePit.tscn"),
 	preload("res://scenes/ArrowTrap.tscn"),

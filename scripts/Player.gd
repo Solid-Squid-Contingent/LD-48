@@ -81,11 +81,8 @@ func positionInMap(pos):
 	return layout.world_to_map(layout.to_local(pos))
 	
 func _input(event):
-	if event.is_action_pressed("build"):
-		var target = get_global_mouse_position()
-		
-		if canPlaceCurrentItem:
-			placeItem(currentItem, target)
+	if event.is_action_pressed("build") and canPlaceCurrentItem:
+		placeItem(currentItem)
 	elif event is InputEventKey and event.pressed:
 		if event.scancode == KEY_Q:
 			var levels = get_tree().get_nodes_in_group('PyramidLevel')
@@ -101,22 +98,11 @@ func _input(event):
 			
 			updateCameraLimits()
 
-func placeItem(item, target):
-	if item == null:
-		return
-	if money >= 10:
-		var index = positionInMap(target)
-		if layout.get_cellv(index) == 1:
-			money -= 10
-			currentItem = null
-			level.add_child(item)
-
-func toggleWall(target):
-	if money >= 10:
-		var index = positionInMap(target)
+func placeItem(item):
+	if item != null and money >= 10:
 		money -= 10
-		layout.set_cellv(index, 1 - layout.get_cellv(index))
-		layout.update_bitmask_area(index)
+		currentItem = null
+		level.add_child(item)
 
 func get_input():
 	velocity = Vector2()

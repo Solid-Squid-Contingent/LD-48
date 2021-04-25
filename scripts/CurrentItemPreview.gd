@@ -12,14 +12,14 @@ func _ready():
 func wallSnapRotation():
 	return Vector2(0,0)
 	
-func setClosestFloorSnapPosition(wallSnap):
+func setClosestFloorSnapPosition(wallSnap, everywhereSnap):
 	player.canPlaceCurrentItem = true
 	
 	var currentLayout = player.layout
 	var mousePositionInLevel = get_global_mouse_position()
 	var positionInMap = currentLayout.world_to_map(currentLayout.to_local(mousePositionInLevel))
 	var typeOfTile = currentLayout.get_cellv(positionInMap)
-	if typeOfTile == 1: #is floor
+	if typeOfTile == 1 or everywhereSnap: #is floor
 		if (mousePositionInLevel - player.global_position).length() < player.INTERACT_RANGE:
 			modulate = Color.green
 		else:
@@ -63,7 +63,10 @@ func _process(_delta):
 		texture = currentItem.getIcon()
 		scale = currentItem.get_node("Sprite").scale
 		rotation = 0
-		setClosestFloorSnapPosition(currentItem.wallSnap())
+		var everywhereSnap = false
+		if currentItem.has_method("everywhereSnap"):
+			everywhereSnap = currentItem.everywhereSnap()
+		setClosestFloorSnapPosition(currentItem.wallSnap(), everywhereSnap)
 		currentItem.position = position
 		currentItem.rotation = rotation
 	else:

@@ -42,9 +42,10 @@ __meta__ = {
 
 [node name="ItemList" type="ItemList" parent="BuildMenu"]
 margin_left = 1830.0
-margin_top = 340.0
+margin_top = 315.0
 margin_right = 1910.0
-margin_bottom = 740.0
+margin_bottom = 765.0
+grow_vertical = 2
 theme = SubResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 fixed_icon_size = Vector2( 50, 50 )
