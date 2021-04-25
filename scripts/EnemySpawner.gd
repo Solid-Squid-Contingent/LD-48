@@ -38,11 +38,11 @@ func generateWave():
 func spawnEnemy():
 	while waves.size() < 3:
 		generateWave()
-	
+
 	var enemy = waves[0].pop_front()
 	enemy.position = position
 	get_parent().call_deferred("add_child", enemy)
-	
+
 	if waves[0].empty():
 		waves.pop_front()
 		generateWave()
@@ -52,3 +52,9 @@ func spawnEnemy():
 
 func _on_SpawnTimer_timeout():
 	spawnEnemy()
+
+func _exit_tree():
+	for wave in waves:
+		for enemy in wave:
+			enemy.free()
+	

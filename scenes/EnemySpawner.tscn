@@ -3,7 +3,9 @@
 [ext_resource path="res://resources/graphics/enemies/Spawner.png" type="Texture" id=1]
 [ext_resource path="res://scripts/EnemySpawner.gd" type="Script" id=2]
 
-[node name="EnemySpawner" type="Sprite"]
+[node name="EnemySpawner" type="Sprite" groups=[
+"EnemySpawner",
+]]
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 

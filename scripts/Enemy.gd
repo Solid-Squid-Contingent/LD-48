@@ -12,22 +12,44 @@ var nextWaypoint: Vector2 = Vector2(-1,-1)
 
 class TreeNode:
 	extends Reference
+	
 	var children = []
-	var parent: TreeNode
+	var parent: WeakRef
 	var tileIndex: Vector2
 	var completed = false
 	
 	func _init(tileIndex_, parent_):
 		tileIndex = tileIndex_
-		parent = parent_
+		parent = weakref(parent_)
+	
+	func duplicate(dupParent = null):
+		var dup = TreeNode.new(tileIndex, dupParent)
+		dup.completed = completed
+		
+		for child in children:
+			dup.children.append(child.duplicate(dup))
+		
+		return dup
+	
+	func find(tileIndexToFind):
+		if tileIndex == tileIndexToFind:
+			return self
+		else:
+			for child in children:
+				var foundInChild = child.find(tileIndexToFind)
+				if foundInChild:
+					return foundInChild
+			return null
 
 var currentTreeNode : TreeNode = null
+var rootTreeNode : TreeNode = null
 var explored = {}
 
 var dynamiteScene = preload("res://scenes/Dynamite.tscn")
-onready var enemyScene = load("res://scenes/Enemy.tscn")
 
 class Stats:
+	extends Reference
+	
 	var drunkPathfinding: bool
 	var demolition: bool
 	var speed: int
@@ -131,6 +153,7 @@ func getRandomAdjacentWaypoint():
 func resetNavigation():
 	currentTreeNode = null
 	explored.clear()
+	rootTreeNode = null
 
 func updateGroupStats():
 	groupStats.drunkPathfinding = true
@@ -155,13 +178,13 @@ func updateGroupStats():
 	updateRendering()
 
 func seperateGroup(stats, i):
-	var enemy : Enemy = enemyScene.instance()
+	var enemy = load("res://scenes/Enemy.tscn").instance()
 	enemy.explored = explored.duplicate()
 	enemy.individualStats = stats
 	enemy.updateGroupStats()
-	var enemyTreeRoot = TreeNode.new(currentTreeNode.tileIndex, null)
-	enemy.currentTreeNode = TreeNode.new(currentTreeNode.children[i].tileIndex, enemyTreeRoot)
 	enemy.position = position
+	enemy.rootTreeNode = rootTreeNode.duplicate()
+	enemy.currentTreeNode = enemy.rootTreeNode.find(currentTreeNode.children[i].tileIndex)
 	enemy.nextWaypoint = centeredWorldPosition(enemy.currentTreeNode.tileIndex)
 	get_parent().add_child(enemy)
 	
@@ -183,6 +206,7 @@ func getNextWaypoint():
 		
 		if !currentTreeNode:
 			currentTreeNode = TreeNode.new(posInMap, null)
+			rootTreeNode = currentTreeNode
 		
 		if !currentTreeNode.completed:
 			var moveableDirections = getMoveableDirections()
@@ -204,8 +228,8 @@ func getNextWaypoint():
 		
 		if currentTreeNode.children.empty():
 			if currentTreeNode.parent:
-				currentTreeNode.parent.children.erase(currentTreeNode)
-				currentTreeNode = currentTreeNode.parent
+				currentTreeNode.parent.get_ref().children.erase(currentTreeNode)
+				currentTreeNode = currentTreeNode.parent.get_ref()
 			else:
 				resetNavigation()
 				return getNextWaypoint()
@@ -275,7 +299,7 @@ func _physics_process(delta):
 
 var mergeable = false
 func _on_MergeArea_area_entered(area):
-	var enemy : Enemy = area.get_parent()
+	var enemy = area.get_parent()
 	if mergeable and enemy.mergeable and !is_queued_for_deletion():
 		enemy.queue_free()
 		for stat in enemy.individualStats:
