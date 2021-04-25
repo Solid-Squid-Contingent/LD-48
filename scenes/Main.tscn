@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/TileSet.tres" type="TileSet" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://resources/graphics/ui/WavesScreen.png" type="Texture" id=8]
 [ext_resource path="res://scenes/ArrowTrap.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/PressurePlate.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Goo.tscn" type="PackedScene" id=11]
 
 [node name="Node2D" type="Node2D"]
 
@@ -32,6 +33,9 @@ tile_data = PoolIntArray( 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65
 "Treasure",
 ]]
 position = Vector2( 750, 150 )
+
+[node name="Goo" parent="PyramidTop" instance=ExtResource( 11 )]
+position = Vector2( 572.671, 225.939 )
 
 [node name="EnemySpawner" parent="PyramidTop" instance=ExtResource( 7 )]
 position = Vector2( 525, 525 )

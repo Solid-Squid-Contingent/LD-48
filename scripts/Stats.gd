@@ -14,6 +14,7 @@ var maxBravery: int
 var bravery: int
 var resistances: Dictionary
 var texturePath: String
+var isSlowed = false
 	
 func _init(drunkPathfinding_ = false,
 	demolition_ = false,
@@ -46,9 +47,12 @@ func duplicate():
 	return s
 
 func getActualSpeed():
+	var speedMultiplier = 1
 	if bravery <= 0:
-		return speed * 5
-	return speed
+		speedMultiplier *= 5
+	if isSlowed:
+		speedMultiplier *= 0.25
+	return speed * speedMultiplier
 
 func changeHealth(amount: int, damageType, individualStats):
 	health += amount * (1.0 - resistances[damageType])

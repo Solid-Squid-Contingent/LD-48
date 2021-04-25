@@ -49,6 +49,11 @@ func collideWithArrow():
 	changeHealth(-100, Stats.DamageTypes.NORMAL)
 	print('arrowed!')
 
+func collideWithGoo():
+	groupStats.isSlowed = true
+	yield(get_tree().create_timer(5.0), "timeout")
+	groupStats.isSlowed = false
+
 func die():
 	queue_free()
 
