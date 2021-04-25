@@ -64,7 +64,7 @@ func changeHealth(amount: int, damageType, individualStats):
 	
 	while amount <= 0 and !individualStats.empty():
 		var hitIndividualIndex = randi() % individualStats.size()
-		var stat :Stats = individualStats[hitIndividualIndex]
+		var stat = individualStats[hitIndividualIndex]
 		
 		var previousHealth = stat.health
 		stat.health += amount * (1.0 - stat.resistances[damageType])

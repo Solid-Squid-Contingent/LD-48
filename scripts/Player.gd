@@ -30,7 +30,6 @@ onready var lampScene = preload("res://scenes/Lamp.tscn")
 onready var pressurePlateScene = preload("res://scenes/PressurePlate.tscn")
 onready var arrowTrapScene = preload("res://scenes/ArrowTrap.tscn")
 onready var spikesScene = preload("res://scenes/Spikes.tscn")
-
 onready var currentItem = null
 
 func _ready():
@@ -119,7 +118,7 @@ func _process(_delta):
 	var inWallUnsnapped = layout.get_cellv(positionInMap(global_position)) == 0
 	var inWall = inWallSnapped or inWallUnsnapped
 	$Light.visible = !inWall
-	$WallLight.visible = inWall
+	$WallLight.visible = inWall		
 
 func _physics_process(_delta):
 	get_input()
@@ -134,3 +133,6 @@ func setCurrentItem(item):
 	if currentItem:
 		currentItem.free()
 	currentItem = item
+
+func getCurrentItem():
+	return currentItem
