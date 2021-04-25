@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://resources/fonts/OpenSans-Bold.tres" type="DynamicFont" id=1]
+[ext_resource path="res://resources/graphics/enemies/evilBellPepper.png" type="Texture" id=2]
+[ext_resource path="res://resources/graphics/ui/textbox.png" type="Texture" id=3]
+[ext_resource path="res://resources/fonts/menu.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scripts/EnemyInfo.gd" type="Script" id=5]
+
+[node name="EnemyInfo" type="TextureRect" groups=[
+"EnemyInfo",
+]]
+pause_mode = 2
+margin_left = 460.0
+margin_top = 140.0
+margin_right = 1200.0
+margin_bottom = 740.0
+texture = ExtResource( 3 )
+stretch_mode = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 215, 185 )
+scale = Vector2( 7, 7 )
+texture = ExtResource( 2 )
+
+[node name="QuoteLabel" type="Label" parent="."]
+margin_left = 415.0
+margin_top = 50.0
+margin_right = 950.0
+margin_bottom = 200.0
+grow_vertical = 2
+custom_fonts/font = ExtResource( 1 )
+text = "Actually, I’m also a pretty good rapper. Look: ‘Boom.’ Hahahaha… Oh, I blew off my leg."
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InfoLabel" type="Label" parent="."]
+margin_left = 50.0
+margin_top = 360.0
+margin_right = 950.0
+margin_bottom = 745.0
+custom_fonts/font = ExtResource( 4 )
+text = "Slow but can place dynamite that might blow up your pyramid. Right-click dynamite to extinguish."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

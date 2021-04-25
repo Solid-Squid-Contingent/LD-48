@@ -41,7 +41,7 @@ __meta__ = {
 }
 
 [node name="ItemList" type="ItemList" parent="BuildMenu"]
-margin_left = 1840.0
+margin_left = 1830.0
 margin_top = 340.0
 margin_right = 1910.0
 margin_bottom = 740.0
