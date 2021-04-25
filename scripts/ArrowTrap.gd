@@ -7,7 +7,7 @@ var player
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().get_nodes_in_group('Player')[0]
-
+	
 func activate():
 	if $ShootInterval.is_stopped():
 		$ShootInterval.start()
@@ -20,15 +20,16 @@ func activate():
 	else:
 		print("tschhrkkk (Cooldown!)")
 
+func getWireConnectionPoint():
+	return $WireConnectionPoint
+
+
 func _on_ArrowTrap_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('interact'):
 		var target = get_global_mouse_position()
 		if (target - global_position).length() < 100 and \
-			(target - player.global_position).length() < player.INTERACT_RANGE:
-				if player.isInConnectMode():
-					player.connectTrap(self)
-				else: 
-					activate()
-
-func getWireConnectionPoint():
-	return $WireConnectionPoint
+				(target - player.global_position).length() < player.INTERACT_RANGE:
+					if player.isInConnectMode():
+						player.connectTrap(self)
+					else: 
+						activate()
