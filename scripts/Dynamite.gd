@@ -6,7 +6,6 @@ var player
 const INTERACT_RANGE = 50
 
 func _ready():
-	layout = get_tree().get_nodes_in_group('Layout')[0]
 	player = get_tree().get_nodes_in_group('Player')[0]
 	
 func positionInMap(pos):

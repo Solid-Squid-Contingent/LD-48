@@ -39,8 +39,8 @@ __meta__ = {
 }
 
 [node name="MergeArea" type="Area2D" parent="."]
-collision_layer = 512
-collision_mask = 512
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="MergeArea"]
 position = Vector2( -2.06644, 0.314659 )

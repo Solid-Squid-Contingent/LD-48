@@ -84,6 +84,7 @@ interact={
 2d_physics/layer_1="Walls"
 2d_physics/layer_2="Traps"
 2d_physics/layer_3="Enemies"
+2d_physics/layer_4="EnemyMerging"
 
 [physics]
 
