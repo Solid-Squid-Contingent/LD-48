@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://scripts/Player.gd"
+}, {
+"base": "Reference",
+"class": "Stats",
+"language": "GDScript",
+"path": "res://scripts/Stats.gd"
+}, {
+"base": "Reference",
+"class": "TreeNode",
+"language": "GDScript",
+"path": "res://scripts/TreeNode.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
-"Player": ""
+"Player": "",
+"Stats": "",
+"TreeNode": ""
 }
 
 [application]
