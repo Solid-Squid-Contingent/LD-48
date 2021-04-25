@@ -2,7 +2,7 @@ extends Area2D
 
 var bodiesOnPlate = 0
 
-var notPressedImage = preload("res://resources/graphics/traps/pressurePlate.png")
+const notPressedImage = preload("res://resources/graphics/traps/pressurePlate.png")
 var pressedImage = preload("res://resources/graphics/traps/pressurePlatePressed.png")
 onready var wireScene = preload("res://scenes/Wire.tscn")
 
@@ -52,3 +52,6 @@ func _on_PressurePlate_mouse_exited():
 	for i in range(wires.size()):
 		wires[i].queue_free()
 	wires = []
+
+static func getIcon():
+	return notPressedImage

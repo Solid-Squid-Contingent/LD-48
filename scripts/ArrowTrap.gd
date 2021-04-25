@@ -2,6 +2,8 @@ extends Area2D
 
 var arrowScene = preload("res://scenes/Arrow.tscn")
 
+const icon = preload("res://resources/graphics/traps/arrowTrap.png")
+
 var player
 
 # Called when the node enters the scene tree for the first time.
@@ -33,3 +35,6 @@ func _on_ArrowTrap_input_event(viewport, event, shape_idx):
 						player.connectTrap(self)
 					else: 
 						activate()
+
+static func getIcon():
+	return icon

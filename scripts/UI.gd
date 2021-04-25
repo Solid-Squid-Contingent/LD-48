@@ -9,7 +9,3 @@ func _ready():
 func _process(_delta):
 	$MoneyLabel.text = String(player.money)
 	$HealthLabel.text = String(player.health)
-	if player.currentItem[0].empty():
-		$ItemLabel.text = ""
-	else:
-		$ItemLabel.text = "Placing " + player.currentItem[0]

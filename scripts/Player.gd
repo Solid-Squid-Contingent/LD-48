@@ -29,20 +29,7 @@ onready var pressurePlateScene = preload("res://scenes/PressurePlate.tscn")
 onready var arrowTrapScene = preload("res://scenes/ArrowTrap.tscn")
 onready var spikesScene = preload("res://scenes/Spikes.tscn")
 
-onready var placeableItems = [
-	["", "placeNothing"],
-	["Wall", "toggleWall"],
-	["Lamp", lampScene],
-	["Pressure Plate", pressurePlateScene],
-	["Arrow Trap", arrowTrapScene],
-	["Spike Trap", spikesScene],
-	["", "placeNothing"],
-	["", "placeNothing"],
-	["", "placeNothing"],
-	["", "placeNothing"]
-]
-
-onready var currentItem = placeableItems[0]
+onready var currentItem = null
 
 func _ready():
 	layout = get_tree().get_nodes_in_group('Layout')[0]
@@ -72,27 +59,19 @@ func _input(event):
 		var target = get_global_mouse_position()
 		
 		if (target - global_position).length() < INTERACT_RANGE:
-			placeItem(currentItem[1], target)
-			# call(currentItem[1], target)
-	elif event is InputEventKey and event.pressed:
-		if event.scancode >= KEY_0 and event.scancode <= KEY_9:
-			currentItem = placeableItems[event.scancode - KEY_0]
+			placeItem(currentItem, target)
 
 func placeItem(item, target):
-	if item is String:
-		call(item, target)
+	if item == null:
 		return
 	if money >= 10:
 		var index = positionInMap(target)
 		if layout.get_cellv(index) == 1:
 			money -= 10
-			var newItem = item.instance()
-			newItem.position = target
-			get_parent().add_child(newItem)
+			item.position = target
+			currentItem = null
+			get_parent().add_child(item)
 
-func placeNothing(_target):
-	pass
-	
 func toggleWall(target):
 	if money >= 10:
 		var index = positionInMap(target)
@@ -126,3 +105,8 @@ func _physics_process(_delta):
 		waveScreen.show()
 		position.x = clamp(position.x, 0, 1000)
 		position.y = clamp(position.y, 0, 600)
+
+func setCurrentItem(item):
+	if currentItem:
+		currentItem.free()
+	currentItem = item
