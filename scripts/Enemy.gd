@@ -78,6 +78,8 @@ class Stats:
 var individualStats = [Stats.new()]
 var groupStats: Stats = Stats.new()
 
+var spooked = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	layout = get_tree().get_nodes_in_group('Layout')[0]
@@ -201,6 +203,14 @@ func getNextWaypoint():
 	if groupStats.drunkPathfinding:
 		return getRandomAdjacentWaypoint()
 	else:
+		if spooked:
+			if currentTreeNode.parent and currentTreeNode.parent.get_ref():
+				currentTreeNode = currentTreeNode.parent.get_ref()
+				return centeredWorldPosition(currentTreeNode.tileIndex)
+			else:
+				queue_free()
+				return position
+				
 		var posInMap = positionInMap()
 		explored[posInMap] = true
 		
@@ -227,7 +237,7 @@ func getNextWaypoint():
 				curChildIndex += 1
 		
 		if currentTreeNode.children.empty():
-			if currentTreeNode.parent:
+			if currentTreeNode.parent and currentTreeNode.parent.get_ref():
 				currentTreeNode.parent.get_ref().children.erase(currentTreeNode)
 				currentTreeNode = currentTreeNode.parent.get_ref()
 			else:
@@ -311,3 +321,14 @@ func _on_MergeArea_area_entered(area):
 
 func _on_MergeArea_area_exited(_area):
 	mergeable = true
+
+
+func _on_Enemy_input_event(_viewport, event, _shape_idx):
+	if event.is_action_pressed('interact'):
+		var target = get_global_mouse_position()
+		if (target - player.global_position).length() < player.INTERACT_RANGE:
+			for stat in individualStats:
+				stat.speed *= 5
+			updateGroupStats()
+			spooked = true
+			nextWaypoint = getNextWaypoint()
