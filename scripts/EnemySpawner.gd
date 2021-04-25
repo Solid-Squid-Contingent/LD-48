@@ -8,8 +8,8 @@ onready var enemyScene = preload("res://scenes/Enemy.tscn")
 #maxHealth: int
 #texturePath: String
 var enemyTypes = [
-	Enemy.Stats.new(false, false, 100, 100, "evilBellPepper.png"),
-	Enemy.Stats.new(false, true, 50, 100, "fancyBellPepper.png")
+	Enemy.Stats.new(false, false, 100, 100, 100, "evilBellPepper.png"),
+	Enemy.Stats.new(false, true, 50, 100, 100, "fancyBellPepper.png")
 ]
 
 var waves = []

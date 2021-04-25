@@ -55,12 +55,15 @@ class Stats:
 	var speed: int
 	var maxHealth: int
 	var health: int
+	var maxBravery: int
+	var bravery: int
 	var texturePath: String
 		
 	func _init(drunkPathfinding_ = false,
 		demolition_ = false,
 		speed_ = 100,
 		maxHealth_ = 100,
+		maxBravery_ = 100,
 		texturePath_ = "evilBellPepper.png"):
 			
 		drunkPathfinding = drunkPathfinding_
@@ -68,17 +71,17 @@ class Stats:
 		speed = speed_
 		maxHealth = maxHealth_
 		health = maxHealth
+		maxBravery = maxBravery_
+		bravery = maxBravery
 		texturePath = texturePath_
 	
 	func duplicate():
-		var s = Stats.new(drunkPathfinding, demolition, speed, maxHealth, texturePath)
+		var s = Stats.new(drunkPathfinding, demolition, speed, maxHealth, maxBravery, texturePath)
 		s.health = health
 		return s
 
 var individualStats = [Stats.new()]
 var groupStats: Stats = Stats.new()
-
-var spooked = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -112,6 +115,32 @@ func changeHealth(amount: int):
 		amount += previousHealth
 		if individualStats[hitIndividualIndex].health <= 0:
 			individualStats.remove(hitIndividualIndex)
+			
+	updateRendering()
+	
+func changeBravery(amount: int):
+	if groupStats.bravery <= 0:
+		return
+		
+	var remainingAmount = amount
+	for stat in individualStats:
+		remainingAmount += stat.bravery
+		stat.bravery += amount * stat.bravery / groupStats.bravery
+	
+	if remainingAmount < 0:
+		for stat in individualStats:
+			if stat.bravery > -remainingAmount:
+				stat.bravery += remainingAmount
+			else:
+				remainingAmount += stat.bravery
+				stat.bravery = 0
+	
+	groupStats.bravery += amount
+	if groupStats.bravery <= 0:
+		for stat in individualStats:
+			stat.speed *= 5
+		updateGroupStats()
+		nextWaypoint = getNextWaypoint()
 			
 	updateRendering()
 
@@ -163,6 +192,8 @@ func updateGroupStats():
 	groupStats.speed = 0
 	groupStats.maxHealth = 0
 	groupStats.health = 0
+	groupStats.maxBravery = 0
+	groupStats.bravery = 0
 	groupStats.texturePath = individualStats[0].texturePath
 	
 	for stat in individualStats:
@@ -173,6 +204,8 @@ func updateGroupStats():
 		groupStats.speed += stat.speed
 		groupStats.maxHealth += stat.maxHealth
 		groupStats.health += stat.health
+		groupStats.maxBravery += stat.maxBravery
+		groupStats.bravery += stat.bravery
 		if stat.texturePath != groupStats.texturePath:
 			groupStats.texturePath = "mixedBellPepper.png"
 	
@@ -203,7 +236,7 @@ func getNextWaypoint():
 	if groupStats.drunkPathfinding:
 		return getRandomAdjacentWaypoint()
 	else:
-		if spooked:
+		if groupStats.bravery <= 0:
 			if currentTreeNode.parent and currentTreeNode.parent.get_ref():
 				currentTreeNode = currentTreeNode.parent.get_ref()
 				return centeredWorldPosition(currentTreeNode.tileIndex)
@@ -291,6 +324,8 @@ func demolish(delta):
 func updateRendering():
 	$Label.text = String(individualStats.size())
 	$Sprite.texture = load("res://resources/graphics/enemies/" + groupStats.texturePath)
+	$BraveryProgress.max_value = groupStats.maxBravery
+	$BraveryProgress.value = groupStats.bravery
 
 func _physics_process(delta):
 	if (nextWaypoint-position).length() < 5 or nextWaypoint.x < 0:
@@ -299,8 +334,9 @@ func _physics_process(delta):
 	if groupStats.demolition:
 		demolish(delta)
 	
+	var dir = nextWaypoint-position
 	# warning-ignore:return_value_discarded
-	move_and_slide((nextWaypoint-position).normalized() * groupStats.speed)
+	move_and_slide(dir.normalized() * min(groupStats.speed, dir.length() / delta))
 	for collisionIndex in range(get_slide_count()):
 		var collision = get_slide_collision(collisionIndex)
 		if collision.collider.has_method("collideWith"):
@@ -327,8 +363,4 @@ func _on_Enemy_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed('interact'):
 		var target = get_global_mouse_position()
 		if (target - player.global_position).length() < player.INTERACT_RANGE:
-			for stat in individualStats:
-				stat.speed *= 5
-			updateGroupStats()
-			spooked = true
-			nextWaypoint = getNextWaypoint()
+			changeBravery(-50)
