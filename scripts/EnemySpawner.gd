@@ -10,8 +10,8 @@ onready var enemyScene = preload("res://scenes/Enemy.tscn")
 #resistances
 #texturePath: String
 var enemyTypes = [
-	Stats.new(false, false, 100, 100, 100, {Stats.DamageTypes.NORMAL : 0.1}, "evilBellPepper.png"),
-	Stats.new(false, true, 50, 100, 100, {}, "fancyBellPepper.png")
+	Stats.new(false, false, 100, 100, 100, {Stats.DamageTypes.NORMAL : 0.1}, "evilBellPepper.png", "evilBellPepperDead.png"),
+	Stats.new(false, true, 50, 100, 100, {}, "fancyBellPepper.png", "fancyBellPepperDead.png")
 ]
 
 var waves = []

@@ -14,6 +14,7 @@ var maxBravery: int
 var bravery: int
 var resistances: Dictionary
 var texturePath: String
+var corpseTexturePath: String
 var isSlowed = false
 	
 func _init(drunkPathfinding_ = false,
@@ -22,7 +23,8 @@ func _init(drunkPathfinding_ = false,
 	maxHealth_ = 100,
 	maxBravery_ = 100,
 	resistances_ = {},
-	texturePath_ = "evilBellPepper.png"):
+	texturePath_ = "evilBellPepper.png",
+	corpseTexturePath_ = "evilBellPepperDead.png"):
 		
 	drunkPathfinding = drunkPathfinding_
 	demolition = demolition_
@@ -33,6 +35,7 @@ func _init(drunkPathfinding_ = false,
 	bravery = maxBravery
 	resistances = resistances_
 	texturePath = texturePath_
+	corpseTexturePath = corpseTexturePath_
 	
 	for damageType in DamageTypes:
 		if !resistances.has(int(damageType)):
@@ -40,7 +43,7 @@ func _init(drunkPathfinding_ = false,
 
 func duplicate():
 	var s = get_script().new(drunkPathfinding, demolition, speed, maxHealth,
-		maxBravery, resistances.duplicate(), texturePath)
+		maxBravery, resistances.duplicate(), texturePath, corpseTexturePath)
 		
 	s.health = health
 	s.bravery = bravery
@@ -56,18 +59,21 @@ func getActualSpeed():
 
 func changeHealth(amount: int, damageType, individualStats):
 	health += amount * (1.0 - resistances[damageType])
-	if health <= 0:
-		return
 	
-	while amount <= 0:
+	var deaths = []
+	
+	while amount <= 0 and !individualStats.empty():
 		var hitIndividualIndex = randi() % individualStats.size()
-		var stat = individualStats[hitIndividualIndex]
+		var stat :Stats = individualStats[hitIndividualIndex]
 		
 		var previousHealth = stat.health
 		stat.health += amount * (1.0 - stat.resistances[damageType])
 		amount += previousHealth
 		if stat.health <= 0:
+			deaths.append(stat.corpseTexturePath)
 			individualStats.remove(hitIndividualIndex)
+	
+	return deaths
 
 func changeBravery(amount: int, individualStats):
 	if bravery <= 0:
@@ -97,6 +103,7 @@ func update(individualStats):
 	maxBravery = 0
 	bravery = 0
 	texturePath = individualStats[0].texturePath
+	corpseTexturePath = individualStats[0].corpseTexturePath
 	
 	for damageType in resistances:
 		resistances[damageType] = 0

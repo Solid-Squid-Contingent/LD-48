@@ -15,7 +15,8 @@ var currentTreeNode : TreeNode = null
 var rootTreeNode : TreeNode = null
 var explored = {}
 
-var dynamiteScene = preload("res://scenes/Dynamite.tscn")
+const dynamiteScene = preload("res://scenes/Dynamite.tscn")
+const corpseScene = preload("res://scenes/Corpse.tscn")
 
 var individualStats = [Stats.new()]
 var groupStats: Stats = Stats.new()
@@ -57,7 +58,13 @@ func die():
 	queue_free()
 
 func changeHealth(amount: int, damageType):
-	groupStats.changeHealth(amount, damageType, individualStats)	
+	var deaths = groupStats.changeHealth(amount, damageType, individualStats)
+	for death in deaths:
+		var corpse = corpseScene.instance()
+		corpse.setTexture(load("res://resources/graphics/enemies/" + death))
+		corpse.position = position
+		get_parent().add_child(corpse)
+		
 	if groupStats.health <= 0:
 		die()
 	updateRendering()
@@ -218,7 +225,7 @@ func getNextWaypoint():
 			
 		return centeredWorldPosition(currentTreeNode.tileIndex)
 
-const MAX_DEMOLITION_COOLDOWN = 4.0
+const MAX_DEMOLITION_COOLDOWN = 10.0
 var demolitionCooldown = MAX_DEMOLITION_COOLDOWN
 func demolish(delta):
 	if demolitionCooldown > 0.0:
