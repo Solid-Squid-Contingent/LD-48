@@ -125,10 +125,10 @@ func _physics_process(_delta):
 	get_input()
 	look_at(position + velocity)
 	velocity = move_and_slide(velocity)
-	if position.x < 0 or position.x > 1000 or position.y < 0 or position.y > 600:
+	if position.x < 0 or position.x > 1920 or position.y < 0 or position.y > 1080:
 		waveScreen.show()
-		position.x = clamp(position.x, 0, 1000)
-		position.y = clamp(position.y, 0, 600)
+		position.x = clamp(position.x, 0, 1920)
+		position.y = clamp(position.y, 0, 1080)
 
 func setCurrentItem(item):
 	if currentItem:

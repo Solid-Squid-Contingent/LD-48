@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/menu_button.wav-2e4f5c46695b9a49e41fb35dbf4c4da2.sample"
+
+[deps]
+
+source_file="res://resources/sounds/menu_button.wav"
+dest_files=[ "res://.import/menu_button.wav-2e4f5c46695b9a49e41fb35dbf4c4da2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
