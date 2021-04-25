@@ -10,75 +10,11 @@ var cellSize: Vector2
 
 var nextWaypoint: Vector2 = Vector2(-1,-1)
 
-class TreeNode:
-	extends Reference
-	
-	var children = []
-	var parent: WeakRef
-	var tileIndex: Vector2
-	var completed = false
-	
-	func _init(tileIndex_, parent_):
-		tileIndex = tileIndex_
-		parent = weakref(parent_)
-	
-	func duplicate(dupParent = null):
-		var dup = TreeNode.new(tileIndex, dupParent)
-		dup.completed = completed
-		
-		for child in children:
-			dup.children.append(child.duplicate(dup))
-		
-		return dup
-	
-	func find(tileIndexToFind):
-		if tileIndex == tileIndexToFind:
-			return self
-		else:
-			for child in children:
-				var foundInChild = child.find(tileIndexToFind)
-				if foundInChild:
-					return foundInChild
-			return null
-
 var currentTreeNode : TreeNode = null
 var rootTreeNode : TreeNode = null
 var explored = {}
 
 var dynamiteScene = preload("res://scenes/Dynamite.tscn")
-
-class Stats:
-	extends Reference
-	
-	var drunkPathfinding: bool
-	var demolition: bool
-	var speed: int
-	var maxHealth: int
-	var health: int
-	var maxBravery: int
-	var bravery: int
-	var texturePath: String
-		
-	func _init(drunkPathfinding_ = false,
-		demolition_ = false,
-		speed_ = 100,
-		maxHealth_ = 100,
-		maxBravery_ = 100,
-		texturePath_ = "evilBellPepper.png"):
-			
-		drunkPathfinding = drunkPathfinding_
-		demolition = demolition_
-		speed = speed_
-		maxHealth = maxHealth_
-		health = maxHealth
-		maxBravery = maxBravery_
-		bravery = maxBravery
-		texturePath = texturePath_
-	
-	func duplicate():
-		var s = Stats.new(drunkPathfinding, demolition, speed, maxHealth, maxBravery, texturePath)
-		s.health = health
-		return s
 
 var individualStats = [Stats.new()]
 var groupStats: Stats = Stats.new()
@@ -187,29 +123,7 @@ func resetNavigation():
 	rootTreeNode = null
 
 func updateGroupStats():
-	groupStats.drunkPathfinding = true
-	groupStats.demolition = false
-	groupStats.speed = 0
-	groupStats.maxHealth = 0
-	groupStats.health = 0
-	groupStats.maxBravery = 0
-	groupStats.bravery = 0
-	groupStats.texturePath = individualStats[0].texturePath
-	
-	for stat in individualStats:
-		if !stat.drunkPathfinding:
-			groupStats.drunkPathfinding = false
-		if stat.demolition:
-			groupStats.demolition = true
-		groupStats.speed += stat.speed
-		groupStats.maxHealth += stat.maxHealth
-		groupStats.health += stat.health
-		groupStats.maxBravery += stat.maxBravery
-		groupStats.bravery += stat.bravery
-		if stat.texturePath != groupStats.texturePath:
-			groupStats.texturePath = "mixedBellPepper.png"
-	
-	groupStats.speed /= individualStats.size()
+	groupStats.update(individualStats)
 	updateRendering()
 
 func seperateGroup(stats, i):

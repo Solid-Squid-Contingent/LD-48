@@ -8,8 +8,8 @@ onready var enemyScene = preload("res://scenes/Enemy.tscn")
 #maxHealth: int
 #texturePath: String
 var enemyTypes = [
-	Enemy.Stats.new(false, false, 100, 100, 100, "evilBellPepper.png"),
-	Enemy.Stats.new(false, true, 50, 100, 100, "fancyBellPepper.png")
+	Stats.new(false, false, 100, 100, 100, "evilBellPepper.png"),
+	Stats.new(false, true, 50, 100, 100, "fancyBellPepper.png")
 ]
 
 var waves = []
@@ -57,9 +57,6 @@ func spawnEnemy():
 	else:
 		$SpawnTimer.start(rand_range(3.0, 5.0))
 
-func _on_SpawnTimer_timeout():
-	spawnEnemy()
-
 func _exit_tree():
 	for wave in waves:
 		for enemy in wave:
@@ -70,8 +67,10 @@ func _process(_delta):
 		$WaveTimeLabel.text = String(int($SpawnTimer.time_left)) + " s"
 	else:
 		$WaveTimeLabel.text = ""
-	
+		
 
+func _on_SpawnTimer_timeout():
+	spawnEnemy()
 
 func _on_WaveTimeLabel_gui_input(event):
 	if event.is_action_pressed('interact'):
