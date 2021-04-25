@@ -37,3 +37,6 @@ func _on_ArrowTrap_input_event(_viewport, event, _shape_idx):
 
 static func getIcon():
 	return icon
+	
+static func wallSnap():
+	return true

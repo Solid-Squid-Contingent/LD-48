@@ -10,3 +10,6 @@ func _on_Goo_body_entered(body):
 
 static func getIcon():
 	return icon
+	
+static func wallSnap():
+	return false

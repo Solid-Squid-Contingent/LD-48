@@ -26,11 +26,13 @@ var connectOrigin
 var waveScreen
 
 
-onready var lampScene = preload("res://scenes/Lamp.tscn")
-onready var pressurePlateScene = preload("res://scenes/PressurePlate.tscn")
-onready var arrowTrapScene = preload("res://scenes/ArrowTrap.tscn")
-onready var spikesScene = preload("res://scenes/Spikes.tscn")
-onready var currentItem = null
+const lampScene = preload("res://scenes/Lamp.tscn")
+const pressurePlateScene = preload("res://scenes/PressurePlate.tscn")
+const arrowTrapScene = preload("res://scenes/ArrowTrap.tscn")
+const spikesScene = preload("res://scenes/Spikes.tscn")
+var currentItem = null
+var canPlaceCurrentItem = true
+
 
 func _ready():
 	updateLayout()
@@ -69,7 +71,7 @@ func _input(event):
 	if event.is_action_pressed("build"):
 		var target = get_global_mouse_position()
 		
-		if (target - global_position).length() < INTERACT_RANGE:
+		if canPlaceCurrentItem:
 			placeItem(currentItem, target)
 	elif event is InputEventKey and event.pressed:
 		if event.scancode == KEY_Q:
@@ -91,7 +93,6 @@ func placeItem(item, target):
 		var index = positionInMap(target)
 		if layout.get_cellv(index) == 1:
 			money -= 10
-			item.position = target
 			currentItem = null
 			level.add_child(item)
 

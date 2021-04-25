@@ -9,4 +9,7 @@ func _on_Spikes_body_entered(body):
 	body.collideWithSpikes()
 
 static func getIcon():
-	return icon;
+	return icon
+
+static func wallSnap():
+	return false

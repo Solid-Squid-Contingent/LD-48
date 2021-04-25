@@ -55,3 +55,6 @@ func _on_PressurePlate_mouse_exited():
 
 static func getIcon():
 	return notPressedImage
+	
+static func wallSnap():
+	return false
