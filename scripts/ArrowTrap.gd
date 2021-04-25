@@ -1,4 +1,4 @@
-extends Sprite
+extends Area2D
 
 var arrowScene = preload("res://scenes/Arrow.tscn")
 
@@ -20,7 +20,7 @@ func activate():
 	else:
 		print("tschhrkkk (Cooldown!)")
 
-func _input(event):
+func _on_ArrowTrap_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('interact'):
 		var target = get_global_mouse_position()
 		if (target - global_position).length() < 100 and \
@@ -29,3 +29,6 @@ func _input(event):
 					player.connectTrap(self)
 				else: 
 					activate()
+
+func getWireConnectionPoint():
+	return $WireConnectionPoint

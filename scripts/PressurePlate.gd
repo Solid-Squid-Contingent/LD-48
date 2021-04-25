@@ -44,12 +44,11 @@ func _on_PressurePlate_input_event(_viewport, event, _shape_idx):
 func _on_PressurePlate_mouse_entered():
 	for connection in connectedTraps:
 		var newWire = wireScene.instance()
-		newWire.points[1] = to_local(connection.position)
+		newWire.points[1] = to_local(connection.getWireConnectionPoint().global_position)
 		wires.append(newWire)
 		add_child(newWire)
 
 func _on_PressurePlate_mouse_exited():
-	print(wires)
 	for i in range(wires.size()):
 		wires[i].queue_free()
-		wires.remove(i)
+	wires = []
