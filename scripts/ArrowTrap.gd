@@ -24,12 +24,11 @@ func getWireConnectionPoint():
 	return $WireConnectionPoint
 
 
-func _on_ArrowTrap_input_event(viewport, event, shape_idx):
+func _on_ArrowTrap_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed('interact'):
 		var target = get_global_mouse_position()
-		if (target - global_position).length() < 100 and \
-				(target - player.global_position).length() < player.INTERACT_RANGE:
-					if player.isInConnectMode():
-						player.connectTrap(self)
-					else: 
-						activate()
+		if (target - player.global_position).length() < player.INTERACT_RANGE:
+			if player.isInConnectMode():
+				player.connectTrap(self)
+			else: 
+				activate()

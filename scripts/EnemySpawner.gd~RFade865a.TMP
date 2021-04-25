@@ -10,8 +10,8 @@ onready var enemyScene = preload("res://scenes/Enemy.tscn")
 #resistances
 #texturePath: String
 var enemyTypes = [
-	Stats.new(false, false, 100, 100, 100, {Stats.DamageTypes.NORMAL : 0.1}, "evilBellPepper.png"),
-	Stats.new(false, true, 50, 100, 100, {}, "fancyBellPepper.png")
+	Stats.new(false, false, 1000, 100, 100, {Stats.DamageTypes.NORMAL : 0.1}, "evilBellPepper.png"),
+	Stats.new(false, true, 500, 100, 100, {}, "fancyBellPepper.png")
 ]
 
 var waves = []
@@ -50,7 +50,6 @@ func spawnEnemy():
 	var enemy = waves[0].pop_front()
 	enemy.position = position
 	get_parent().call_deferred("add_child", enemy)
-	enemy.call_deferred("updateLevel")
 
 	if waves[0].empty():
 		waves.pop_front()
@@ -58,7 +57,7 @@ func spawnEnemy():
 		$SpawnTimer.start(rand_range(20.0, 25.0))
 		betweenWaves = true
 	else:
-		$SpawnTimer.start(rand_range(3.0, 5.0))
+		pass#$SpawnTimer.start(rand_range(3.0, 5.0))
 
 func _exit_tree():
 	for wave in waves:

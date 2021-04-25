@@ -5,6 +5,8 @@ var pharaohImage = preload("res://resources/graphics/player/player.png")
 var buildingImage = preload("res://resources/graphics/player/buildingPharaoh.png")
 
 var layout: TileMap
+var level: Node
+var layoutIndex: int
 export var speed : int = 200
 
 const INTERACT_RANGE = 100
@@ -45,8 +47,18 @@ onready var placeableItems = [
 onready var currentItem = placeableItems[0]
 
 func _ready():
-	layout = get_tree().get_nodes_in_group('Layout')[0]
+	updateLayout()
 	waveScreen = get_tree().get_nodes_in_group('WaveScreen')[0]
+
+func updateLayout():
+	var i = 0
+	for l in get_tree().get_nodes_in_group('Layout'):
+		if l.visible:
+			layout = l
+			layoutIndex = i
+			level = get_tree().get_nodes_in_group('PyramidLevel')[layoutIndex]
+			break
+		i += 1
 
 func connectTrap(node):
 	connectOrigin.connectToTrap(node)
@@ -77,6 +89,17 @@ func _input(event):
 	elif event is InputEventKey and event.pressed:
 		if event.scancode >= KEY_0 and event.scancode <= KEY_9:
 			currentItem = placeableItems[event.scancode - KEY_0]
+		if event.scancode == KEY_Q:
+			var levels = get_tree().get_nodes_in_group('PyramidLevel')
+			
+			level.visible = false
+			layout.occluder_light_mask = 0
+			
+			layoutIndex = (layoutIndex + 1) % levels.size()
+			layout = get_tree().get_nodes_in_group('Layout')[layoutIndex]
+			level = levels[layoutIndex]
+			level.visible = true
+			layout.occluder_light_mask = 1
 
 func placeItem(item, target):
 	if item is String:
@@ -88,7 +111,7 @@ func placeItem(item, target):
 			money -= 10
 			var newItem = item.instance()
 			newItem.position = target
-			get_parent().add_child(newItem)
+			level.add_child(newItem)
 
 func placeNothing(_target):
 	pass

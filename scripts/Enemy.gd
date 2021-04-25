@@ -7,6 +7,7 @@ var player
 
 var layout: TileMap
 var cellSize: Vector2
+var layoutIndex: int
 
 var nextWaypoint: Vector2 = Vector2(-1,-1)
 
@@ -21,11 +22,24 @@ var groupStats: Stats = Stats.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	layout = get_tree().get_nodes_in_group('Layout')[0]
+	updateLevel()
 	player = get_tree().get_nodes_in_group('Player')[0]
-	treasurePosition = get_tree().get_nodes_in_group('Treasure')[0].global_position
-	cellSize = layout.cell_size
 	updateGroupStats()
+
+func updateLevel():
+	layout = findInCurrentLevel('Layout', true)
+	if layout:
+		cellSize = layout.cell_size
+		treasurePosition = findInCurrentLevel('Treasure').global_position
+
+func findInCurrentLevel(name, setLayoutIndex = false):
+	var i = 0
+	for l in get_tree().get_nodes_in_group(name):
+		if l.get_parent() == get_parent():
+			if setLayoutIndex:
+				layoutIndex = i
+			return l
+		i += 1
 
 func collideWithSpikes():
 	changeHealth(-100, Stats.DamageTypes.NORMAL)
@@ -107,11 +121,21 @@ func seperateGroup(stats, i):
 	enemy.currentTreeNode = enemy.rootTreeNode.find(currentTreeNode.children[i].tileIndex)
 	enemy.nextWaypoint = centeredWorldPosition(enemy.currentTreeNode.tileIndex)
 	get_parent().add_child(enemy)
+
+func reachedEnd():
+	var levels = get_tree().get_nodes_in_group("PyramidLevel")
+	if layoutIndex >= levels.size() - 1:
+		player.health -= 10 * individualStats.size()
+		queue_free()
+	else:
+		get_parent().remove_child(self)
+		levels[layoutIndex + 1].add_child(self)
+		updateLevel()
+		resetNavigation()
 	
 func getNextWaypoint():
 	if (treasurePosition - global_position).length() < 5:
-		player.health -= 10 * individualStats.size()
-		queue_free()
+		reachedEnd()
 	
 	treasureRayCast.cast_to = treasurePosition - global_position
 	treasureRayCast.force_raycast_update()
@@ -203,6 +227,7 @@ func demolish(delta):
 			
 			var dynamite = dynamiteScene.instance()
 			dynamite.position = centeredWorldPosition(demolishPos)
+			dynamite.layout = layout
 			get_parent().add_child(dynamite)
 
 func updateRendering():
