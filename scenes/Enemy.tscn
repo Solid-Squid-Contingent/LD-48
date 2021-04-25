@@ -74,6 +74,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GooTimer" type="Timer" parent="."]
+
 [connection signal="input_event" from="." to="." method="_on_Enemy_input_event"]
 [connection signal="area_entered" from="MergeArea" to="." method="_on_MergeArea_area_entered"]
 [connection signal="area_exited" from="MergeArea" to="." method="_on_MergeArea_area_exited"]
+[connection signal="timeout" from="GooTimer" to="." method="_on_GooTimer_timeout"]

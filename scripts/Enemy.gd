@@ -51,8 +51,7 @@ func collideWithArrow():
 
 func collideWithGoo():
 	groupStats.isSlowed = true
-	yield(get_tree().create_timer(5.0), "timeout")
-	groupStats.isSlowed = false
+	$GooTimer.start(5.0)
 
 func die():
 	queue_free()
@@ -283,3 +282,7 @@ func _on_Enemy_input_event(_viewport, event, _shape_idx):
 		var target = get_global_mouse_position()
 		if (target - player.global_position).length() < player.INTERACT_RANGE:
 			changeBravery(-50)
+
+
+func _on_GooTimer_timeout():
+	groupStats.isSlowed = false
