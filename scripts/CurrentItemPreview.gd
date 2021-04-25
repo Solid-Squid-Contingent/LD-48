@@ -61,6 +61,8 @@ func _process(_delta):
 	if currentItem:
 		show()
 		texture = currentItem.getIcon()
+		scale = currentItem.get_node("Sprite").scale
+		rotation = 0
 		setClosestFloorSnapPosition(currentItem.wallSnap())
 		currentItem.position = position
 		currentItem.rotation = rotation

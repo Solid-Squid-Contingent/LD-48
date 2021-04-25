@@ -1,6 +1,6 @@
 extends Area2D
 
-const icon = preload("res://resources/graphics/traps/spikes.png")
+const icon = preload("res://resources/graphics/traps/crocodiles.png")
 
 func _on_Spikes_body_entered(body):
 	body.collideWithCrocodiles()

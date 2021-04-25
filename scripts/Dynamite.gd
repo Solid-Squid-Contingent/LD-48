@@ -21,4 +21,5 @@ func _input(event):
 func _on_Timer_timeout():
 	var index = positionInMap(global_position)
 	layout.set_cellv(index, 1)
+	layout.update_bitmask_area(index)
 	queue_free()

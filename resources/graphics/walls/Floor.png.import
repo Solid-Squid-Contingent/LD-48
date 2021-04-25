@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wall links rechts offen.png-b988109537b94fb4813c1f9a11b3098a.stex"
+path="res://.import/Floor.png-7a0227299e4710784bdc0e517bd98232.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/walls/Wall links rechts offen.png"
-dest_files=[ "res://.import/Wall links rechts offen.png-b988109537b94fb4813c1f9a11b3098a.stex" ]
+source_file="res://resources/graphics/walls/Floor.png"
+dest_files=[ "res://.import/Floor.png-7a0227299e4710784bdc0e517bd98232.stex" ]
 
 [params]
 

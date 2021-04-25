@@ -91,4 +91,5 @@ margin_bottom = 40.0
 color = Color( 0.34, 0.34, 0.34, 1 )
 
 [node name="CurrentItemPreview" type="Sprite" parent="."]
+z_index = 2
 script = ExtResource( 13 )

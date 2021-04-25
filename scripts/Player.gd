@@ -115,6 +115,7 @@ func toggleWall(target):
 		var index = positionInMap(target)
 		money -= 10
 		layout.set_cellv(index, 1 - layout.get_cellv(index))
+		layout.update_bitmask_area(index)
 
 func get_input():
 	velocity = Vector2()
