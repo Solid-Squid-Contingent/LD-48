@@ -4,26 +4,26 @@
 [ext_resource path="res://scripts/ArrowTrap.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23.3281, 7.49492 )
+extents = Vector2( 106.835, 44.996 )
 
 [node name="ArrowTrap" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="ShootInterval" type="Timer" parent="."]
-wait_time = 3.0
 one_shot = true
 
 [node name="WireConnectionPoint" type="Node2D" parent="."]
 position = Vector2( 0, -20 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.8354, -18.504 )
+position = Vector2( -1.3354, -75.004 )
 shape = SubResource( 1 )
 
 [connection signal="input_event" from="." to="." method="_on_ArrowTrap_input_event"]

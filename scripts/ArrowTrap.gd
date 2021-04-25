@@ -15,7 +15,7 @@ func shoot():
 	var inAccuracy = (randf() - 0.5) * 0.05
 	newArrow.position = position
 	newArrow.rotation = rotation
-	newArrow.add_central_force(Vector2(0, 300).rotated(rotation).rotated(inAccuracy))
+	newArrow.add_central_force(Vector2(0, 1500).rotated(rotation).rotated(inAccuracy))
 	get_parent().call_deferred("add_child", newArrow)
 	
 func activate():
