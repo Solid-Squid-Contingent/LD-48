@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="Wire" type="Line2D"]
+z_index = 6
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 5.0
+default_color = Color( 0.85098, 0.14902, 0.14902, 1 )
