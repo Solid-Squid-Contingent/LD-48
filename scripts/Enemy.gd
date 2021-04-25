@@ -46,10 +46,16 @@ func collideWithCrocodiles():
 	changeHealth(-200, Stats.DamageTypes.CROCODILES)
 	
 func collideWithSpikes():
-	changeHealth(-100, Stats.DamageTypes.NORMAL)
+	changeHealth(-50, Stats.DamageTypes.NORMAL)
 	
 func collideWithArrow():
 	changeHealth(-100, Stats.DamageTypes.NORMAL)
+
+func collideWithFire():
+	$FireTimer.start()
+	
+func stopCollidingWithFire():
+	$FireTimer.stop()
 
 func collideWithGoo():
 	groupStats.isSlowed = true
@@ -294,3 +300,7 @@ func _on_Enemy_input_event(_viewport, event, _shape_idx):
 
 func _on_GooTimer_timeout():
 	groupStats.isSlowed = false
+
+
+func _on_FireTimer_timeout():
+	changeHealth(-10, Stats.DamageTypes.FIRE)

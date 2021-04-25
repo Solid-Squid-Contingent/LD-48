@@ -9,16 +9,19 @@ var player
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().get_nodes_in_group('Player')[0]
+
+func shoot():
+	var newArrow = arrowScene.instance()
+	var inAccuracy = (randf() - 0.5) * 0.05
+	newArrow.position = position
+	newArrow.rotation = rotation
+	newArrow.add_central_force(Vector2(0, 300).rotated(rotation).rotated(inAccuracy))
+	get_parent().call_deferred("add_child", newArrow)
 	
 func activate():
 	if $ShootInterval.is_stopped():
 		$ShootInterval.start()
-		var newArrow = arrowScene.instance()
-		var inAccuracy = (randf() - 0.5) * 0.05
-		newArrow.position = position
-		newArrow.rotation = rotation
-		newArrow.add_central_force(Vector2(0, 300).rotated(rotation).rotated(inAccuracy))
-		get_parent().call_deferred("add_child", newArrow)
+		shoot()
 	else:
 		print("tschhrkkk (Cooldown!)")
 

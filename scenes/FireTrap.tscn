@@ -1,0 +1,177 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://resources/graphics/traps/fireTrap.png" type="Texture" id=1]
+[ext_resource path="res://scripts/FireTrap.gd" type="Script" id=2]
+[ext_resource path="res://scripts/FireArea.gd" type="Script" id=3]
+[ext_resource path="res://resources/graphics/traps/fire1.png" type="Texture" id=4]
+[ext_resource path="res://resources/graphics/traps/fire2.png" type="Texture" id=5]
+[ext_resource path="res://resources/graphics/traps/fire5.png" type="Texture" id=7]
+[ext_resource path="res://resources/graphics/traps/fire4.png" type="Texture" id=8]
+[ext_resource path="res://resources/graphics/traps/fire6.png" type="Texture" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 122.084, 88.1864 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 90.6145, 472.448 )
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.248322, 0.510067 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[node name="FireTrap" type="Area2D"]
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="ShootInterval" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="WireConnectionPoint" type="Node2D" parent="."]
+position = Vector2( 0, -20 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -5.27748, -37.7636 )
+shape = SubResource( 1 )
+
+[node name="FireArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireArea"]
+position = Vector2( -0.450943, 345.351 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="FireParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 3.0
+one_shot = true
+texture = ExtResource( 4 )
+direction = Vector2( 0, 1 )
+spread = 15.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 569.89
+angle = 180.0
+angle_random = 0.13
+scale_amount = 0.5
+color_ramp = SubResource( 3 )
+hue_variation = 0.28
+hue_variation_random = 0.5
+
+[node name="FireParticles2" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 3.0
+one_shot = true
+texture = ExtResource( 5 )
+direction = Vector2( 0, 1 )
+spread = 15.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 569.89
+angle = 180.0
+angle_random = 0.13
+scale_amount = 0.5
+color_ramp = SubResource( 3 )
+hue_variation = 0.28
+hue_variation_random = 0.5
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FireParticles3" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 3.0
+one_shot = true
+texture = ExtResource( 4 )
+direction = Vector2( 0, 1 )
+spread = 15.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 569.89
+angle = 180.0
+angle_random = 0.13
+scale_amount = 0.5
+color_ramp = SubResource( 3 )
+hue_variation = 0.28
+hue_variation_random = 0.5
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FireParticles4" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 3.0
+one_shot = true
+texture = ExtResource( 8 )
+direction = Vector2( 0, 1 )
+spread = 15.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 569.89
+angle = 180.0
+angle_random = 0.13
+scale_amount = 0.5
+color_ramp = SubResource( 3 )
+hue_variation = 0.28
+hue_variation_random = 0.5
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FireParticles5" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 3.0
+one_shot = true
+texture = ExtResource( 7 )
+direction = Vector2( 0, 1 )
+spread = 15.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 569.89
+angle = 180.0
+angle_random = 0.13
+scale_amount = 0.5
+color_ramp = SubResource( 3 )
+hue_variation = 0.28
+hue_variation_random = 0.5
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FireParticles6" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 3.0
+one_shot = true
+texture = ExtResource( 9 )
+direction = Vector2( 0, 1 )
+spread = 15.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 569.89
+angle = 180.0
+angle_random = 0.13
+scale_amount = 0.5
+color_ramp = SubResource( 3 )
+hue_variation = 0.28
+hue_variation_random = 0.5
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="input_event" from="." to="." method="_on_ArrowTrap_input_event"]
+[connection signal="body_entered" from="FireArea" to="FireArea" method="_on_FireArea_body_entered"]
+[connection signal="body_exited" from="FireArea" to="FireArea" method="_on_FireArea_body_exited"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]

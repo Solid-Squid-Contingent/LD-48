@@ -77,7 +77,11 @@ __meta__ = {
 
 [node name="GooTimer" type="Timer" parent="."]
 
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="input_event" from="." to="." method="_on_Enemy_input_event"]
 [connection signal="area_entered" from="MergeArea" to="." method="_on_MergeArea_area_entered"]
 [connection signal="area_exited" from="MergeArea" to="." method="_on_MergeArea_area_exited"]
 [connection signal="timeout" from="GooTimer" to="." method="_on_GooTimer_timeout"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]

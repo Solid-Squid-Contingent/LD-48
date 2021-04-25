@@ -31,7 +31,7 @@ tile_data = PoolIntArray( 196611, 0, 65537, 196612, 0, 65538, 196613, 0, 6, 1966
 [node name="TreasureChamber" type="Position2D" parent="PyramidTop" groups=[
 "Treasure",
 ]]
-position = Vector2( 750, 150 )
+position = Vector2( 3375, 1125 )
 
 [node name="EnemySpawner" parent="PyramidTop" instance=ExtResource( 7 )]
 position = Vector2( 2625, 2625 )
@@ -57,7 +57,7 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 0, 65537, 4, 0, 65538, 5
 [node name="TreasureChamber" type="Position2D" parent="PyramidBottom" groups=[
 "Treasure",
 ]]
-position = Vector2( 525, 475 )
+position = Vector2( 2625, 2375 )
 
 [node name="Player" parent="." groups=[
 "Player",

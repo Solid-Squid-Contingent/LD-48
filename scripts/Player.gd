@@ -73,6 +73,7 @@ func changeToConnectModeFrom(node):
 	$Sprite.texture = buildingImage
 
 func changeToDefaultMode():
+	connectOrigin = null
 	mode = MODES.DEFAULT
 	$Sprite.texture = pharaohImage
 

@@ -10,6 +10,7 @@ var player
 
 var connectedTraps = []
 var wires = []
+var currentWire = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,9 +38,14 @@ func _on_PressurePlate_body_exited(_body):
 
 func _on_PressurePlate_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed('interact'):
-		var target = get_global_mouse_position()
-		if (target - player.global_position).length() < player.INTERACT_RANGE:
-			player.changeToConnectModeFrom(self)
+		if player.connectOrigin == self:
+			player.changeToDefaultMode()
+		else:
+			var target = get_global_mouse_position()
+			if (target - player.global_position).length() < player.INTERACT_RANGE:
+				player.changeToConnectModeFrom(self)
+				currentWire = wireScene.instance()
+				add_child(currentWire)
 
 func _on_PressurePlate_mouse_entered():
 	for connection in connectedTraps:
@@ -58,3 +64,11 @@ static func getIcon():
 	
 static func wallSnap():
 	return false
+
+func _process(_delta):
+	if currentWire:
+		if player.connectOrigin != self:
+			currentWire.queue_free()
+			currentWire = null
+		else:
+			currentWire.points[1] = get_local_mouse_position()
