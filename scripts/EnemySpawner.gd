@@ -13,9 +13,13 @@ var enemyTypes = [
 ]
 
 var waves = []
+var betweenWaves = false
+
+var player
 
 func _ready():
 	spawnEnemy()
+	player = get_tree().get_nodes_in_group('Player')[0]
 
 func generateWave():
 	var wave = []
@@ -36,6 +40,8 @@ func generateWave():
 	waves.append(wave)
 	
 func spawnEnemy():
+	betweenWaves = false
+	
 	while waves.size() < 3:
 		generateWave()
 
@@ -46,9 +52,10 @@ func spawnEnemy():
 	if waves[0].empty():
 		waves.pop_front()
 		generateWave()
-		$SpawnTimer.start(rand_range(10.0, 11.0))
+		$SpawnTimer.start(rand_range(20.0, 25.0))
+		betweenWaves = true
 	else:
-		$SpawnTimer.start(rand_range(5.0, 6.0))
+		$SpawnTimer.start(rand_range(3.0, 5.0))
 
 func _on_SpawnTimer_timeout():
 	spawnEnemy()
@@ -57,4 +64,18 @@ func _exit_tree():
 	for wave in waves:
 		for enemy in wave:
 			enemy.free()
+
+func _process(_delta):
+	if betweenWaves:
+		$WaveTimeLabel.text = String(int($SpawnTimer.time_left)) + " s"
+	else:
+		$WaveTimeLabel.text = ""
 	
+
+
+func _on_WaveTimeLabel_gui_input(event):
+	if event.is_action_pressed('interact'):
+		var target = get_global_mouse_position()
+		if (target - player.global_position).length() < player.INTERACT_RANGE:
+			if betweenWaves:
+				spawnEnemy()
