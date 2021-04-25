@@ -4,6 +4,7 @@ var selectableScenes = [
 	preload("res://scenes/Spikes.tscn"),
 	preload("res://scenes/ArrowTrap.tscn"),
 	preload("res://scenes/Goo.tscn"),
+	preload("res://scenes/PressurePlate.tscn"),
 	preload("res://scenes/Lamp.tscn"),
 ]
 

@@ -94,7 +94,7 @@ func placeItem(item, target):
 			money -= 10
 			item.position = target
 			currentItem = null
-			level.add_child(newItem)
+			level.add_child(item)
 
 func toggleWall(target):
 	if money >= 10:
