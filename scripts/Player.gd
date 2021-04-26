@@ -6,7 +6,6 @@ signal connectedTrap
 signal switchedLevel
 
 var pharaohImage = preload("res://resources/graphics/player/player.png")
-var buildingImage = preload("res://resources/graphics/player/buildingPharaoh.png")
 
 var layout: TileMap
 var level: Node
@@ -83,12 +82,10 @@ func isInConnectMode():
 func changeToConnectModeFrom(node):
 	connectOrigin = node
 	mode = MODES.CONNECTING_TRAPS
-	$Sprite.texture = buildingImage
 
 func changeToDefaultMode():
 	connectOrigin = null
 	mode = MODES.DEFAULT
-	$Sprite.texture = pharaohImage
 	
 func _input(event):
 	if event.is_action_pressed("build"):
