@@ -2,6 +2,8 @@ extends TileMap
 
 var placedItems = {}
 
+signal itemRemoved(item)
+
 func positionInMap(pos):
 	return world_to_map(to_local(pos))
 	
@@ -18,6 +20,7 @@ func addItem(item):
 func removeItem(item):
 	var posInMap = positionInMap(item.global_position)
 	placedItems.erase(posInMap)
+	emit_signal("itemRemoved", item)
 	if item.has_method("wallSnap") and item.wallSnap():
 		placedItems.erase(posInMap + Vector2.UP.rotated(item.rotation))
 
