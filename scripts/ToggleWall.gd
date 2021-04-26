@@ -24,3 +24,6 @@ static func wallSnap():
 	
 static func everywhereSnap():
 	return true
+
+static func getPrice():
+	return 10

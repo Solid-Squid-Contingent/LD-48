@@ -99,8 +99,8 @@ func _input(event):
 			updateCameraLimits()
 
 func placeItem(item):
-	if money >= 10:
-		money -= 10
+	if money >= item.getPrice():
+		money -= item.getPrice()
 		currentItem = null
 		level.add_child(item)
 		layout.addItem(item)

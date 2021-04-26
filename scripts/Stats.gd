@@ -12,6 +12,7 @@ var maxHealth: int
 var health: int
 var maxBravery: int
 var bravery: int
+var moneyDropped:int
 var resistances: Dictionary
 var texturePath: String
 var corpseTexturePath: String
@@ -22,6 +23,7 @@ func _init(drunkPathfinding_ = false,
 	speed_ = 100,
 	maxHealth_ = 100,
 	maxBravery_ = 100,
+	moneyDropped_ = 1,
 	resistances_ = {},
 	texturePath_ = "evilBellPepper.png",
 	corpseTexturePath_ = "evilBellPepperDead.png"):
@@ -33,6 +35,7 @@ func _init(drunkPathfinding_ = false,
 	health = maxHealth
 	maxBravery = maxBravery_
 	bravery = maxBravery
+	moneyDropped = moneyDropped_
 	resistances = resistances_
 	texturePath = texturePath_
 	corpseTexturePath = corpseTexturePath_
@@ -43,7 +46,7 @@ func _init(drunkPathfinding_ = false,
 
 func duplicate():
 	var s = get_script().new(drunkPathfinding, demolition, speed, maxHealth,
-		maxBravery, resistances.duplicate(), texturePath, corpseTexturePath)
+		maxBravery, moneyDropped, resistances.duplicate(), texturePath, corpseTexturePath)
 		
 	s.health = health
 	s.bravery = bravery
@@ -68,7 +71,7 @@ func changeHealth(amount: int, damageType, individualStats):
 		stat.health += amount * (1.0 - stat.resistances[damageType])
 		amount += previousHealth
 		if stat.health <= 0:
-			deaths.append(stat.corpseTexturePath)
+			deaths.append(stat)
 			individualStats.remove(hitIndividualIndex)
 	
 	update(individualStats)
@@ -105,6 +108,7 @@ func update(individualStats):
 	health = 0
 	maxBravery = 0
 	bravery = 0
+	moneyDropped = 0
 	texturePath = individualStats[0].texturePath
 	corpseTexturePath = individualStats[0].corpseTexturePath
 	
@@ -121,6 +125,7 @@ func update(individualStats):
 		health += stat.health
 		maxBravery += stat.maxBravery
 		bravery += stat.bravery
+		moneyDropped += stat.moneyDropped
 		
 		if stat.texturePath != texturePath:
 			texturePath = "mixedBellPepper.png"

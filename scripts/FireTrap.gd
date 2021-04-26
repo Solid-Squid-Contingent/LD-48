@@ -17,3 +17,6 @@ func shoot():
 
 func _on_FireTimer_timeout():
 	$FireArea/CollisionShape2D.disabled = true
+	
+static func getPrice():
+	return 30

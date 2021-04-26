@@ -72,3 +72,6 @@ func _process(_delta):
 			currentWire = null
 		else:
 			currentWire.points[1] = get_local_mouse_position()
+			
+static func getPrice():
+	return 10

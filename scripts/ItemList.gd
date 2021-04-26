@@ -17,7 +17,7 @@ func _ready():
 	var i = 1
 	for scene in selectableScenes:
 		var newItem = scene.instance()
-		add_item(String(i), newItem.getIcon())
+		add_item("(" + String(i) + ") " + String(newItem.getPrice()) + "$", newItem.getIcon())
 		newItem.free()
 		i += 1
 
@@ -35,4 +35,6 @@ func _input(event):
 				player.setCurrentItem(null)
 			else:
 				player.setCurrentItem(selectableScenes[event.scancode - KEY_1].instance())
+		elif event.scancode >= KEY_0:
+			player.setCurrentItem(null)
 

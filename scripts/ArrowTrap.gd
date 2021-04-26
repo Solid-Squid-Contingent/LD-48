@@ -43,3 +43,6 @@ static func getIcon():
 	
 static func wallSnap():
 	return true
+	
+static func getPrice():
+	return 10

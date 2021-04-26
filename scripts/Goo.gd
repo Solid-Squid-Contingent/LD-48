@@ -13,3 +13,6 @@ static func getIcon():
 	
 static func wallSnap():
 	return false
+	
+static func getPrice():
+	return 15

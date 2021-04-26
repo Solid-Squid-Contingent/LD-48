@@ -11,8 +11,8 @@ onready var enemyScene = preload("res://scenes/Enemy.tscn")
 #texturePath: String
 #corpseTexturePath: String
 var enemyTypes = [
-	Stats.new(false, false, 100, 100, 100, {Stats.DamageTypes.NORMAL : 0.1}, "evilBellPepper.png", "evilBellPepperDead.png"),
-	Stats.new(false, true, 50, 100, 100, {}, "fancyBellPepper.png", "fancyBellPepperDead.png")
+	Stats.new(false, false, 100, 100, 100, 2, {Stats.DamageTypes.NORMAL : 0.1}, "evilBellPepper.png", "evilBellPepperDead.png"),
+	Stats.new(false, true, 50, 100, 100, 5, {}, "fancyBellPepper.png", "fancyBellPepperDead.png")
 ]
 
 var enemyDescriptions = [

@@ -68,9 +68,10 @@ func changeHealth(amount: int, damageType):
 	var deaths = groupStats.changeHealth(amount, damageType, individualStats)
 	for death in deaths:
 		var corpse = corpseScene.instance()
-		corpse.setTexture(load("res://resources/graphics/enemies/" + death))
+		corpse.setTexture(load("res://resources/graphics/enemies/" + death.corpseTexturePath))
 		corpse.position = position
 		get_parent().add_child(corpse)
+		player.money += death.moneyDropped
 		
 	if individualStats.empty():
 		die()
