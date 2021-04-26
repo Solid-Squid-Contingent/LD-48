@@ -276,12 +276,12 @@ func updateRendering():
 		
 		var collisionShape = collisionShapeScene.instance()
 		collisionShape.position = sprite.position
-		add_child(collisionShape)
+		call_deferred("add_child", collisionShape)
 		collisionShapes.append(collisionShape)
 
 		var collisionShape2 = collisionShapeScene.instance()
 		collisionShape2.position = sprite.position
-		$MergeArea.add_child(collisionShape2)
+		$MergeArea.call_deferred("add_child", collisionShape2)
 		i += 1
 		
 func _physics_process(delta):
