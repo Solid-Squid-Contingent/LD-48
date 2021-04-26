@@ -11,5 +11,5 @@ dest_files=[ "res://.import/env_dynamite.ogg-952bab9d589d9996e1d235dcc8da62fe.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

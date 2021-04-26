@@ -34,6 +34,7 @@ func connectToTrap(node):
 func _on_PressurePlate_body_entered(_body):
 	if bodiesOnPlate == 0:
 		$Sprite.texture = pressedImage
+		$TriggerPlayer.play()
 		activateTraps()
 	bodiesOnPlate += 1
 

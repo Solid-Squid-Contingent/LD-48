@@ -11,5 +11,5 @@ dest_files=[ "res://.import/env_buildTorch.ogg-f8f4c232a23b78b1475a2d29a57e8ffe.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

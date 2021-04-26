@@ -9,6 +9,7 @@ func _ready():
 
 func _on_Spikes_body_entered(body):
 	body.collideWithSpikes()
+	$TriggerPlayer.play()
 
 static func getIcon():
 	return icon

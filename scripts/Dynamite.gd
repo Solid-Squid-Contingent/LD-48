@@ -19,4 +19,5 @@ func _on_Timer_timeout():
 	var index = layout.positionInMap(global_position)
 	layout.set_cellv(index, 1)
 	layout.update_bitmask_area(index)
+	get_tree().get_nodes_in_group("AudioManager")[0].playBombSfx(global_position)
 	queue_free()

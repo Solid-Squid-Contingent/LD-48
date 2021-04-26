@@ -11,5 +11,5 @@ dest_files=[ "res://.import/trap_spikes_trigger.ogg-6b90893cd904f4c309a1101cbc53
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

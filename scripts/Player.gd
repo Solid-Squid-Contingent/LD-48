@@ -96,6 +96,8 @@ func _input(event):
 				layout.freeItemAt(get_global_mouse_position())
 		elif canPlaceCurrentItem:
 			placeItem(currentItem)
+		else:
+			$BuildFailedPlayer.play()
 	elif event.is_action_pressed("interact"):
 		if currentItem:
 			setCurrentItem(null, -1)
@@ -124,6 +126,8 @@ func placeItem(item):
 		layout.addItem(item)
 		if item.has_method("isSpikes") and item.isSpikes():
 			emit_signal("placedSpikes")
+	else:
+		$BuildFailedPlayer.play()
 
 func get_input():
 	velocity = Vector2()

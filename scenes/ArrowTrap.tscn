@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://resources/graphics/traps/arrowTrap.png" type="Texture" id=1]
 [ext_resource path="res://scripts/ArrowTrap.gd" type="Script" id=2]
+[ext_resource path="res://resources/sounds/env_pressurePlateConnect.ogg" type="AudioStream" id=3]
+[ext_resource path="res://resources/sounds/trap_arrows_trigger.ogg" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 106.835, 44.996 )
@@ -27,5 +29,16 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1.3354, -75.004 )
 shape = SubResource( 1 )
+
+[node name="ConnectPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "SoundEffects"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ShootPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+bus = "SoundEffects"
 
 [connection signal="input_event" from="." to="." method="_on_ArrowTrap_input_event"]

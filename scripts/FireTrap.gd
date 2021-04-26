@@ -14,9 +14,15 @@ func shoot():
 		particle.emitting = true
 	$FireArea/CollisionShape2D.set_deferred("disabled", false)
 	$FireTimer.start()
+	$FirePlayer.play()
 
 func _on_FireTimer_timeout():
 	$FireArea/CollisionShape2D.disabled = true
+	$FirePlayer.stop()
 	
 static func getPrice():
 	return 30
+
+
+func _on_FireTrap_input_event(viewport, event, shape_idx):
+	_on_ArrowTrap_input_event(viewport, event, shape_idx)

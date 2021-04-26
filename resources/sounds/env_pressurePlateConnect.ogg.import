@@ -11,5 +11,5 @@ dest_files=[ "res://.import/env_pressurePlateConnect.ogg-9068676fdd7401451f89b69
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

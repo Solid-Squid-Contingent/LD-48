@@ -11,5 +11,5 @@ dest_files=[ "res://.import/trap_pressureplate_trigger.ogg-0dd4cca9bf9744f8c7809
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

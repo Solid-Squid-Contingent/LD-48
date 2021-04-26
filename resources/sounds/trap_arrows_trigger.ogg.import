@@ -11,5 +11,5 @@ dest_files=[ "res://.import/trap_arrows_trigger.ogg-c8332ece3e77afe984984333f57d
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

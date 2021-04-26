@@ -11,5 +11,5 @@ dest_files=[ "res://.import/trap_crocodile_trigger.ogg-a5ddd6c0abd41df2ba40c6837
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

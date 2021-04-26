@@ -5,6 +5,8 @@ const icon = preload("res://resources/graphics/walls/wall.png")
 var layout
 	
 func _ready():
+	get_tree().get_nodes_in_group("AudioManager")[0].playWallSfx(global_position)
+	
 	for l in get_tree().get_nodes_in_group('Layout'):
 		if l.get_parent().visible:
 			layout = l

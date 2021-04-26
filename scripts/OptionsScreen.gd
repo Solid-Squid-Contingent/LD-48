@@ -126,8 +126,8 @@ func load_options():
 		set_volume("SoundEffects", optionsData["sfx_volume"])
 
 func _on_BackButton_pressed():
-	go_away()
 	emit_signal("button_pressed")
+	go_away()
 
 func _on_FullscreenToggle_toggled(button_pressed):
 	OS.set_window_fullscreen(button_pressed)

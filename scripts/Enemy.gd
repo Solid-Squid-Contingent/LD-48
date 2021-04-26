@@ -74,6 +74,7 @@ func die():
 	queue_free()
 
 func changeHealth(amount: int, damageType):
+	[$HitPlayer1, $HitPlayer2, $HitPlayer3][randi() % 3].play()
 	var deaths = groupStats.changeHealth(amount, damageType, individualStats)
 	for death in deaths:
 		var corpse = corpseScene.instance()

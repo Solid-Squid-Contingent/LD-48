@@ -7,6 +7,7 @@ func _ready():
 
 func _on_Goo_body_entered(body):
 	body.collideWithGoo()
+	$TriggerPlayer.play()
 
 static func getIcon():
 	return icon

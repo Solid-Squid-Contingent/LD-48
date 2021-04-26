@@ -11,5 +11,5 @@ dest_files=[ "res://.import/trap_goo_trigger.ogg-4f2bb7baabb021170b18a084f734f9f
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

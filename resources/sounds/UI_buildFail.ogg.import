@@ -11,5 +11,5 @@ dest_files=[ "res://.import/UI_buildFail.ogg-b56647aca7568d6c2c3e6c0cfc771b1c.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

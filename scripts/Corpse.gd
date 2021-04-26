@@ -4,6 +4,7 @@ var fading = false
 
 func _ready():
 	$Particles2D.emitting = true
+	[$DeathPlayer1, $DeathPlayer2][randi() % 2].play()
 
 
 func setTexture(texture: Texture):

@@ -6,7 +6,8 @@ var noise = OpenSimplexNoise.new()
 var value = 0
 
 func _ready():
-	noise.period = 16.0 
+	noise.period = 16.0
+	$BuildPlayer.play()
 
 func getIcon():
 	return $Sprite.texture 

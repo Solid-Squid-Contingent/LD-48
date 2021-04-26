@@ -159,6 +159,7 @@ margin_top = 83.0
 margin_right = 1568.0
 margin_bottom = 202.0
 text = "Go Back"
+
 [connection signal="value_changed" from="VBoxContainer/SettingsContainer/GridContainer/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SettingsContainer/GridContainer/SoundeffectsSlider" to="." method="_on_SoundeffectsSlider_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/SettingsContainer/GridContainer/ResolutionButton" to="." method="_on_ResolutionButton_item_selected"]

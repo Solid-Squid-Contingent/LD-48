@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://resources/graphics/traps/fireTrap.png" type="Texture" id=1]
 [ext_resource path="res://scripts/FireTrap.gd" type="Script" id=2]
 [ext_resource path="res://scripts/FireArea.gd" type="Script" id=3]
 [ext_resource path="res://resources/graphics/traps/fire1.png" type="Texture" id=4]
 [ext_resource path="res://resources/graphics/traps/fire2.png" type="Texture" id=5]
+[ext_resource path="res://resources/sounds/env_pressurePlateConnect.ogg" type="AudioStream" id=6]
 [ext_resource path="res://resources/graphics/traps/fire5.png" type="Texture" id=7]
 [ext_resource path="res://resources/graphics/traps/fire4.png" type="Texture" id=8]
 [ext_resource path="res://resources/graphics/traps/fire6.png" type="Texture" id=9]
+[ext_resource path="res://resources/sounds/trap_flamethrower_trigger.ogg" type="AudioStream" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 43.4606, 23.2019 )
@@ -187,7 +189,16 @@ disabled = true
 wait_time = 3.0
 one_shot = true
 
-[connection signal="input_event" from="." to="." method="_on_ArrowTrap_input_event"]
+[node name="ConnectPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+bus = "SoundEffects"
+
+[node name="FirePlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+volume_db = 5.0
+bus = "SoundEffects"
+
+[connection signal="input_event" from="." to="." method="_on_FireTrap_input_event"]
 [connection signal="body_entered" from="FireArea" to="FireArea" method="_on_FireArea_body_entered"]
 [connection signal="body_exited" from="FireArea" to="FireArea" method="_on_FireArea_body_exited"]
 [connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]

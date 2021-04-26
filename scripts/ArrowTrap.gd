@@ -20,6 +20,7 @@ func shoot():
 	newArrow.add_central_force(Vector2(0, 1500).rotated(rotation).rotated(inAccuracy))
 	get_parent().call_deferred("add_child", newArrow)
 	emit_signal("fired")
+	$ShootPlayer.play()
 	
 func activate():
 	if $ShootInterval.is_stopped():
@@ -38,6 +39,7 @@ func _on_ArrowTrap_input_event(_viewport, event, _shape_idx):
 		if (target - player.global_position).length() < player.INTERACT_RANGE:
 			if player.isInConnectMode():
 				player.connectTrap(self)
+				$ConnectPlayer.play()
 			else: 
 				activate()
 
