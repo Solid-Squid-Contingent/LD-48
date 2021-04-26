@@ -49,7 +49,9 @@ Press Q to switch between levels.""",
 	0.5,
 	
 	"""The footsteps grow louder. They are approaching again. There is no time to move the treasure any deeper right now.
-You can now place and remove walls. When adding walls, you have to make sure that all floor tiles are still reachable.""",
+Enemies will still enter on the upper level of the pyramid but they will try to reach the second level via the stairs.""",
+	
+	"""You can now place and remove walls. When adding walls, you have to make sure that all floor tiles that were previously reachable are still reachable.""",
 
 ]
 
