@@ -17,7 +17,7 @@ static func wallSnap():
 static func getPrice():
 	return 1
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	value += 1
 	if value > 10000:
 		value = 0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Grabräuber dead.png-88455b0a2695e47f3ebb054bc34fdaa0.stex"
+path="res://.import/tombRaiderDead.png-ebbfab61f5f1c3114bc8d6a35538528b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/Grabräuber dead.png"
-dest_files=[ "res://.import/Grabräuber dead.png-88455b0a2695e47f3ebb054bc34fdaa0.stex" ]
+source_file="res://resources/graphics/enemies/tombRaiderDead.png"
+dest_files=[ "res://.import/tombRaiderDead.png-ebbfab61f5f1c3114bc8d6a35538528b.stex" ]
 
 [params]
 

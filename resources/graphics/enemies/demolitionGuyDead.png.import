@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fancyBellPepper.png-a494c693de3fff7ffacf56fdcbc75bd8.stex"
+path="res://.import/demolitionGuyDead.png-d0f2299aafc20ee4f8cdfbb440356f83.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/enemies/fancyBellPepper.png"
-dest_files=[ "res://.import/fancyBellPepper.png-a494c693de3fff7ffacf56fdcbc75bd8.stex" ]
+source_file="res://resources/graphics/enemies/demolitionGuyDead.png"
+dest_files=[ "res://.import/demolitionGuyDead.png-d0f2299aafc20ee4f8cdfbb440356f83.stex" ]
 
 [params]
 

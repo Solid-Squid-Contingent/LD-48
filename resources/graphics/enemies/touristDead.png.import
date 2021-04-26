@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fancyBellPepperDead.png-d90fdfcd8bb4991ddc0a3dc6516424ab.stex"
+path="res://.import/touristDead.png-2a04fa960c6ec689e4af5a3190bf5995.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/enemies/fancyBellPepperDead.png"
-dest_files=[ "res://.import/fancyBellPepperDead.png-d90fdfcd8bb4991ddc0a3dc6516424ab.stex" ]
+source_file="res://resources/graphics/enemies/touristDead.png"
+dest_files=[ "res://.import/touristDead.png-2a04fa960c6ec689e4af5a3190bf5995.stex" ]
 
 [params]
 

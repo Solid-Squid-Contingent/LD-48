@@ -131,7 +131,6 @@ valign = 1
 autowrap = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0.129412, 0.129412, 0.129412, 1 )
 
 [node name="CurrentItemPreview" type="Sprite" parent="."]
