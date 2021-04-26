@@ -270,7 +270,7 @@ func updateRendering():
 		sprite.position = Vector2(rand_range(-1, 1) * mult,
 								(rand_range(-0.9, 0.9) + i) * mult / individualStats.size())
 		sprite.region_enabled = true
-		sprite.region_rect.size = Vector2(292,453)
+		sprite.region_rect.size = sprite.texture.get_size()/2
 		sprite.scale = Vector2(0.2, 0.2)
 		$Sprites.add_child(sprite)
 		
@@ -295,12 +295,12 @@ func _physics_process(delta):
 	
 	var regionPos = Vector2(0,0)
 	if dir.normalized().y < -0.1:
-		regionPos.y = 453
+		regionPos.y = 1
 	elif dir.normalized().x < -0.1:
-		regionPos.x = 292
+		regionPos.x = 1
 	
 	for sprite in $Sprites.get_children():
-		sprite.region_rect.position = regionPos
+		sprite.region_rect.position = regionPos * sprite.texture.get_size()/2
 	
 	# warning-ignore:return_value_discarded
 	move_and_slide(dir.normalized() * min(groupStats.getActualSpeed(), dir.length() / delta))
