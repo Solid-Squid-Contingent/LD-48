@@ -268,7 +268,7 @@ func updateRendering():
 		var sprite = Sprite.new()
 		sprite.texture = load("res://resources/graphics/enemies/" + groupStats.texturePath)
 		sprite.position = Vector2(rand_range(-1, 1) * mult,
-								(rand_range(-0.9, 0.9) + i) * mult / individualStats.size())
+								(rand_range(-0.4, 0.4) + i - individualStats.size()/2) * mult / individualStats.size())
 		sprite.region_enabled = true
 		sprite.region_rect.size = sprite.texture.get_size()/2
 		sprite.scale = Vector2(0.2, 0.2)
