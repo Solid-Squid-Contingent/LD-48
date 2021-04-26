@@ -49,10 +49,14 @@ func updateList():
 		add_item("(" + String(i) + ") " + String(newItem.getPrice()) + "$", newItem.getIcon())
 		newItem.free()
 		i += 1
+	
+	add_item("(0) 0$", preload("res://resources/graphics/misc/Remove.png"))
 
 func _on_ItemList_item_selected(index):
 	if player.currentItemIndex == index:
 		player.setCurrentItem(null, -1)
+	elif index == selectableScenes.size():
+		player.toggleRemoveMode()
 	else:
 		player.setCurrentItem(selectableScenes[index].instance(), index)
 	unselect_all()
@@ -69,7 +73,7 @@ func _input(event):
 			else:
 				player.setCurrentItem(selectableScenes[index].instance(), index)
 		elif event.scancode == KEY_0:
-			player.setCurrentItem(null, -1)
+			player.toggleRemoveMode()
 
 func _on_UI_allEnemiesDead():
 	progress += 1

@@ -73,6 +73,13 @@ func _process(_delta):
 		currentItem.position = position
 		currentItem.rotation = rotation
 		checkMoneyIndicator()
+	elif player.mode == player.MODES.REMOVING:
+		show()
+		texture = preload("res://resources/graphics/misc/Remove.png")
+		position = get_global_mouse_position()
+		modulate = Color.white
+		modulate.a = 0.5
+		$NoMoneyIndicator.visible = false
 	else:
 		hide()
 
