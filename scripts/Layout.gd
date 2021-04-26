@@ -15,7 +15,7 @@ func addItem(item):
 		placedItems[posInMap + Vector2.UP.rotated(item.rotation)] = item
 	item.connect("tree_exiting", self, "removeItem", [item])
 
-func removeItem(item):	
+func removeItem(item):
 	var posInMap = positionInMap(item.global_position)
 	placedItems.erase(posInMap)
 	if item.has_method("wallSnap") and item.wallSnap():
