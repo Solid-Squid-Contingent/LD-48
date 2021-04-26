@@ -31,5 +31,8 @@ func _on_ItemList_nothing_selected():
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode >= KEY_1 and event.scancode <= KEY_9:
-			player.setCurrentItem(selectableScenes[event.scancode - KEY_1].instance())
+			if event.scancode - KEY_1 >= selectableScenes.size():
+				player.setCurrentItem(null)
+			else:
+				player.setCurrentItem(selectableScenes[event.scancode - KEY_1].instance())
 

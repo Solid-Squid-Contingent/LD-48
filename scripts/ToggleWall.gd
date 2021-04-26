@@ -2,11 +2,7 @@ extends Node2D
 
 const icon = preload("res://resources/graphics/walls/wall.png")
 
-var layout
-			
-func positionInMap(pos):
-	return layout.world_to_map(layout.to_local(pos))
-	
+var layout	
 	
 func _ready():
 	for l in get_tree().get_nodes_in_group('Layout'):
@@ -14,7 +10,7 @@ func _ready():
 			layout = l
 			break
 			
-	var index = positionInMap(global_position)
+	var index = layout.positionInMap(global_position)
 	layout.set_cellv(index, 1 - layout.get_cellv(index))
 	layout.update_bitmask_area(index)
 	

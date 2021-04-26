@@ -84,7 +84,7 @@ func changeBravery(amount: int):
 	updateRendering()
 
 func positionInMap():
-	return layout.world_to_map(layout.to_local(global_position))
+	return layout.positionInMap(global_position)
 
 func centeredWorldPosition(mapIndex: Vector2):
 	return layout.map_to_world(mapIndex) + cellSize * 0.5
@@ -152,6 +152,14 @@ func reachedEnd():
 		resetNavigation()
 	
 func getNextWaypoint():
+	if groupStats.bravery <= 0 and !groupStats.drunkPathfinding:
+		if currentTreeNode.parent and currentTreeNode.parent.get_ref():
+			currentTreeNode = currentTreeNode.parent.get_ref()
+			return centeredWorldPosition(currentTreeNode.tileIndex)
+		else:
+			queue_free()
+			return position
+				
 	if (treasurePosition - global_position).length() < 5:
 		reachedEnd()
 	
@@ -163,14 +171,6 @@ func getNextWaypoint():
 	if groupStats.drunkPathfinding:
 		return getRandomAdjacentWaypoint()
 	else:
-		if groupStats.bravery <= 0:
-			if currentTreeNode.parent and currentTreeNode.parent.get_ref():
-				currentTreeNode = currentTreeNode.parent.get_ref()
-				return centeredWorldPosition(currentTreeNode.tileIndex)
-			else:
-				queue_free()
-				return position
-				
 		var posInMap = positionInMap()
 		explored[posInMap] = true
 		
@@ -239,9 +239,14 @@ func demolish(delta):
 		demolitionCooldown -= delta
 	else:
 		var moveableDirections = getMoveableDirections(0)
-		if !moveableDirections.empty():
+		var possiblePlacements = []
+		for d in moveableDirections:
+			if !layout.isItemAtIndex(positionInMap() + d):
+				possiblePlacements.append(d)
+			
+		if !possiblePlacements.empty():
 			demolitionCooldown = MAX_DEMOLITION_COOLDOWN
-			var demolishPos = positionInMap() + moveableDirections[randi() % moveableDirections.size()]
+			var demolishPos = positionInMap() + possiblePlacements[randi() % possiblePlacements.size()]
 			
 			var dynamite = dynamiteScene.instance()
 			dynamite.position = centeredWorldPosition(demolishPos)

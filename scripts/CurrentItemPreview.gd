@@ -16,11 +16,11 @@ func setClosestFloorSnapPosition(wallSnap, everywhereSnap):
 	player.canPlaceCurrentItem = true
 	
 	var currentLayout = player.layout
-	var mousePositionInLevel = get_global_mouse_position()
-	var positionInMap = currentLayout.world_to_map(currentLayout.to_local(mousePositionInLevel))
+	var mousePos= get_global_mouse_position()
+	var positionInMap = currentLayout.positionInMap(mousePos)
 	var typeOfTile = currentLayout.get_cellv(positionInMap)
-	if typeOfTile == 1 or everywhereSnap: #is floor
-		if (mousePositionInLevel - player.global_position).length() < player.INTERACT_RANGE:
+	if (typeOfTile == 1 or everywhereSnap) and not currentLayout.isItemAtPos(mousePos): #is floor
+		if (mousePos - player.global_position).length() < player.INTERACT_RANGE:
 			modulate = Color.green
 		else:
 			modulate = Color.yellow
@@ -31,7 +31,7 @@ func setClosestFloorSnapPosition(wallSnap, everywhereSnap):
 		var cellSize = currentLayout.cell_size
 		
 		if wallSnap:
-			var offset = mousePositionInLevel - cellPosition
+			var offset = mousePos - cellPosition
 			if offset.x > offset.y:
 				if cellSize.x - offset.x > offset.y:
 					rotation = deg2rad(0)
