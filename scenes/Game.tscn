@@ -61,6 +61,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="EnemyInfo" parent="UILayer" instance=ExtResource( 5 )]
+visible = false
 
 [node name="Textbox" type="TextureRect" parent="UILayer" groups=[
 "Textbox",
