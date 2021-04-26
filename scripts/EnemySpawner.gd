@@ -97,7 +97,7 @@ func generateWave(enemyTypesUsed, addedGroupSize):
 			var typeIndex = randi() % enemyTypesUsed.size()
 			type = enemyTypesUsed[typeIndex]
 			
-		for _u in range(rand_range(2,5) + addedGroupSize):
+		for _u in range(rand_range(2,10) + addedGroupSize):
 			if type:
 				enemy.individualStats.append(type.duplicate())
 			else:

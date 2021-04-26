@@ -19,6 +19,7 @@ Click the spikes on the right side of the screen (or press 1) and then place the
 	"""Hahahaha, this will show them not to mess with the gods above. Or with you, for that matter.
 Right-click the countdown on the entrance to the pyramid to make enemies appear immediately and watch them DIE.""",
 	["Spikes", "bodyExitedSpikes"],
+	["Spikes", "bodyExitedSpikes"],
 	0.5,
 	
 	"""What? One of them survived the spikes of DESTRUCTION?! Such an action shall not be tolerated!
