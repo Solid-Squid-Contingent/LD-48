@@ -18,4 +18,14 @@ texture = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="Crocodile1" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[node name="Crocodile2" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_Spikes_body_entered"]
+[connection signal="timeout" from="Crocodile1" to="." method="_on_Crocodile1_timeout"]
+[connection signal="timeout" from="Crocodile2" to="." method="_on_Crocodile2_timeout"]
