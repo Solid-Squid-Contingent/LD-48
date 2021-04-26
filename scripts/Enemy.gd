@@ -89,33 +89,12 @@ func positionInMap():
 func centeredWorldPosition(mapIndex: Vector2):
 	return layout.map_to_world(mapIndex) + cellSize * 0.5
 
-func pairOfCellAndPosition(direction: Vector2):
-	var typeOfCell = layout.get_cellv(positionInMap() + direction)
-	return [typeOfCell, direction]
-
-func getAdjacentCells():
-	var adjacentCells = []
-	
-	adjacentCells.append(pairOfCellAndPosition(Vector2(1,0)))
-	adjacentCells.append(pairOfCellAndPosition(Vector2(0,1)))
-	adjacentCells.append(pairOfCellAndPosition(Vector2(-1,0)))
-	adjacentCells.append(pairOfCellAndPosition(Vector2(0,-1)))
-	return adjacentCells
-
-func getMoveableDirections(tileId = 1):
-	var adjacentCells = getAdjacentCells()
-	var moveableDirections = []
-	for cell in adjacentCells:
-		if cell[0] == tileId:
-			moveableDirections.append(cell[1])
-	
-	return moveableDirections
 
 func directionToWaypoint(direction: Vector2):
 	return centeredWorldPosition(positionInMap() + direction)
 
 func getRandomAdjacentWaypoint():
-	var moveableDirections = getMoveableDirections()
+	var moveableDirections = layout.getAdjacentCellsWithIdPos(global_position, 1)
 	if moveableDirections.empty():
 		return position
 	return directionToWaypoint(moveableDirections[randi() % moveableDirections.size()])
@@ -179,7 +158,7 @@ func getNextWaypoint():
 			rootTreeNode = currentTreeNode
 		
 		if !currentTreeNode.completed:
-			var moveableDirections = getMoveableDirections()
+			var moveableDirections = layout.getAdjacentCellsWithIdPos(global_position, 1)
 			moveableDirections.shuffle()
 			
 			for direction in moveableDirections:
@@ -238,7 +217,7 @@ func demolish(delta):
 	if demolitionCooldown > 0.0:
 		demolitionCooldown -= delta
 	else:
-		var moveableDirections = getMoveableDirections(0)
+		var moveableDirections = layout.getAdjacentCellsWithIdPos(global_position, 0)
 		var possiblePlacements = []
 		for d in moveableDirections:
 			if !layout.isItemAtIndex(positionInMap() + d):

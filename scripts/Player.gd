@@ -118,20 +118,22 @@ func get_input():
 	velocity = velocity.normalized() * speed
 	
 func _process(_delta):
-	var inWallSnapped = layout.cellAtPosition(global_position.snapped(Vector2.ONE)) == 0
-	var inWallUnsnapped = layout.cellAtPosition(global_position) == 0
-	var inWall = inWallSnapped or inWallUnsnapped
+	var inWallFloor = layout.cellAtPosition((global_position - Vector2.ONE).floor()) == 0
+	var inWallCeil = layout.cellAtPosition((global_position + Vector2.ONE).ceil()) == 0
+	var inWall = inWallFloor or inWallCeil
 	$Light.visible = !inWall
-	$WallLight.visible = inWall		
+	$WallLight.visible = inWall
 
 func _physics_process(_delta):
 	get_input()
 	look_at(position + velocity)
 	velocity = move_and_slide(velocity)
-	if position < topLeftMapCorner or position > bottomRightMapCorner:
+	if position.x < topLeftMapCorner.x or position.y < topLeftMapCorner.y or \
+		position.x > bottomRightMapCorner.x or position.y > bottomRightMapCorner.y:
+			
 		waveScreen.show()
-		position.x = clamp(position.x, 0, 1920)
-		position.y = clamp(position.y, 0, 1080)
+		position.x = clamp(position.x, topLeftMapCorner.x, bottomRightMapCorner.x)
+		position.y = clamp(position.y, topLeftMapCorner.y, bottomRightMapCorner.y)
 
 func setCurrentItem(item):
 	if currentItem:

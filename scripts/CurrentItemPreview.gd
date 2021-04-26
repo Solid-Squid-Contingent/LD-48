@@ -19,7 +19,10 @@ func setClosestFloorSnapPosition(wallSnap, everywhereSnap):
 	var mousePos= get_global_mouse_position()
 	var positionInMap = currentLayout.positionInMap(mousePos)
 	var typeOfTile = currentLayout.get_cellv(positionInMap)
-	if (typeOfTile == 1 or everywhereSnap) and not currentLayout.isItemAtPos(mousePos): #is floor
+	if (typeOfTile == 1 or everywhereSnap) and \
+		(currentLayout.canPlaceWallAtPos(mousePos) or !everywhereSnap) and \
+		not currentLayout.isItemAtPos(mousePos): #is floor
+		
 		if (mousePos - player.global_position).length() < player.INTERACT_RANGE:
 			modulate = Color.green
 		else:

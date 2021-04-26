@@ -16,11 +16,13 @@ var enemyTypes = [
 ]
 
 var enemyDescriptions = [
-	["I hope to make enough of an impact on the world to make people want to rob MY grave.",
+	["Tomb Raider",
+		"I hope to make enough of an impact on the world to make people want to plunder MY crypt.",
 		"Your average grave robber. Stronger than tourists and other amateurs. More resistant to boring traps like spikes and arrows."],
 	
-	["Actually, I’m also a pretty good rapper. Look: ‘Boom.’ Hahahaha… Oh, I blew off my leg.",
-		"Slow but can place bombs that might blow up your pyramid. Right-click bombs to extinguish."]
+	["Demolition Dude",
+		"Actually, I’m also a pretty good rapper. Look: ‘Boom.’ Hahahaha… Oh, I blew off my leg.",
+		"Slow but can place bombs that might blow up your pyramid. Right-click bombs to extinguish."],
 ]
 
 var enemiesSeen = []
@@ -32,10 +34,21 @@ onready var player = get_tree().get_nodes_in_group('Player')[0]
 onready var enemyInfo = get_tree().get_nodes_in_group('EnemyInfo')[0]
 
 func _ready():
+	var layout
+	for l in get_tree().get_nodes_in_group("Layout"):
+		if l.get_parent() == get_parent():
+			layout = l
+			break
+	
+	layout.addItem(self)
+		
 	for enemyType in enemyTypes:
 		enemiesSeen.append(false)
 		
 	spawnEnemy()
+
+func unremoveable():
+	return true
 
 func showEnemyInfoIfNeeded(typeIndex):
 	return #TODO: Remove
