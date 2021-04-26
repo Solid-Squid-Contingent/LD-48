@@ -18,7 +18,7 @@ var enemyTypes = [
 	Stats.new(false, false, 100, 50, 10, 1, {}, "tourist.png", "evilBellPepperDead.png"),
 	Stats.new(false, false, 150, 100, 100, 2, {Stats.DamageTypes.NORMAL : 0.1}, "tombRaider.png", "evilBellPepperDead.png"),
 	Stats.new(false, true, 300, 50, 50, 3, {}, "sprinter.png", "fancyBellPepperDead.png"),
-	Stats.new(false, true, 70, 100, 100, 5, {}, "tombRaider.png", "fancyBellPepperDead.png")
+	Stats.new(false, true, 70, 100, 100, 5, {}, "demolitionGuy.png", "fancyBellPepperDead.png")
 ]
 
 var enemyDescriptions = [
