@@ -72,5 +72,10 @@ func _process(_delta):
 		setClosestFloorSnapPosition(currentItem.wallSnap(), everywhereSnap)
 		currentItem.position = position
 		currentItem.rotation = rotation
+		checkMoneyIndicator()
 	else:
 		hide()
+
+
+func checkMoneyIndicator():
+	$NoMoneyIndicator.visible = player.money < player.getCurrentItem().getPrice()
