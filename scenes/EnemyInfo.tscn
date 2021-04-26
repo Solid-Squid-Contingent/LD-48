@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resources/fonts/OpenSans-Bold.tres" type="DynamicFont" id=1]
-[ext_resource path="res://resources/graphics/enemies/evilBellPepper.png" type="Texture" id=2]
+[ext_resource path="res://resources/graphics/enemies/tombRaider.png" type="Texture" id=2]
 [ext_resource path="res://resources/graphics/ui/textbox.png" type="Texture" id=3]
 [ext_resource path="res://resources/fonts/menu.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scripts/EnemyInfo.gd" type="Script" id=5]
@@ -23,9 +23,11 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 215, 285 )
-scale = Vector2( 7, 7 )
+position = Vector2( 150, 285 )
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 292, 453 )
 
 [node name="NameLabel" type="Label" parent="."]
 margin_top = 20.0
@@ -42,13 +44,13 @@ __meta__ = {
 }
 
 [node name="QuoteLabel" type="Label" parent="."]
-margin_left = 415.0
+margin_left = 315.0
 margin_top = 150.0
 margin_right = 950.0
 margin_bottom = 400.0
 grow_vertical = 2
 custom_fonts/font = ExtResource( 1 )
-text = "Actually, I’m also a pretty good rapper. Look: ‘Boom.’ Hahahaha… Oh, I blew off my leg."
+text = "Actually, I’m also a pretty good rapper. Look: ‘Boom.’ Hahahaha… Oh, I blew my leg off."
 valign = 1
 autowrap = true
 __meta__ = {
@@ -57,7 +59,7 @@ __meta__ = {
 
 [node name="InfoLabel" type="Label" parent="."]
 margin_left = 50.0
-margin_top = 460.0
+margin_top = 480.0
 margin_right = 950.0
 margin_bottom = 745.0
 custom_fonts/font = ExtResource( 4 )
