@@ -55,6 +55,14 @@ func begin():
 	
 	updateCameraLimits()
 
+func spook():
+	if !$SpookTimer.is_stopped():
+		return false
+	
+	$SpookTimer.start()
+	$Sprite.region_rect.position.x += 558 * 2
+	return true
+
 func updateCameraLimits():
 	var indexRect : Rect2 = layout.get_used_rect()
 	topLeftMapCorner = layout.map_to_world(indexRect.position)
@@ -123,6 +131,19 @@ func get_input():
 		velocity.y += 1
 	if Input.is_action_pressed("up"):
 		velocity.y -= 1
+	
+	if velocity.x > 0:
+		$Sprite.region_rect.position.x = 558
+	elif velocity.x < 0:
+		$Sprite.region_rect.position.x = 0
+	if velocity.y > 0:
+		$Sprite.region_rect.position.y = 0
+	elif velocity.y < 0:
+		$Sprite.region_rect.position.y = 1022
+	
+	if velocity.x != 0 and !$SpookTimer.is_stopped():
+			$Sprite.region_rect.position.x += 558 * 2
+	
 	velocity = velocity.normalized() * speed
 	
 func _process(_delta):
@@ -134,7 +155,6 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	get_input()
-	look_at(position + velocity)
 	velocity = move_and_slide(velocity)
 	if position.x < topLeftMapCorner.x or position.y < topLeftMapCorner.y or \
 		position.x > bottomRightMapCorner.x or position.y > bottomRightMapCorner.y:
@@ -150,3 +170,7 @@ func setCurrentItem(item):
 
 func getCurrentItem():
 	return currentItem
+
+
+func _on_SpookTimer_timeout():
+	$Sprite.region_rect.position.x -= 558 * 2
