@@ -4,6 +4,7 @@ signal done
 
 func setSprite(name):
 	$Sprite.texture = load("res://resources/graphics/enemies/" + name)
+	$Sprite.region_rect.size = $Sprite.texture.get_size() / 2
 	
 func setText(text):
 	$NameLabel.text = text[0]

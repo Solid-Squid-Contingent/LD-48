@@ -10,12 +10,14 @@ onready var enemyScene = preload("res://scenes/Enemy.tscn")
 #speed: int
 #maxHealth: int
 #maxBravery: int
+#moneyDropped
 #resistances
 #texturePath: String
 #corpseTexturePath: String
 var enemyTypes = [
 	Stats.new(false, false, 100, 50, 10, 1, {}, "tourist.png", "evilBellPepperDead.png"),
 	Stats.new(false, false, 150, 100, 100, 2, {Stats.DamageTypes.NORMAL : 0.1}, "tombRaider.png", "evilBellPepperDead.png"),
+	Stats.new(false, true, 300, 50, 50, 3, {}, "sprinter.png", "fancyBellPepperDead.png"),
 	Stats.new(false, true, 70, 100, 100, 5, {}, "tombRaider.png", "fancyBellPepperDead.png")
 ]
 
@@ -28,6 +30,10 @@ var enemyDescriptions = [
 		"I hope to make enough of an impact on the world to make people want to plunder MY crypt.",
 		"Your average grave robber. Stronger than tourists and other amateurs. More resistant to boring traps like spikes and arrows."],
 	
+	["Sprinter",
+		"Running for my life? Yes, I do this sport for a living if that’s what you’re asking.",
+		"Fast. That’s about it. Ahh, and crocodiles like them for some reason."],
+		
 	["Demolition Dude",
 		"Actually, I’m also a pretty good rapper. Look: ‘Boom.’ Hahahaha… Oh, I blew my leg off.",
 		"Slow but can place bombs that might blow up your pyramid. Right-click bombs to extinguish."],
