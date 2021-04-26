@@ -94,6 +94,9 @@ margin_bottom = 40.0
 [node name="EnemyInfo" parent="UILayer" instance=ExtResource( 5 )]
 visible = false
 
+[node name="MinimumShowTime" type="Timer" parent="UILayer/EnemyInfo"]
+one_shot = true
+
 [node name="Textbox" type="TextureRect" parent="UILayer" groups=[
 "Textbox",
 ]]
@@ -110,6 +113,9 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+
+[node name="MinimumShowTime" type="Timer" parent="UILayer/Textbox"]
+one_shot = true
 
 [node name="Label" type="Label" parent="UILayer/Textbox"]
 margin_left = 100.0
