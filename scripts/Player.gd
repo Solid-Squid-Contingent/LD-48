@@ -28,6 +28,7 @@ var connectOrigin
 
 var waveScreen
 
+onready var start_time = OS.get_ticks_msec()
 
 const lampScene = preload("res://scenes/Lamp.tscn")
 const pressurePlateScene = preload("res://scenes/PressurePlate.tscn")
@@ -39,7 +40,6 @@ var canPlaceCurrentItem = true
 
 var topLeftMapCorner
 var bottomRightMapCorner
-
 
 func begin():
 	waveScreen = get_tree().get_nodes_in_group('WaveScreen')[0]
@@ -133,8 +133,12 @@ func get_input():
 	
 	if velocity.x > 0:
 		$Sprite.region_rect.position.x = 558
+		$Sprite.rotation_degrees = 10 
 	elif velocity.x < 0:
 		$Sprite.region_rect.position.x = 0
+		$Sprite.rotation_degrees = - 10
+	elif velocity.x == 0:
+		$Sprite.rotation_degrees = 0
 	if velocity.y > 0:
 		$Sprite.region_rect.position.y = 0
 	elif velocity.y < 0:
@@ -149,8 +153,9 @@ func _process(_delta):
 	var inWallFloor = layout.cellAtPosition((global_position - Vector2.ONE).floor()) == 0
 	var inWallCeil = layout.cellAtPosition((global_position + Vector2.ONE).ceil()) == 0
 	var inWall = inWallFloor or inWallCeil
-	$Light.visible = !inWall
-	$WallLight.visible = inWall
+	floatGhostly()
+	$Sprite/Light.visible = !inWall
+	$Sprite/WallLight.visible = inWall
 
 func _physics_process(_delta):
 	get_input()
@@ -171,6 +176,10 @@ func setCurrentItem(item, index):
 func getCurrentItem():
 	return currentItem
 
+func floatGhostly():
+	var elapsedTime = OS.get_ticks_msec() - start_time
+	$Sprite.position = Vector2(0,1) * sin(elapsedTime / 1500.0) * 20
+	
 
 func _on_SpookTimer_timeout():
 	$Sprite.region_rect.position.x -= 558 * 2
