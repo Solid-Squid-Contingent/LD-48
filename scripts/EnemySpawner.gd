@@ -1,5 +1,8 @@
 extends Sprite
 
+signal spawnedWave
+signal allEnemiesDead
+
 onready var enemyScene = preload("res://scenes/Enemy.tscn")
 
 #drunkPathfinding: bool
@@ -11,11 +14,16 @@ onready var enemyScene = preload("res://scenes/Enemy.tscn")
 #texturePath: String
 #corpseTexturePath: String
 var enemyTypes = [
-	Stats.new(false, false, 100, 100, 100, 2, {Stats.DamageTypes.NORMAL : 0.1}, "evilBellPepper.png", "evilBellPepperDead.png"),
-	Stats.new(false, true, 50, 100, 100, 5, {}, "fancyBellPepper.png", "fancyBellPepperDead.png")
+	Stats.new(false, false, 100, 50, 10, 1, {}, "evilBellPepper.png", "evilBellPepperDead.png"),
+	Stats.new(false, false, 150, 100, 100, 2, {Stats.DamageTypes.NORMAL : 0.1}, "evilBellPepper.png", "evilBellPepperDead.png"),
+	Stats.new(false, true, 70, 100, 100, 5, {}, "fancyBellPepper.png", "fancyBellPepperDead.png")
 ]
 
 var enemyDescriptions = [
+	["Tourist",
+		"Isn’t this country wonderful? Wow, these spikes almost look like they could actually kill y-",
+		"Weak. Puny. Nothing of note about them. Like all enemies they like to show up in groups and split up on intersections."],
+	
 	["Tomb Raider",
 		"I hope to make enough of an impact on the world to make people want to plunder MY crypt.",
 		"Your average grave robber. Stronger than tourists and other amateurs. More resistant to boring traps like spikes and arrows."],
@@ -29,6 +37,10 @@ var enemiesSeen = []
 
 var waves = []
 var betweenWaves = false
+
+var showEnemyInfos = false
+
+var enemyCount = 0
 
 onready var player = get_tree().get_nodes_in_group('Player')[0]
 onready var enemyInfo = get_tree().get_nodes_in_group('EnemyInfo')[0]
@@ -45,62 +57,86 @@ func _ready():
 	for enemyType in enemyTypes:
 		enemiesSeen.append(false)
 		
-	spawnEnemy()
+	$SpawnTimer.start(999.0)
+	betweenWaves = true
+	
+	generateFirstWave()
+	generateFirstWave()
+	generateWave([enemyTypes[0]])
 
 func unremoveable():
 	return true
 
 func showEnemyInfoIfNeeded(typeIndex):
-	return #TODO: Remove
-	if !enemiesSeen[typeIndex]:
+	if showEnemyInfos and !enemiesSeen[typeIndex]:
 		if enemyInfo.visible:
 			yield(enemyInfo, "done")
 		enemiesSeen[typeIndex] = true
 		enemyInfo.setSprite(enemyTypes[typeIndex].texturePath)
 		enemyInfo.setText(enemyDescriptions[typeIndex])
 		enemyInfo.show()
-		
 
-func generateWave():
+func generateFirstWave():
+	var wave = []
+	var enemy : Enemy = enemyScene.instance()
+	enemy.individualStats = []
+	var type = enemyTypes[0]
+	for _u in range(2):
+		enemy.individualStats.append(type.duplicate())
+	enemy.updateGroupStats()
+	wave.append(enemy)
+	waves.append(wave)
+	
+func generateWave(enemyTypesUsed = enemyTypes):
 	var wave = []
 	for _i in range(rand_range(2,10)):
 		var enemy : Enemy = enemyScene.instance()
 		enemy.individualStats = []
 		var type = null
 		if randf() <= 0.75:
-			var typeIndex = randi() % enemyTypes.size()
+			var typeIndex = randi() % enemyTypesUsed.size()
 			showEnemyInfoIfNeeded(typeIndex)
-			type = enemyTypes[typeIndex]
+			type = enemyTypesUsed[typeIndex]
 			
 		for _u in range(rand_range(2,5)):
 			if type:
 				enemy.individualStats.append(type.duplicate())
 			else:
-				var typeIndex = randi() % enemyTypes.size()
+				var typeIndex = randi() % enemyTypesUsed.size()
 				showEnemyInfoIfNeeded(typeIndex)
-				enemy.individualStats.append(enemyTypes[typeIndex].duplicate())
+				enemy.individualStats.append(enemyTypesUsed[typeIndex].duplicate())
 		enemy.updateGroupStats()
 		wave.append(enemy)
 	waves.append(wave)
 	
 func spawnEnemy():
+	if waves.empty():
+		return
+		
 	betweenWaves = false
-	
-	while waves.size() < 3:
-		generateWave()
 
 	var enemy = waves[0].pop_front()
 	enemy.position = position
 	get_parent().call_deferred("add_child", enemy)
 	enemy.call_deferred("updateLevel")
+	enemyCount += 1
+	enemy.connect("groupDied", self, "enemyGroupDied")
 
 	if waves[0].empty():
 		waves.pop_front()
-		generateWave()
-		$SpawnTimer.start(rand_range(20.0, 25.0))
+		$SpawnTimer.start(rand_range(30.0, 40.0))
 		betweenWaves = true
 	else:
-		$SpawnTimer.start(rand_range(3.0, 5.0))
+		$SpawnTimer.start(rand_range(2.0, 4.0))
+	
+	emit_signal("spawnedWave")
+
+func enemyGroupDied():
+	enemyCount -= 1
+	if enemyCount <= 0 and waves.empty():
+		emit_signal("allEnemiesDead")
+		while waves.size() < 3:
+			generateWave()
 
 func _exit_tree():
 	for wave in waves:

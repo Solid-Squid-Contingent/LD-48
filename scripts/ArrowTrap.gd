@@ -1,5 +1,7 @@
 extends Area2D
 
+signal fired
+
 var arrowScene = preload("res://scenes/Arrow.tscn")
 
 const icon = preload("res://resources/graphics/traps/arrowTrap.png")
@@ -17,6 +19,7 @@ func shoot():
 	newArrow.rotation = rotation
 	newArrow.add_central_force(Vector2(0, 1500).rotated(rotation).rotated(inAccuracy))
 	get_parent().call_deferred("add_child", newArrow)
+	emit_signal("fired")
 	
 func activate():
 	if $ShootInterval.is_stopped():

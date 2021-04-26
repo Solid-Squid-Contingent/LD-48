@@ -1,6 +1,10 @@
 extends KinematicBody2D
 class_name Enemy
 
+signal enemyDied
+signal enemyScared
+signal groupDied
+
 onready var treasureRayCast = $TreasureRayCast
 var treasurePosition
 var player
@@ -72,15 +76,19 @@ func changeHealth(amount: int, damageType):
 		corpse.position = position
 		get_parent().add_child(corpse)
 		player.money += death.moneyDropped
+		emit_signal("enemyDied")
 		
 	if individualStats.empty():
 		die()
+		emit_signal("groupDied")
+		
 	updateRendering()
 	
 func changeBravery(amount: int):
 	groupStats.changeBravery(amount, individualStats)
 	if groupStats.bravery <= 0:
 		nextWaypoint = getNextWaypoint()
+		emit_signal("enemyScared")
 			
 	updateRendering()
 

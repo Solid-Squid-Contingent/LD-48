@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 106.835, 44.996 )
 
-[node name="ArrowTrap" type="Area2D"]
+[node name="ArrowTrap" type="Area2D" groups=[
+"ArrowTrap",
+]]
 script = ExtResource( 2 )
 
 [node name="ShootInterval" type="Timer" parent="."]

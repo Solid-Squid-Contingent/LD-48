@@ -1,6 +1,10 @@
 extends KinematicBody2D
 class_name Player
 
+signal placedSpikes
+signal connectedTrap
+signal switchedLevel
+
 var pharaohImage = preload("res://resources/graphics/player/player.png")
 var buildingImage = preload("res://resources/graphics/player/buildingPharaoh.png")
 
@@ -63,6 +67,7 @@ func updateCameraLimits():
 func connectTrap(node):
 	connectOrigin.connectToTrap(node)
 	changeToDefaultMode()
+	emit_signal("connectedTrap")
 
 func isInConnectMode():
 	return mode == MODES.CONNECTING_TRAPS
@@ -97,6 +102,7 @@ func _input(event):
 			layout.occluder_light_mask = 1
 			
 			updateCameraLimits()
+			emit_signal("switchedLevel")
 
 func placeItem(item):
 	if money >= item.getPrice():
@@ -104,6 +110,8 @@ func placeItem(item):
 		currentItem = null
 		level.add_child(item)
 		layout.addItem(item)
+		if item.has_method("isSpikes") and item.isSpikes():
+			emit_signal("placedSpikes")
 
 func get_input():
 	velocity = Vector2()

@@ -35,6 +35,6 @@ func _input(event):
 				player.setCurrentItem(null)
 			else:
 				player.setCurrentItem(selectableScenes[event.scancode - KEY_1].instance())
-		elif event.scancode >= KEY_0:
+		elif event.scancode == KEY_0:
 			player.setCurrentItem(null)
 

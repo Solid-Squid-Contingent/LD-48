@@ -1,5 +1,6 @@
 extends TextureRect
 
+signal done
 
 var enemySpawner
 onready var container = $Container
@@ -26,3 +27,4 @@ func _input(event):
 		visible = false
 		while container.get_child_count() > 0:
 			container.remove_child(container.get_child(0))
+		emit_signal("done")

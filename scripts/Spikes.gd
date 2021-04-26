@@ -1,5 +1,7 @@
 extends Area2D
 
+signal bodyExitedSpikes
+
 const icon = preload("res://resources/graphics/traps/spikes.png")
 
 func _ready():
@@ -16,3 +18,9 @@ static func wallSnap():
 	
 static func getPrice():
 	return 10
+	
+static func isSpikes():
+	return true
+
+func _on_Spikes_body_exited(_body):
+	emit_signal("bodyExitedSpikes")
