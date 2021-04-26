@@ -12,14 +12,21 @@ var connectedTraps = []
 var wires = []
 var currentWire = null
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().get_nodes_in_group('Player')[0]
+	
+	#im sorry junber
+	for layout in get_tree().get_nodes_in_group('Layout'):
+		if layout.visible:
+			layout.connect("itemRemoved", self, "_on_itemRemoved")
+			break
+
 
 
 func activateTraps():
 	for trap in connectedTraps:
-		trap.activate()
+		if trap:
+			trap.activate()
 	
 func connectToTrap(node):
 	connectedTraps.append(node)
@@ -48,7 +55,7 @@ func _on_PressurePlate_input_event(_viewport, event, _shape_idx):
 				add_child(currentWire)
 
 func _on_PressurePlate_mouse_entered():
-	for connection in connectedTraps:
+	for connection in connectedTraps:			
 		var newWire = wireScene.instance()
 		newWire.points[1] = to_local(connection.getWireConnectionPoint().global_position)
 		wires.append(newWire)
@@ -64,6 +71,12 @@ static func getIcon():
 	
 static func wallSnap():
 	return false
+	
+func _on_itemRemoved(item):
+	var pos = connectedTraps.find(item)
+	if pos != -1:
+		connectedTraps.remove(pos)
+	
 
 func _process(_delta):
 	if currentWire:
