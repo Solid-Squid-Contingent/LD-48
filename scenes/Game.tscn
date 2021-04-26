@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scripts/WaveScreen.gd" type="Script" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://resources/graphics/ui/textbox.png" type="Texture" id=6]
 [ext_resource path="res://resources/graphics/traps/no_money.png" type="Texture" id=7]
 [ext_resource path="res://resources/graphics/ui/WavesScreen.png" type="Texture" id=8]
-[ext_resource path="res://scenes/EnemySpawner.tscn" type="PackedScene" id=9]
+[ext_resource path="res://resources/graphics/misc/light.png" type="Texture" id=9]
 [ext_resource path="res://scenes/PyramidLevel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/EnemyInfo.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=12]
@@ -30,6 +30,13 @@ position = Vector2( 3375, 1625 )
 
 [node name="EnemySpawner" parent="PyramidLevel0" instance=ExtResource( 9 )]
 position = Vector2( 2625, 2375 )
+
+[node name="OutsideLight" type="Light2D" parent="PyramidLevel0/EnemySpawner"]
+position = Vector2( 1, 1 )
+texture = ExtResource( 9 )
+texture_scale = 2.0
+color = Color( 1, 0.8, 0.2, 0.443137 )
+shadow_enabled = true
 
 [node name="PyramidLevel1" parent="." instance=ExtResource( 10 )]
 levelIndex = 1
@@ -108,7 +115,7 @@ valign = 1
 autowrap = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.34, 0.34, 0.34, 1 )
+color = Color( 0.129412, 0.129412, 0.129412, 1 )
 
 [node name="CurrentItemPreview" type="Sprite" parent="."]
 visible = false

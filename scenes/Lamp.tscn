@@ -17,6 +17,8 @@ texture = ExtResource( 2 )
 [node name="Light" type="Light2D" parent="."]
 position = Vector2( 0, -28.0316 )
 texture = ExtResource( 1 )
+texture_scale = 4.0
+color = Color( 0.823529, 0.678431, 0.368627, 1 )
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
 __meta__ = {
