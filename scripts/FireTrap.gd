@@ -2,8 +2,8 @@ extends "res://scripts/ArrowTrap.gd"
 
 const fireIcon = preload("res://resources/graphics/traps/fireTrap.png")
 
-onready var particles = [$FireParticles, $FireParticles2, $FireParticles3,
-						$FireParticles4, $FireParticles5, $FireParticles6]
+onready var particles = [$Particles/FireParticles, $Particles/FireParticles2, $Particles/FireParticles3,
+						$Particles/FireParticles4, $Particles/FireParticles5, $Particles/FireParticles6]
 	
 
 static func getIcon():

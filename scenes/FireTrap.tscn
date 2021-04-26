@@ -10,14 +10,14 @@
 [ext_resource path="res://resources/graphics/traps/fire6.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 122.084, 88.1864 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 90.6145, 472.448 )
+extents = Vector2( 43.4606, 23.2019 )
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.248322, 0.510067 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 106.332, 398.438 )
 
 [node name="FireTrap" type="Area2D"]
 collision_mask = 0
@@ -31,26 +31,21 @@ one_shot = true
 position = Vector2( 0, -20 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -5.27748, -37.7636 )
+position = Vector2( 1.93785, -94.6579 )
 shape = SubResource( 1 )
 
-[node name="FireArea" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 4
-script = ExtResource( 3 )
+[node name="Particles" type="Node2D" parent="."]
+position = Vector2( -2.58308, -0.510117 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FireArea"]
-position = Vector2( -0.450943, 345.351 )
-shape = SubResource( 2 )
-disabled = true
-
-[node name="FireParticles" type="CPUParticles2D" parent="."]
+[node name="FireParticles" type="CPUParticles2D" parent="Particles"]
+position = Vector2( -0.389938, -60.734 )
 z_index = 1
 emitting = false
 amount = 60
@@ -68,7 +63,8 @@ color_ramp = SubResource( 3 )
 hue_variation = 0.28
 hue_variation_random = 0.5
 
-[node name="FireParticles2" type="CPUParticles2D" parent="."]
+[node name="FireParticles2" type="CPUParticles2D" parent="Particles"]
+position = Vector2( -0.389938, -60.734 )
 z_index = 1
 emitting = false
 amount = 60
@@ -89,7 +85,8 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="FireParticles3" type="CPUParticles2D" parent="."]
+[node name="FireParticles3" type="CPUParticles2D" parent="Particles"]
+position = Vector2( -0.389938, -60.734 )
 z_index = 1
 emitting = false
 amount = 60
@@ -110,7 +107,8 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="FireParticles4" type="CPUParticles2D" parent="."]
+[node name="FireParticles4" type="CPUParticles2D" parent="Particles"]
+position = Vector2( -0.389938, -60.734 )
 z_index = 1
 emitting = false
 amount = 60
@@ -131,7 +129,8 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="FireParticles5" type="CPUParticles2D" parent="."]
+[node name="FireParticles5" type="CPUParticles2D" parent="Particles"]
+position = Vector2( -0.389938, -60.734 )
 z_index = 1
 emitting = false
 amount = 60
@@ -152,7 +151,8 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="FireParticles6" type="CPUParticles2D" parent="."]
+[node name="FireParticles6" type="CPUParticles2D" parent="Particles"]
+position = Vector2( -0.389938, -60.734 )
 z_index = 1
 emitting = false
 amount = 60
@@ -172,6 +172,16 @@ hue_variation_random = 0.5
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="FireArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireArea"]
+position = Vector2( -1.39192, 281.677 )
+shape = SubResource( 2 )
+disabled = true
 
 [node name="FireTimer" type="Timer" parent="."]
 wait_time = 3.0
