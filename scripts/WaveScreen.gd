@@ -20,6 +20,8 @@ func show():
 			container.add_child(enemy)
 			enemyIndex += 1
 		waveIndex += 1
+		if waveIndex >= 3:
+			break
 	
 func _input(event):
 	if visible and event is InputEventKey and event.pressed and !event.echo:

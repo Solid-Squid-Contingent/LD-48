@@ -62,6 +62,7 @@ func begin():
 	
 	generateFirstWave()
 	generateFirstWave()
+	generateFirstWave()
 	generateWave([enemyTypes[0]], 0)
 
 func unremoveable():
@@ -119,7 +120,7 @@ func spawnEnemy():
 	get_parent().call_deferred("add_child", enemy)
 	enemy.call_deferred("updateLevel")
 	enemyCount += 1
-	enemy.connect("groupDied", self, "enemyGroupDied")
+	enemy.connect("tree_exiting", self, "enemyGroupDied")
 	
 	for stat in enemy.individualStats:
 		showEnemyInfoIfNeeded(enemyTypes.find(stat))
