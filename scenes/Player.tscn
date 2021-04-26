@@ -19,11 +19,8 @@ texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 558, 1022 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
-[node name="Light" type="Light2D" parent="."]
-scale = Vector2( 2, 2 )
+[node name="Light" type="Light2D" parent="Sprite"]
+scale = Vector2( 5, 5 )
 texture = ExtResource( 3 )
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
@@ -31,12 +28,16 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="WallLight" type="Light2D" parent="."]
+[node name="WallLight" type="Light2D" parent="Sprite"]
+scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 3 )
 shadow_color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
