@@ -21,6 +21,9 @@ var explored = {}
 
 const dynamiteScene = preload("res://scenes/Dynamite.tscn")
 const corpseScene = preload("res://scenes/Corpse.tscn")
+const collisionShapeScene = preload("res://scenes/EnemyCollisionShape.tscn")
+
+var collisionShapes = []
 
 var individualStats = [Stats.new()]
 var groupStats: Stats = Stats.new()
@@ -250,6 +253,12 @@ func updateRendering():
 	
 	for sprite in $Sprites.get_children():
 		sprite.queue_free()
+	for collisionShape in $MergeArea.get_children():
+		collisionShape.queue_free()
+	for collisionShape in collisionShapes:
+		collisionShape.queue_free()
+	collisionShapes = []
+	
 	
 	var mult = min(sqrt(individualStats.size() - 1) * 40, 125)
 	for stat in individualStats:
@@ -257,7 +266,16 @@ func updateRendering():
 		sprite.texture = load("res://resources/graphics/enemies/" + groupStats.texturePath)
 		sprite.position = Vector2(rand_range(-1, 1) * mult, rand_range(-1, 1) * mult)
 		$Sprites.add_child(sprite)
+		
+		var collisionShape = collisionShapeScene.instance()
+		collisionShape.position = sprite.position
+		add_child(collisionShape)
+		collisionShapes.append(collisionShape)
 
+		var collisionShape2 = collisionShapeScene.instance()
+		collisionShape2.position = sprite.position
+		$MergeArea.add_child(collisionShape2)
+		
 func _physics_process(delta):
 	if (nextWaypoint-position).length() < 5 or nextWaypoint.x < 0:
 		nextWaypoint = getNextWaypoint()
