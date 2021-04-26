@@ -16,7 +16,8 @@ const INTERACT_RANGE = 750
 
 enum MODES{
 	DEFAULT,
-	CONNECTING_TRAPS
+	CONNECTING_TRAPS,
+	REMOVING
 }
 
 var velocity = Vector2()
@@ -90,8 +91,9 @@ func changeToDefaultMode():
 	
 func _input(event):
 	if event.is_action_pressed("build"):
-		if currentItem == null :
-			layout.freeItemAt(get_global_mouse_position())
+		if currentItem == null:
+			if mode == MODES.REMOVING:
+				layout.freeItemAt(get_global_mouse_position())
 		elif canPlaceCurrentItem:
 			placeItem(currentItem)
 	elif event.is_action_pressed("interact"):
@@ -170,11 +172,23 @@ func _physics_process(_delta):
 		position.x = clamp(position.x, topLeftMapCorner.x, bottomRightMapCorner.x)
 		position.y = clamp(position.y, topLeftMapCorner.y, bottomRightMapCorner.y)
 
-func setCurrentItem(item, index):
+func setCurrentItemKeepMode(item, index):
 	if currentItem:
 		currentItem.free()
 	currentItem = item
 	currentItemIndex = index
+
+func setCurrentItem(item, index):
+	setCurrentItemKeepMode(item, index)
+	if mode == MODES.REMOVING:
+		mode = MODES.DEFAULT
+
+func toggleRemoveMode():
+	setCurrentItemKeepMode(null ,-1)
+	if mode == MODES.REMOVING:
+		mode = MODES.DEFAULT
+	else:
+		mode = MODES.REMOVING
 
 func getCurrentItem():
 	return currentItem
