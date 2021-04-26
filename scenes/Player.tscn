@@ -23,6 +23,9 @@ region_rect = Rect2( 0, 0, 558, 1022 )
 [node name="Light" type="Light2D" parent="Sprite"]
 scale = Vector2( 5, 5 )
 texture = ExtResource( 3 )
+texture_scale = 1.6
+color = Color( 0.34902, 0.560784, 0.678431, 1 )
+energy = 0.8
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
 __meta__ = {
@@ -30,8 +33,11 @@ __meta__ = {
 }
 
 [node name="WallLight" type="Light2D" parent="Sprite"]
+visible = false
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 3 )
+color = Color( 0.34902, 0.560784, 0.678431, 1 )
+energy = 0.8
 shadow_color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_editor_description_": ""
