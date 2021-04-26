@@ -4,9 +4,11 @@ var inMenu = true
 var tutorialProgress = 0
 
 onready var textbox = get_tree().get_nodes_in_group("Textbox")[0]
+onready var enemySpawner = get_tree().get_nodes_in_group("EnemySpawner")[0]
+onready var player = get_tree().get_nodes_in_group("Player")[0]
 	
 const tutorial = [
-	"""Oh, these pesky mortals are at it again. How dare they disturb ye, oh mighty pharaoh?
+	"""Curses, these pesky mortals are at it again. How dare they disturb ye, oh mighty pharaoh?
 Float around using WASD and investigate outside of your pyramid.""",
 	["WaveScreen", "done"],
 	
@@ -52,6 +54,9 @@ You can now place and remove walls. When adding walls, you have to make sure tha
 ]
 
 func _ready():
+	unlockNewPyramidLayer()
+	enemySpawner.begin()
+	player.begin()
 	pass #doTutorial()
 
 func doTutorial():
@@ -63,10 +68,20 @@ func doTutorial():
 		elif currentStep is float:
 			yield(get_tree().create_timer(currentStep), "timeout")
 		else:
-			if currentStep.empty():
-				yield(get_tree(), "idle_frame")
-			else:
-				var node = get_tree().get_nodes_in_group(currentStep[0])[0]
-				yield(node, currentStep[1])
+			var node = get_tree().get_nodes_in_group(currentStep[0])[0]
+			yield(node, currentStep[1])
 		tutorialProgress += 1
 	
+	enemySpawner.showInfo = true
+
+func unlockNewPyramidLayer():
+	var nextLevel : Node2D = get_tree().get_nodes_in_group("PotentialPyramidLevel")[0]
+	nextLevel.remove_from_group("PotentialPyramidLevel")
+	nextLevel.add_to_group("PyramidLevel")
+	nextLevel.get_node("Layout").add_to_group("Layout")
+	nextLevel.get_node("TreasureChamber").add_to_group("Treasure")
+	
+	get_tree().call_group("Treasure", "updateTexture")
+
+func _on_EnemySpawner_allEnemiesDead():
+	unlockNewPyramidLayer()

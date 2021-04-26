@@ -10,7 +10,7 @@ const stairsUpScene = preload("res://scenes/StairsUp.tscn")
 
 var pairedStair = null
 
-func _ready():
+func updateTexture():
 	var i = 0
 	for l in get_tree().get_nodes_in_group("Layout"):
 		if l.get_parent() == get_parent():
@@ -18,10 +18,7 @@ func _ready():
 			layout = l
 			break
 		i += 1
-	
-	updateTexture()
-
-func updateTexture():
+		
 	if pairedStair:
 		pairedStair.queue_free()
 		pairedStair = null

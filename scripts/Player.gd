@@ -41,7 +41,7 @@ var topLeftMapCorner
 var bottomRightMapCorner
 
 
-func _ready():
+func begin():
 	waveScreen = get_tree().get_nodes_in_group('WaveScreen')[0]
 	
 	var i = 0

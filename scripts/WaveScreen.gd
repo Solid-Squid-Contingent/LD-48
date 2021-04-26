@@ -15,8 +15,8 @@ func show():
 	for wave in enemySpawner.waves:
 		var enemyIndex = 0
 		for enemy in wave:
-			enemy.position.x = 50 + 50 * enemyIndex
-			enemy.position.y = 250 + 100 * waveIndex
+			enemy.position.x = 200 + 150 * enemyIndex
+			enemy.position.y = 350 + 250 * waveIndex
 			container.add_child(enemy)
 			enemyIndex += 1
 		waveIndex += 1

@@ -45,7 +45,7 @@ var enemyCount = 0
 onready var player = get_tree().get_nodes_in_group('Player')[0]
 onready var enemyInfo = get_tree().get_nodes_in_group('EnemyInfo')[0]
 
-func _ready():
+func begin():
 	var layout
 	for l in get_tree().get_nodes_in_group("Layout"):
 		if l.get_parent() == get_parent():
@@ -62,7 +62,7 @@ func _ready():
 	
 	generateFirstWave()
 	generateFirstWave()
-	generateWave([enemyTypes[0]])
+	generateWave([enemyTypes[0]], 0)
 
 func unremoveable():
 	return true
@@ -87,7 +87,7 @@ func generateFirstWave():
 	wave.append(enemy)
 	waves.append(wave)
 	
-func generateWave(enemyTypesUsed = enemyTypes):
+func generateWave(enemyTypesUsed, addedGroupSize):
 	var wave = []
 	for _i in range(rand_range(2,10)):
 		var enemy : Enemy = enemyScene.instance()
@@ -95,10 +95,9 @@ func generateWave(enemyTypesUsed = enemyTypes):
 		var type = null
 		if randf() <= 0.75:
 			var typeIndex = randi() % enemyTypesUsed.size()
-			showEnemyInfoIfNeeded(typeIndex)
 			type = enemyTypesUsed[typeIndex]
 			
-		for _u in range(rand_range(2,5)):
+		for _u in range(rand_range(2,5) + addedGroupSize):
 			if type:
 				enemy.individualStats.append(type.duplicate())
 			else:
@@ -121,6 +120,9 @@ func spawnEnemy():
 	enemy.call_deferred("updateLevel")
 	enemyCount += 1
 	enemy.connect("groupDied", self, "enemyGroupDied")
+	
+	for stat in enemy.individualStats:
+		showEnemyInfoIfNeeded(enemyTypes.find(stat))
 
 	if waves[0].empty():
 		waves.pop_front()
@@ -131,12 +133,19 @@ func spawnEnemy():
 	
 	emit_signal("spawnedWave")
 
+var enemyTypeUnlockProgress = 0
+var groupSizeDifficulty = 5
+var waveNum = 5
 func enemyGroupDied():
 	enemyCount -= 1
 	if enemyCount <= 0 and waves.empty():
 		emit_signal("allEnemiesDead")
-		while waves.size() < 3:
-			generateWave()
+		while waves.size() < waveNum:
+			generateWave(enemyTypes.slice(0, enemyTypeUnlockProgress), groupSizeDifficulty)
+			
+		enemyTypeUnlockProgress += 1
+		groupSizeDifficulty += 3
+		waveNum += 2
 
 func _exit_tree():
 	for wave in waves:
