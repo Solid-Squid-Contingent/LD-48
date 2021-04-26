@@ -51,21 +51,25 @@ func updateList():
 		i += 1
 
 func _on_ItemList_item_selected(index):
-	player.setCurrentItem(selectableScenes[index].instance())
+	if player.currentItemIndex == index:
+		player.setCurrentItem(null, -1)
+	else:
+		player.setCurrentItem(selectableScenes[index].instance(), index)
 	unselect_all()
 
 func _on_ItemList_nothing_selected():
-	player.setCurrentItem(null)
+	player.setCurrentItem(null, -1)
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode >= KEY_1 and event.scancode <= KEY_9:
-			if event.scancode - KEY_1 >= selectableScenes.size():
-				player.setCurrentItem(null)
+			var index = event.scancode - KEY_1
+			if index >= selectableScenes.size() or player.currentItemIndex == index:
+				player.setCurrentItem(null, -1)
 			else:
-				player.setCurrentItem(selectableScenes[event.scancode - KEY_1].instance())
+				player.setCurrentItem(selectableScenes[index].instance(), index)
 		elif event.scancode == KEY_0:
-			player.setCurrentItem(null)
+			player.setCurrentItem(null, -1)
 
 func _on_UI_allEnemiesDead():
 	progress += 1
