@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/trap_goo_trigger.ogg-4f2bb7baabb021170b18a084f734f9f6.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/trap_goo_trigger.ogg"
+dest_files=[ "res://.import/trap_goo_trigger.ogg-4f2bb7baabb021170b18a084f734f9f6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

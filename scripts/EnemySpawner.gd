@@ -15,10 +15,10 @@ onready var enemyScene = preload("res://scenes/Enemy.tscn")
 #texturePath: String
 #corpseTexturePath: String
 var enemyTypes = [
-	Stats.new(false, false, 100, 50, 10, 1, {}, "tourist.png", "evilBellPepperDead.png"),
-	Stats.new(false, false, 150, 100, 100, 2, {Stats.DamageTypes.NORMAL : 0.1}, "tombRaider.png", "evilBellPepperDead.png"),
-	Stats.new(false, true, 300, 50, 50, 3, {}, "sprinter.png", "fancyBellPepperDead.png"),
-	Stats.new(false, true, 70, 100, 100, 5, {}, "demolitionGuy.png", "fancyBellPepperDead.png")
+	Stats.new(false, false, 100, 50, 10, 1, {}, "tourist.png", "touristDead.png"),
+	Stats.new(false, false, 150, 100, 100, 2, {Stats.DamageTypes.NORMAL : 0.1}, "tombRaider.png", "tombRaiderDead.png"),
+	Stats.new(false, true, 300, 50, 50, 3, {}, "sprinter.png", "sprinterDead.png"),
+	Stats.new(false, true, 70, 100, 100, 5, {}, "demolitionGuy.png", "demolitionGuyDead.png")
 ]
 
 var enemyDescriptions = [
@@ -141,7 +141,7 @@ func spawnEnemy():
 	
 	emit_signal("spawnedWave")
 
-var enemyTypeUnlockProgress = 0
+var enemyTypeUnlockProgress = 1
 var groupSizeDifficulty = 5
 var waveNum = 5
 func enemyGroupDied():

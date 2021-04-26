@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/trap_crocodile_trigger.ogg-a5ddd6c0abd41df2ba40c6837f30bd75.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/trap_crocodile_trigger.ogg"
+dest_files=[ "res://.import/trap_crocodile_trigger.ogg-a5ddd6c0abd41df2ba40c6837f30bd75.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

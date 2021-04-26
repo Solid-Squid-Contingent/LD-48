@@ -2,6 +2,7 @@ extends Node2D
 
 var inMenu = true
 var tutorialProgress = 0
+var pyramidProgress = 0
 
 onready var textbox = get_tree().get_nodes_in_group("Textbox")[0]
 onready var enemySpawner = get_tree().get_nodes_in_group("EnemySpawner")[0]
@@ -58,7 +59,6 @@ Enemies will still enter on the upper level of the pyramid but they will try to 
 
 func _ready():
 	unlockNewPyramidLayer()
-	unlockNewPyramidLayer()
 	enemySpawner.begin()
 	player.begin()
 	doTutorial()
@@ -95,3 +95,22 @@ func unlockNewPyramidLayer():
 		
 func _on_EnemySpawner_allEnemiesDead():
 	unlockNewPyramidLayer()
+	pyramidProgress += 1
+	if pyramidProgress == 2:
+		textbox.setText("""You move deeper yet again. Your enemies grow stronger but so do you.
+You can now palce goo traps that slow down enemies.
+Soon you will reach the deepest point.""")
+		textbox.show()
+	elif pyramidProgress == 3:
+		textbox.setText("""This is it. The lowest point. You hoped no one would disturb you here but alas.
+At least you still have your locyal crocodile friends. They were probably itching for a meal anyways.""")
+		textbox.show()
+	elif pyramidProgress == 4:
+		textbox.setText("""It seems like you could move deeper after all. Below the ground no one shall disturb you any more.
+Finally, your spirit can rest and, just like your body, become one with the earth.""")
+		textbox.show()
+		yield(textbox, "done")
+		textbox.setText("""Thank you for playing.""")
+		textbox.show()
+		yield(textbox, "done")
+		get_tree().quit()

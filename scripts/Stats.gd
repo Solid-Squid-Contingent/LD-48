@@ -25,8 +25,8 @@ func _init(drunkPathfinding_ = false,
 	maxBravery_ = 100,
 	moneyDropped_ = 1,
 	resistances_ = {},
-	texturePath_ = "evilBellPepper.png",
-	corpseTexturePath_ = "evilBellPepperDead.png"):
+	texturePath_ = "",
+	corpseTexturePath_ = ""):
 		
 	drunkPathfinding = drunkPathfinding_
 	demolition = demolition_
@@ -126,9 +126,6 @@ func update(individualStats):
 		maxBravery += stat.maxBravery
 		bravery += stat.bravery
 		moneyDropped += stat.moneyDropped
-		
-		if stat.texturePath != texturePath:
-			texturePath = "mixedBellPepper.png"
 		
 		for damageType in resistances:
 			resistances[damageType] += stat.resistances[damageType]

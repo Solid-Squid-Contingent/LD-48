@@ -16,7 +16,7 @@ func show():
 		var enemyIndex = 0
 		for enemy in wave:
 			enemy.position.x = 200 + 150 * enemyIndex
-			enemy.position.y = 350 + 250 * waveIndex
+			enemy.position.y = 300 + 250 * waveIndex
 			container.add_child(enemy)
 			enemyIndex += 1
 		waveIndex += 1
