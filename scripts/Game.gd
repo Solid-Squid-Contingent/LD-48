@@ -12,7 +12,7 @@ const tutorial = [
 Float around using WASD and investigate outside of your pyramid.""",
 	["WaveScreen", "done"],
 	
-	"""Look at them lining up to steal your riches. Or, should you say, like lambs for the slaughter?
+	"""Look at them lining up to steal your riches. Or, should you say, like lambs to the slaughter?
 Click the spikes on the right side of the screen (or press 1) and then place them next to the entrance by floating nearby and clicking again.""",
 	["Player", "placedSpikes"],
 	
@@ -57,6 +57,7 @@ Enemies will still enter on the upper level of the pyramid but they will try to 
 ]
 
 func _ready():
+	unlockNewPyramidLayer()
 	unlockNewPyramidLayer()
 	enemySpawner.begin()
 	player.begin()

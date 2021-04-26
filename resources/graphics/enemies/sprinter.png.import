@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/crocodiles_none_left.png-871c83c199282da5f5589cf0a1d89f71.stex"
+path="res://.import/sprinter.png-26af4f03d70dd2f9aed6d0f8d2912c99.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/traps/crocodiles_none_left.png"
-dest_files=[ "res://.import/crocodiles_none_left.png-871c83c199282da5f5589cf0a1d89f71.stex" ]
+source_file="res://resources/graphics/enemies/sprinter.png"
+dest_files=[ "res://.import/sprinter.png-26af4f03d70dd2f9aed6d0f8d2912c99.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

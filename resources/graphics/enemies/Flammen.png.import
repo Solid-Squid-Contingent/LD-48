@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/crocodiles_none_left.png-871c83c199282da5f5589cf0a1d89f71.stex"
+path="res://.import/Flammen.png-d47b635cd911a3c37c355cab5b080730.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/traps/crocodiles_none_left.png"
-dest_files=[ "res://.import/crocodiles_none_left.png-871c83c199282da5f5589cf0a1d89f71.stex" ]
+source_file="res://resources/graphics/enemies/Flammen.png"
+dest_files=[ "res://.import/Flammen.png-d47b635cd911a3c37c355cab5b080730.stex" ]
 
 [params]
 

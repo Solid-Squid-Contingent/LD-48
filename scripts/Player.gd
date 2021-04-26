@@ -94,6 +94,9 @@ func _input(event):
 			layout.freeItemAt(get_global_mouse_position())
 		elif canPlaceCurrentItem:
 			placeItem(currentItem)
+	elif event.is_action_pressed("interact"):
+		if currentItem:
+			setCurrentItem(null, -1)
 	elif event is InputEventKey and event.pressed:
 		if event.scancode == KEY_Q:
 			var levels = get_tree().get_nodes_in_group('PyramidLevel')

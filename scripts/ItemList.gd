@@ -34,7 +34,7 @@ var selectableScenesProgression = [
 ]
 
 var progress = 0
-var selectableScenes = selectableScenesProgression[progress]
+var selectableScenes = selectableScenesProgression.back() #[progress]
 
 onready var player = get_tree().get_nodes_in_group("Player")[0]
 

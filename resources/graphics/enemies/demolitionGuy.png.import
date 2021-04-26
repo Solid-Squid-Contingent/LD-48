@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/crocodiles_none_left.png-871c83c199282da5f5589cf0a1d89f71.stex"
+path="res://.import/demolitionGuy.png-d639a286f5d22308e527d62db71a9856.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/graphics/traps/crocodiles_none_left.png"
-dest_files=[ "res://.import/crocodiles_none_left.png-871c83c199282da5f5589cf0a1d89f71.stex" ]
+source_file="res://resources/graphics/enemies/demolitionGuy.png"
+dest_files=[ "res://.import/demolitionGuy.png-d639a286f5d22308e527d62db71a9856.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

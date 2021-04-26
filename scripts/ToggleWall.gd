@@ -2,14 +2,14 @@ extends Node2D
 
 const icon = preload("res://resources/graphics/walls/wall.png")
 
-var layout	
+var layout
 	
 func _ready():
 	for l in get_tree().get_nodes_in_group('Layout'):
-		if l.visible:
+		if l.get_parent().visible:
 			layout = l
 			break
-			
+	
 	var index = layout.positionInMap(global_position)
 	layout.set_cellv(index, 1 - layout.get_cellv(index))
 	layout.update_bitmask_area(index)
