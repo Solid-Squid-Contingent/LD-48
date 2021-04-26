@@ -38,8 +38,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Test"
-run/main_scene="res://scenes/Game.tscn"
+config/name="Tourist Trap"
+run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
 [display]
