@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/trap_pressureplate_trigger.ogg-0dd4cca9bf9744f8c7809df662aeae43.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/trap_pressureplate_trigger.ogg"
+dest_files=[ "res://.import/trap_pressureplate_trigger.ogg-0dd4cca9bf9744f8c7809df662aeae43.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/trap_flamethrower_trigger.ogg-3bbd872bc6f1603d80532ff88c545051.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/trap_flamethrower_trigger.ogg"
+dest_files=[ "res://.import/trap_flamethrower_trigger.ogg-3bbd872bc6f1603d80532ff88c545051.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

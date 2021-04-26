@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/env_buildWall.ogg-ce367cc4c96de1453358df94aa5b0504.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/env_buildWall.ogg"
+dest_files=[ "res://.import/env_buildWall.ogg-ce367cc4c96de1453358df94aa5b0504.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
