@@ -70,8 +70,10 @@ func doTutorial():
 		elif currentStep is float:
 			yield(get_tree().create_timer(currentStep), "timeout")
 		else:
-			var node = get_tree().get_nodes_in_group(currentStep[0])[0]
-			yield(node, currentStep[1])
+			var nodes = get_tree().get_nodes_in_group(currentStep[0])
+			if nodes.empty():
+				break
+			yield(nodes[0], currentStep[1])
 		tutorialProgress += 1
 	
 	enemySpawner.showEnemyInfos = true
