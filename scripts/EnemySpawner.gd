@@ -141,7 +141,7 @@ func spawnEnemy():
 	
 	emit_signal("spawnedWave")
 
-var enemyTypeUnlockProgress = 0
+var enemyTypeUnlockProgress = 1
 var groupSizeDifficulty = 5
 var waveNum = 5
 func enemyGroupDied():

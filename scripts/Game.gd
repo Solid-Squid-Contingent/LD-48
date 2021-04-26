@@ -2,6 +2,7 @@ extends Node2D
 
 var inMenu = true
 var tutorialProgress = 0
+var pyramidProgress = 0
 
 onready var textbox = get_tree().get_nodes_in_group("Textbox")[0]
 onready var enemySpawner = get_tree().get_nodes_in_group("EnemySpawner")[0]
@@ -58,7 +59,6 @@ Enemies will still enter on the upper level of the pyramid but they will try to 
 
 func _ready():
 	unlockNewPyramidLayer()
-	unlockNewPyramidLayer()
 	enemySpawner.begin()
 	player.begin()
 	doTutorial()
@@ -95,3 +95,10 @@ func unlockNewPyramidLayer():
 		
 func _on_EnemySpawner_allEnemiesDead():
 	unlockNewPyramidLayer()
+	pyramidProgress += 1
+	if pyramidProgress == 2:
+		textbox.setText("...")
+		textbox.show()
+	if pyramidProgress == 3:
+		textbox.setText("...")
+		textbox.show()
