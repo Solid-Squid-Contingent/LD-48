@@ -125,8 +125,8 @@ script = ExtResource( 13 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 4 )
 
-[connection signal="allEnemiesDead" from="PyramidLevel0/EnemySpawner" to="." method="_on_EnemySpawner_allEnemiesDead"]
 [connection signal="allEnemiesDead" from="PyramidLevel0/EnemySpawner" to="UILayer/UI" method="_on_EnemySpawner_allEnemiesDead"]
+[connection signal="allEnemiesDead" from="PyramidLevel0/EnemySpawner" to="." method="_on_EnemySpawner_allEnemiesDead"]
 
 [editable path="PyramidLevel0"]
 [editable path="PyramidLevel1"]

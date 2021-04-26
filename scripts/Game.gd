@@ -59,7 +59,6 @@ Enemies will still enter on the upper level of the pyramid but they will try to 
 
 func _ready():
 	unlockNewPyramidLayer()
-	unlockNewPyramidLayer()
 	enemySpawner.begin()
 	player.begin()
 	doTutorial()
