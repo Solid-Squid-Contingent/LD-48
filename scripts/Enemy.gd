@@ -53,7 +53,9 @@ func collideWithCrocodiles():
 	changeHealth(-200, Stats.DamageTypes.CROCODILES)
 	
 func collideWithSpikes():
-	changeHealth(-50, Stats.DamageTypes.NORMAL)
+	if $SpikeIFrameTimer.is_stopped():
+		changeHealth(-50, Stats.DamageTypes.NORMAL)
+		$SpikeIFrameTimer.start()
 	
 func collideWithArrow():
 	changeHealth(-100, Stats.DamageTypes.NORMAL)
