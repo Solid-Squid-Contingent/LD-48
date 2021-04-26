@@ -13,7 +13,7 @@ Float around using WASD and investigate outside of your pyramid.""",
 	["WaveScreen", "done"],
 	
 	"""Look at them lining up to steal your riches. Or, should you say, like lambs for the slaughter?
-Click the spikes on the right side of the screen (or press 2) and then place them next to the entrance by floating nearby and clicking again.""",
+Click the spikes on the right side of the screen (or press 1) and then place them next to the entrance by floating nearby and clicking again.""",
 	["Player", "placedSpikes"],
 	
 	"""Hahahaha, this will show them not to mess with the gods above. Or with you, for that matter.
@@ -27,7 +27,7 @@ Right click the enemy when floating nearby to scare them.""",
 	0.5,
 	
 	"""Ha! The spikes of DESTRUCTION strike yet again! But maybe they need some support after all, purely emotional support of course.
-Place an arrow trap (4) at the end of the first straight hallway and call the next enemies.""",
+Place an arrow trap (2) at the end of the first straight hallway and call the next enemies.""",
 	["EnemySpawner", "spawnedWave"],
 	
 	"""Right-click the arrow trap to fire it.""",
@@ -35,7 +35,7 @@ Place an arrow trap (4) at the end of the first straight hallway and call the ne
 	1.0,
 	
 	"""That trap might have been effective but your time is too precious to waste on performing lowly tasks like manually shooting arrows.
-Place a pressure plate (7) and connect it by first right-clicking it and then the arrow trap.""",
+Place a pressure plate (3) and connect it by first right-clicking it and then the arrow trap.""",
 	["Player", "connectedTrap"],
 	
 	"""Oh, technology. A most trusty minion. SOON IT SHALL REPLACE MANKIND. At least, you hope so.
@@ -49,7 +49,9 @@ Press Q to switch between levels.""",
 	0.5,
 	
 	"""The footsteps grow louder. They are approaching again. There is no time to move the treasure any deeper right now.
-You can now place and remove walls. When adding walls, you have to make sure that all floor tiles are still reachable.""",
+Enemies will still enter on the upper level of the pyramid but they will try to reach the second level via the stairs.""",
+	
+	"""You can now place and remove walls. When adding walls, you have to make sure that all floor tiles that were previously reachable are still reachable.""",
 
 ]
 

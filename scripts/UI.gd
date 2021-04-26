@@ -1,5 +1,7 @@
 extends Control
 
+signal allEnemiesDead
+
 var player : Player
 
 func _ready():
@@ -9,3 +11,7 @@ func _ready():
 func _process(_delta):
 	$MoneyLabel.text = String(player.money)
 	$HealthLabel.text = String(player.health)
+
+
+func _on_EnemySpawner_allEnemiesDead():
+	emit_signal("allEnemiesDead")

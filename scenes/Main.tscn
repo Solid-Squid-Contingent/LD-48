@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/MenuButtonSoundPlayer.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Root.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/DeleteScreen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/CreditsScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Resources/Sounds/menu_button.wav" type="AudioStream" id=5]
 [ext_resource path="res://Scenes/StartMenuScreen.tscn" type="PackedScene" id=6]
@@ -33,9 +32,6 @@ visible = false
 pause_mode = 2
 visible = false
 
-[node name="DeleteScreen" parent="MenuScreenLayer" instance=ExtResource( 3 )]
-visible = false
-
 [node name="CreditsScreen" parent="MenuScreenLayer" instance=ExtResource( 4 )]
 visible = false
 
@@ -63,11 +59,8 @@ script = ExtResource( 8 )
 [connection signal="button_pressed" from="MenuScreenLayer/StartMenuScreen" to="MenuButtonSoundPlayer" method="_on_StartMenuScreen_button_pressed"]
 [connection signal="quit_game" from="MenuScreenLayer/StartMenuScreen" to="." method="_on_StartMenuScreen_quit_game"]
 [connection signal="start_game" from="MenuScreenLayer/StartMenuScreen" to="." method="_on_StartMenuScreen_start_game"]
-[connection signal="screenClosed" from="MenuScreenLayer/OptionsScreen" to="MenuScreenLayer/StartMenuScreen" method="_on_OptionsScreen_screenClosed"]
 [connection signal="screenClosed" from="MenuScreenLayer/OptionsScreen" to="MenuScreenLayer/MenuScreen" method="_on_OptionsScreen_screenClosed"]
-[connection signal="button_pressed" from="MenuScreenLayer/DeleteScreen" to="MenuButtonSoundPlayer" method="_on_DeleteScreen_button_pressed"]
-[connection signal="deleteSaveData" from="MenuScreenLayer/DeleteScreen" to="." method="_on_DeleteScreen_deleteSaveData"]
-[connection signal="screenClosed" from="MenuScreenLayer/DeleteScreen" to="MenuScreenLayer/StartMenuScreen" method="_on_DeleteScreen_screenClosed"]
+[connection signal="screenClosed" from="MenuScreenLayer/OptionsScreen" to="MenuScreenLayer/StartMenuScreen" method="_on_OptionsScreen_screenClosed"]
 [connection signal="button_pressed" from="MenuScreenLayer/CreditsScreen" to="MenuButtonSoundPlayer" method="_on_CreditsScreen_button_pressed"]
 [connection signal="screenClosed" from="MenuScreenLayer/CreditsScreen" to="MenuScreenLayer/StartMenuScreen" method="_on_CreditsScreen_screenClosed"]
 [connection signal="finished" from="MusicIntroPlayer" to="MusicLoopPlayer" method="_on_MusicIntroPlayer_finished"]

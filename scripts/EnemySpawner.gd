@@ -126,8 +126,9 @@ func spawnEnemy():
 
 	if waves[0].empty():
 		waves.pop_front()
-		$SpawnTimer.start(rand_range(30.0, 40.0))
-		betweenWaves = true
+		if !waves.empty():
+			betweenWaves = true
+			$SpawnTimer.start(rand_range(30.0, 40.0))
 	else:
 		$SpawnTimer.start(rand_range(2.0, 4.0))
 	
@@ -146,6 +147,9 @@ func enemyGroupDied():
 		enemyTypeUnlockProgress += 1
 		groupSizeDifficulty += 3
 		waveNum += 2
+		
+		betweenWaves = true
+		$SpawnTimer.start(rand_range(30.0, 40.0))
 
 func _exit_tree():
 	for wave in waves:
