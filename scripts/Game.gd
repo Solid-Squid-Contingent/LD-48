@@ -59,7 +59,7 @@ func _ready():
 	unlockNewPyramidLayer()
 	enemySpawner.begin()
 	player.begin()
-	pass #doTutorial()
+	doTutorial()
 
 func doTutorial():
 	while tutorialProgress < tutorial.size():
@@ -74,16 +74,20 @@ func doTutorial():
 			yield(node, currentStep[1])
 		tutorialProgress += 1
 	
-	enemySpawner.showInfo = true
+	enemySpawner.showEnemyInfos = true
 
 func unlockNewPyramidLayer():
-	var nextLevel : Node2D = get_tree().get_nodes_in_group("PotentialPyramidLevel")[0]
-	nextLevel.remove_from_group("PotentialPyramidLevel")
-	nextLevel.add_to_group("PyramidLevel")
-	nextLevel.get_node("Layout").add_to_group("Layout")
-	nextLevel.get_node("TreasureChamber").add_to_group("Treasure")
-	
-	get_tree().call_group("Treasure", "updateTexture")
-
+	var potentialNextLevels = get_tree().get_nodes_in_group("PotentialPyramidLevel")
+	if potentialNextLevels.size() > 0:
+		var nextLevel : Node2D = potentialNextLevels[0]
+		nextLevel.remove_from_group("PotentialPyramidLevel")
+		nextLevel.add_to_group("PyramidLevel")
+		nextLevel.get_node("Layout").add_to_group("Layout")
+		nextLevel.get_node("TreasureChamber").add_to_group("Treasure")
+		
+		get_tree().call_group("Treasure", "updateTexture")
+	else: 
+		print("no more layers")
+		
 func _on_EnemySpawner_allEnemiesDead():
 	unlockNewPyramidLayer()
