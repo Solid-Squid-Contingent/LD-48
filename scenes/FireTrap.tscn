@@ -51,6 +51,7 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="FireParticles" type="CPUParticles2D" parent="."]
+z_index = 1
 emitting = false
 amount = 60
 lifetime = 3.0
@@ -68,6 +69,7 @@ hue_variation = 0.28
 hue_variation_random = 0.5
 
 [node name="FireParticles2" type="CPUParticles2D" parent="."]
+z_index = 1
 emitting = false
 amount = 60
 lifetime = 3.0
@@ -88,6 +90,7 @@ __meta__ = {
 }
 
 [node name="FireParticles3" type="CPUParticles2D" parent="."]
+z_index = 1
 emitting = false
 amount = 60
 lifetime = 3.0
@@ -108,6 +111,7 @@ __meta__ = {
 }
 
 [node name="FireParticles4" type="CPUParticles2D" parent="."]
+z_index = 1
 emitting = false
 amount = 60
 lifetime = 3.0
@@ -128,6 +132,7 @@ __meta__ = {
 }
 
 [node name="FireParticles5" type="CPUParticles2D" parent="."]
+z_index = 1
 emitting = false
 amount = 60
 lifetime = 3.0
@@ -148,6 +153,7 @@ __meta__ = {
 }
 
 [node name="FireParticles6" type="CPUParticles2D" parent="."]
+z_index = 1
 emitting = false
 amount = 60
 lifetime = 3.0

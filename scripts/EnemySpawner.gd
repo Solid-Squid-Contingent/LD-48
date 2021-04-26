@@ -29,7 +29,7 @@ var enemyDescriptions = [
 		"Your average grave robber. Stronger than tourists and other amateurs. More resistant to boring traps like spikes and arrows."],
 	
 	["Demolition Dude",
-		"Actually, I’m also a pretty good rapper. Look: ‘Boom.’ Hahahaha… Oh, I blew off my leg.",
+		"Actually, I’m also a pretty good rapper. Look: ‘Boom.’ Hahahaha… Oh, I blew my leg off.",
 		"Slow but can place bombs that might blow up your pyramid. Right-click bombs to extinguish."],
 ]
 

@@ -8,6 +8,7 @@
 colors = PoolColorArray( 1, 0, 0, 1, 0.615686, 0, 0, 1 )
 
 [node name="Corpse" type="Node2D"]
+z_index = 1
 script = ExtResource( 3 )
 
 [node name="Particles2D" type="CPUParticles2D" parent="."]
