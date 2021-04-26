@@ -263,10 +263,15 @@ func updateRendering():
 	
 	
 	var mult = min(sqrt(individualStats.size() - 1) * 40, 125)
+	var i = 0
 	for stat in individualStats:
 		var sprite = Sprite.new()
 		sprite.texture = load("res://resources/graphics/enemies/" + groupStats.texturePath)
-		sprite.position = Vector2(rand_range(-1, 1) * mult, rand_range(-1, 1) * mult)
+		sprite.position = Vector2(rand_range(-1, 1) * mult,
+								(rand_range(-0.9, 0.9) + i) * mult / individualStats.size())
+		sprite.region_enabled = true
+		sprite.region_rect.size = Vector2(292,453)
+		sprite.scale = Vector2(0.2, 0.2)
 		$Sprites.add_child(sprite)
 		
 		var collisionShape = collisionShapeScene.instance()
@@ -277,6 +282,7 @@ func updateRendering():
 		var collisionShape2 = collisionShapeScene.instance()
 		collisionShape2.position = sprite.position
 		$MergeArea.add_child(collisionShape2)
+		i += 1
 		
 func _physics_process(delta):
 	if (nextWaypoint-position).length() < 5 or nextWaypoint.x < 0:
@@ -286,6 +292,16 @@ func _physics_process(delta):
 		demolish(delta)
 	
 	var dir = nextWaypoint-position
+	
+	var regionPos = Vector2(0,0)
+	if dir.normalized().y < -0.1:
+		regionPos.y = 453
+	elif dir.normalized().x < -0.1:
+		regionPos.x = 292
+	
+	for sprite in $Sprites.get_children():
+		sprite.region_rect.position = regionPos
+	
 	# warning-ignore:return_value_discarded
 	move_and_slide(dir.normalized() * min(groupStats.getActualSpeed(), dir.length() / delta))
 	for collisionIndex in range(get_slide_count()):

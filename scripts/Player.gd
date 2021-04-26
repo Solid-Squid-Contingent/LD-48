@@ -34,6 +34,7 @@ const pressurePlateScene = preload("res://scenes/PressurePlate.tscn")
 const arrowTrapScene = preload("res://scenes/ArrowTrap.tscn")
 const spikesScene = preload("res://scenes/Spikes.tscn")
 var currentItem = null
+var currentItemIndex = -1
 var canPlaceCurrentItem = true
 
 var topLeftMapCorner
@@ -113,6 +114,7 @@ func placeItem(item):
 	if money >= item.getPrice():
 		money -= item.getPrice()
 		currentItem = null
+		currentItemIndex = -1
 		level.add_child(item)
 		layout.addItem(item)
 		if item.has_method("isSpikes") and item.isSpikes():
@@ -160,10 +162,11 @@ func _physics_process(_delta):
 		position.x = clamp(position.x, topLeftMapCorner.x, bottomRightMapCorner.x)
 		position.y = clamp(position.y, topLeftMapCorner.y, bottomRightMapCorner.y)
 
-func setCurrentItem(item):
+func setCurrentItem(item, index):
 	if currentItem:
 		currentItem.free()
 	currentItem = item
+	currentItemIndex = index
 
 func getCurrentItem():
 	return currentItem
