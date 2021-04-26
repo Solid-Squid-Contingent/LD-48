@@ -243,11 +243,20 @@ func demolish(delta):
 
 func updateRendering():
 	$Label.text = String(individualStats.size())
-	$Sprite.texture = load("res://resources/graphics/enemies/" + groupStats.texturePath)
 	$BraveryProgress.max_value = groupStats.maxBravery
 	$BraveryProgress.value = groupStats.bravery
 	$HealthProgress.max_value = groupStats.maxHealth
 	$HealthProgress.value = groupStats.health
+	
+	for sprite in $Sprites.get_children():
+		sprite.queue_free()
+	
+	var mult = min(sqrt(individualStats.size() - 1) * 40, 125)
+	for stat in individualStats:
+		var sprite = Sprite.new()
+		sprite.texture = load("res://resources/graphics/enemies/" + groupStats.texturePath)
+		sprite.position = Vector2(rand_range(-1, 1) * mult, rand_range(-1, 1) * mult)
+		$Sprites.add_child(sprite)
 
 func _physics_process(delta):
 	if (nextWaypoint-position).length() < 5 or nextWaypoint.x < 0:

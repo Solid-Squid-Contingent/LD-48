@@ -52,7 +52,7 @@ You can now place and remove walls. When adding walls, you have to make sure tha
 ]
 
 func _ready():
-	doTutorial()
+	pass #doTutorial()
 
 func doTutorial():
 	while tutorialProgress < tutorial.size():
