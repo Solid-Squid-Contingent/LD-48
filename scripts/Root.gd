@@ -3,15 +3,11 @@ extends Node2D
 export(String, FILE) var saveFileName = "user://Save.save"
 
 var gameScene = load("res://Scenes/Game.tscn")
-var tutorialProgress = 0
 var previousPauseState
 var game = null
 
 func _ready():
-	loadProgress()
-	if tutorialProgress != 0:
-		$"MenuScreenLayer/StartMenuScreen/MarginContainer/VBoxContainer/StartButton".text = "Continue"
-		$"MenuScreenLayer/StartMenuScreen/MarginContainer/VBoxContainer/DeleteButton".disabled = false
+	restartLevel()
 	pauseGame()
 	
 func _notification(what):
@@ -50,32 +46,7 @@ func restartGame():
 
 
 func saveProgress():
-	var progressData = {
-		"tutorialProgress" : tutorialProgress,
-	}
-	
-	var saveFile = File.new()
-	saveFile.open(saveFileName, File.WRITE)
-	saveFile.store_line(to_json(progressData))
-	saveFile.close()
-	
 	$"MenuScreenLayer/OptionsScreen".save_options()
-
-func loadProgress():
-	var saveFile = File.new()
-	if not saveFile.file_exists(saveFileName):
-		restartLevel()
-		return
-
-	saveFile.open(saveFileName, File.READ)
-	var optionsData = parse_json(saveFile.get_line())
-	saveFile.close()
-	
-	if optionsData.has("tutorialProgress"):
-		tutorialProgress = optionsData["tutorialProgress"]
-	
-	restartLevel()
-
 
 func _on_MenuScreen_restart_game():
 	restartGame()
@@ -97,13 +68,6 @@ func _on_MenuScreen_unpause():
 
 func _on_StartMenuScreen_start_game():
 	unpauseGame()
-
-func _on_DeleteScreen_deleteSaveData():
-	tutorialProgress = 0
-	$"MenuScreenLayer/StartMenuScreen/MarginContainer/VBoxContainer/StartButton".text = "New Game"
-	$"MenuScreenLayer/StartMenuScreen/MarginContainer/VBoxContainer/DeleteButton".disabled = true
-	saveProgress()
-	restartLevel()
 
 func _on_Game_restartGame():
 	restartLevel()
