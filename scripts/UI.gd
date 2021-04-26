@@ -12,6 +12,7 @@ func _ready():
 func _process(_delta):
 	$MoneyLabel.text = String(player.money) + " $"
 	$HealthLabel.text = "Treasure Chamber integrity: " + String(player.health)
+	$LevelLabel.text = "Layer " + String(player.layoutIndex + 1)
 
 
 func _on_EnemySpawner_allEnemiesDead():

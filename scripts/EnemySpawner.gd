@@ -96,7 +96,7 @@ func generateFirstWave():
 	
 func generateWave(enemyTypesUsed, addedGroupSize):
 	var wave = []
-	for _i in range(rand_range(2,10)):
+	for _i in range(rand_range(3,8)):
 		var enemy : Enemy = enemyScene.instance()
 		enemy.individualStats = []
 		var type = null
