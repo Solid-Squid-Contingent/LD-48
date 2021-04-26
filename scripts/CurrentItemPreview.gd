@@ -24,10 +24,10 @@ func setClosestFloorSnapPosition(wallSnap, everywhereSnap):
 		not currentLayout.isItemAtPos(mousePos): #is floor
 		
 		if (mousePos - player.global_position).length() < player.INTERACT_RANGE:
-			modulate = Color.green
+			self_modulate = Color.green
 		else:
-			modulate = Color.yellow
-			modulate.a = 0.5
+			self_modulate = Color.yellow
+			self_modulate.a = 0.5
 			player.canPlaceCurrentItem = false
 		
 		var cellPosition = currentLayout.map_to_world(positionInMap)
@@ -47,14 +47,14 @@ func setClosestFloorSnapPosition(wallSnap, everywhereSnap):
 					rotation = deg2rad(180)
 			
 			if currentLayout.get_cellv(positionInMap + Vector2.UP.rotated(rotation)) == 1: #is floor
-				modulate = Color.red
-				modulate.a = 0.5
+				self_modulate = Color.red
+				self_modulate.a = 0.5
 				player.canPlaceCurrentItem = false
 			
 		position = cellPosition + cellSize / 2
 	else: 
-		modulate = Color.red
-		modulate.a = 0.5
+		self_modulate = Color.red
+		self_modulate.a = 0.5
 		player.canPlaceCurrentItem = false
 		
 		position = get_global_mouse_position() + previewOffset
@@ -77,8 +77,8 @@ func _process(_delta):
 		show()
 		texture = preload("res://resources/graphics/misc/Remove.png")
 		position = get_global_mouse_position()
-		modulate = Color.white
-		modulate.a = 0.5
+		self_modulate = Color.white
+		self_modulate.a = 0.5
 		$NoMoneyIndicator.visible = false
 	else:
 		hide()

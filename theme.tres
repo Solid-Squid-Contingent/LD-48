@@ -97,6 +97,7 @@ Button/colors/font_color_hover = Color( 0.784314, 0.784314, 0.784314, 1 )
 Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 0
 Button/fonts/font = null
+Button/icons/ = null
 Button/styles/disabled = SubResource( 1 )
 Button/styles/focus = SubResource( 2 )
 Button/styles/hover = ExtResource( 3 )

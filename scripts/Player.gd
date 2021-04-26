@@ -155,8 +155,8 @@ func get_input():
 	velocity = velocity.normalized() * speed
 	
 func _process(_delta):
-	var inWallFloor = layout.cellAtPosition((global_position - Vector2.ONE).floor()) == 0
-	var inWallCeil = layout.cellAtPosition((global_position + Vector2.ONE).ceil()) == 0
+	var inWallFloor = layout.cellAtPosition(($Sprite.global_position - Vector2.ONE).floor()) == 0
+	var inWallCeil = layout.cellAtPosition(($Sprite.global_position + Vector2.ONE).ceil()) == 0
 	var inWall = inWallFloor or inWallCeil
 	floatGhostly()
 	$Sprite/Light.visible = !inWall
