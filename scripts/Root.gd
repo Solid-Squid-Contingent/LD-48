@@ -2,7 +2,7 @@ extends Node2D
 
 export(String, FILE) var saveFileName = "user://Save.save"
 
-var gameScene = load("res://Scenes/Game.tscn")
+var gameScene = preload("res://scenes/Game.tscn")
 var previousPauseState
 var game = null
 
@@ -39,9 +39,6 @@ func restartLevel():
 	Engine.time_scale = 1
 	game = gameScene.instance()
 	add_child(game)
-	#game.setTutorialProgress(tutorialProgress)
-	#game.print_next_dialog_line()
-	#game.connect("restartGame", self, "_on_Game_restartGame")
 	game.inMenu = false
 
 func restartGame():

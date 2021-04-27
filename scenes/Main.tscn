@@ -1,15 +1,15 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Scripts/MenuButtonSoundPlayer.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/Root.gd" type="Script" id=2]
+[ext_resource path="res://scripts/MenuButtonSoundPlayer.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Root.gd" type="Script" id=2]
 [ext_resource path="res://scenes/DeathScreen.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/CreditsScreen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/CreditsScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://resources/sounds/UI_menuButton.ogg" type="AudioStream" id=5]
-[ext_resource path="res://Scenes/StartMenuScreen.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/MenuScreen.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/StartMenuScreen.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/MenuScreen.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resources/sounds/Pyramid.mp3" type="AudioStream" id=9]
 [ext_resource path="res://resources/sounds/Menu.mp3" type="AudioStream" id=10]
-[ext_resource path="res://Scenes/OptionsScreen.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/OptionsScreen.tscn" type="PackedScene" id=15]
 
 [node name="Root" type="Node2D"]
 pause_mode = 2
