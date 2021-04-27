@@ -41,7 +41,7 @@ Place a pressure plate (3) and connect it by first right-clicking it and then th
 	["Player", "connectedTrap"],
 	
 	"""Oh, technology. A most trusty minion. SOON IT SHALL REPLACE MANKIND. At least, you hope so.
-Place more traps to defeat the rest of these pesky humans. You can remove traps by clicking them again but you will not get your money back.""",
+Place more traps to defeat the rest of these pesky humans. You can remove traps by selecting remove (0) and clicking them again but you will not get your money back.""",
 	["EnemySpawner", "allEnemiesDead"],
 	1.0,
 	
@@ -53,7 +53,11 @@ Press Q to switch between levels.""",
 	"""The footsteps grow louder. They are approaching again. There is no time to move the treasure any deeper right now.
 Enemies will still enter on the upper level of the pyramid but they will try to reach the second level via the stairs.""",
 	
-	"""You can now place and remove walls. When adding walls, you have to make sure that all floor tiles that were previously reachable are still reachable.""",
+	"""You can now place and remove walls. When adding walls, you have to make sure that all floor tiles that were previously reachable are still reachable.
+Also, you can now place fire traps that burn enemies while they are active.""",
+
+	"""One more thing about enemies, as you might have notices, they don't go straight towards the exit because, well, they don't know where it is so they need to split up and search for it.
+The number in their corner is the number of enemies in a group, the red bar their health and the purple bar their bravery left before they run away.""",
 
 ]
 

@@ -21,6 +21,7 @@
 light_mode = 1
 
 [node name="Game" type="Node2D"]
+pause_mode = 1
 script = ExtResource( 12 )
 
 [node name="PyramidLevel0" parent="." instance=ExtResource( 10 )]
@@ -82,6 +83,8 @@ visible = false
 
 [node name="EnemyInfo" parent="UILayer" instance=ExtResource( 5 )]
 visible = false
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+self_modulate = Color( 0.6, 0.6, 0.6, 1 )
 
 [node name="MinimumShowTime" type="Timer" parent="UILayer/EnemyInfo"]
 one_shot = true
@@ -91,6 +94,8 @@ one_shot = true
 ]]
 pause_mode = 2
 visible = false
+modulate = Color( 0.701961, 0.701961, 0.701961, 1 )
+self_modulate = Color( 0.6, 0.6, 0.6, 1 )
 margin_left = 460.0
 margin_top = 140.0
 margin_right = 1460.0
