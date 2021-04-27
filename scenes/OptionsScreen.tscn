@@ -49,7 +49,7 @@ valign = 1
 [node name="SettingsContainer" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 146.0
 margin_right = 1568.0
-margin_bottom = 811.0
+margin_bottom = 829.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 1
@@ -63,7 +63,7 @@ __meta__ = {
 [node name="GridContainer" type="VBoxContainer" parent="VBoxContainer/SettingsContainer"]
 margin_left = 400.0
 margin_right = 1538.0
-margin_bottom = 665.0
+margin_bottom = 683.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/SettingsContainer/GridContainer"]
@@ -77,7 +77,7 @@ valign = 1
 [node name="MusicSlider" type="HSlider" parent="VBoxContainer/SettingsContainer/GridContainer"]
 margin_top = 63.0
 margin_right = 1138.0
-margin_bottom = 144.0
+margin_bottom = 89.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/slider = ExtResource( 6 )
@@ -86,18 +86,18 @@ custom_styles/grabber_area = ExtResource( 5 )
 value = 100.0
 
 [node name="Soundeffects" type="Label" parent="VBoxContainer/SettingsContainer/GridContainer"]
-margin_top = 148.0
+margin_top = 93.0
 margin_right = 1138.0
-margin_bottom = 207.0
+margin_bottom = 152.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 4 )
 text = "Sound Effect Volume:"
 valign = 1
 
 [node name="SoundeffectsSlider" type="HSlider" parent="VBoxContainer/SettingsContainer/GridContainer"]
-margin_top = 211.0
+margin_top = 156.0
 margin_right = 1138.0
-margin_bottom = 292.0
+margin_bottom = 182.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/slider = ExtResource( 6 )
@@ -109,18 +109,18 @@ __meta__ = {
 }
 
 [node name="Label2" type="Label" parent="VBoxContainer/SettingsContainer/GridContainer"]
-margin_top = 296.0
+margin_top = 186.0
 margin_right = 1138.0
-margin_bottom = 355.0
+margin_bottom = 245.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 4 )
 text = "Resolution:"
 valign = 1
 
 [node name="ResolutionButton" type="OptionButton" parent="VBoxContainer/SettingsContainer/GridContainer"]
-margin_top = 359.0
+margin_top = 249.0
 margin_right = 1138.0
-margin_bottom = 478.0
+margin_bottom = 368.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 7 )
@@ -128,9 +128,9 @@ text = "1200x600"
 align = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer/SettingsContainer/GridContainer"]
-margin_top = 482.0
+margin_top = 372.0
 margin_right = 1138.0
-margin_bottom = 541.0
+margin_bottom = 431.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 4 )
 text = "Fullscreen:"
@@ -140,16 +140,16 @@ __meta__ = {
 }
 
 [node name="FullscreenToggle" type="CheckButton" parent="VBoxContainer/SettingsContainer/GridContainer"]
-margin_top = 545.0
+margin_top = 435.0
 margin_right = 1138.0
-margin_bottom = 665.0
+margin_bottom = 683.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BackContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 840.0
+margin_top = 858.0
 margin_right = 1568.0
-margin_bottom = 1040.0
+margin_bottom = 1058.0
 rect_min_size = Vector2( 0, 200 )
 mouse_filter = 1
 theme = ExtResource( 7 )
