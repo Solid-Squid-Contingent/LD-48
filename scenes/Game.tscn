@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/fonts/OpenSans-Bold.tres" type="DynamicFont" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://scripts/Textbox.gd" type="Script" id=14]
 [ext_resource path="res://resources/sounds/env_dynamite.ogg" type="AudioStream" id=15]
 [ext_resource path="res://resources/graphics/ui/textbox.png" type="Texture" id=16]
+[ext_resource path="res://resources/sounds/env_trapPlaced.ogg" type="AudioStream" id=17]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
@@ -150,6 +151,10 @@ bus = "SoundEffects"
 [node name="BombPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = ExtResource( 15 )
 volume_db = 10.0
+bus = "SoundEffects"
+
+[node name="PlaceTrapPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource( 17 )
 bus = "SoundEffects"
 
 [connection signal="allEnemiesDead" from="PyramidLevel0/EnemySpawner" to="." method="_on_EnemySpawner_allEnemiesDead"]

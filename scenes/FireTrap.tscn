@@ -14,11 +14,11 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 43.4606, 23.2019 )
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.248322, 0.510067 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 106.332, 398.438 )
 
 [node name="FireTrap" type="Area2D"]
@@ -61,7 +61,7 @@ initial_velocity = 569.89
 angle = 180.0
 angle_random = 0.13
 scale_amount = 0.5
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.28
 hue_variation_random = 0.5
 
@@ -80,7 +80,7 @@ initial_velocity = 569.89
 angle = 180.0
 angle_random = 0.13
 scale_amount = 0.5
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.28
 hue_variation_random = 0.5
 __meta__ = {
@@ -102,7 +102,7 @@ initial_velocity = 569.89
 angle = 180.0
 angle_random = 0.13
 scale_amount = 0.5
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.28
 hue_variation_random = 0.5
 __meta__ = {
@@ -124,7 +124,7 @@ initial_velocity = 569.89
 angle = 180.0
 angle_random = 0.13
 scale_amount = 0.5
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.28
 hue_variation_random = 0.5
 __meta__ = {
@@ -146,7 +146,7 @@ initial_velocity = 569.89
 angle = 180.0
 angle_random = 0.13
 scale_amount = 0.5
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.28
 hue_variation_random = 0.5
 __meta__ = {
@@ -168,7 +168,7 @@ initial_velocity = 569.89
 angle = 180.0
 angle_random = 0.13
 scale_amount = 0.5
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.28
 hue_variation_random = 0.5
 __meta__ = {
@@ -182,7 +182,7 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FireArea"]
 position = Vector2( -1.39192, 281.677 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="FireTimer" type="Timer" parent="."]

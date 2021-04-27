@@ -5,7 +5,7 @@ signal bodyExitedSpikes
 const icon = preload("res://resources/graphics/traps/spikes.png")
 
 func _ready():
-	pass # Replace with function body.
+	get_tree().get_nodes_in_group("AudioManager")[0].playPlaceTrapSfx(global_position)
 
 func _on_Spikes_body_entered(body):
 	body.collideWithSpikes()

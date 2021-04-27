@@ -95,6 +95,7 @@ func changeBravery(amount: int):
 	if groupStats.bravery <= 0:
 		nextWaypoint = getNextWaypoint()
 		emit_signal("enemyScared")
+		$ScaredPlayer.play()
 			
 	updateRendering()
 

@@ -7,6 +7,9 @@ const crocodileMunchTime = 5
 
 var amountOfCrocodiles = 2
 
+func _ready():
+	get_tree().get_nodes_in_group("AudioManager")[0].playPlaceTrapSfx(global_position)
+
 func _on_Spikes_body_entered(body):
 	if $Crocodile1.is_stopped():
 		$Crocodile1.start()

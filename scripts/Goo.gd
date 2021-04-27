@@ -1,9 +1,9 @@
-extends Node
+extends Area2D
 
 const icon = preload("res://resources/graphics/traps/goo.png")
 
 func _ready():
-	pass # Replace with function body.
+	get_tree().get_nodes_in_group("AudioManager")[0].playPlaceTrapSfx(global_position)
 
 func _on_Goo_body_entered(body):
 	body.collideWithGoo()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/MenuButtonSoundPlayer.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Root.gd" type="Script" id=2]
@@ -7,9 +7,8 @@
 [ext_resource path="res://resources/sounds/UI_menuButton.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Scenes/StartMenuScreen.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/MenuScreen.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scripts/MusicLoopPlayer.gd" type="Script" id=8]
-[ext_resource path="res://Resources/Sounds/main_theme_intro.ogg" type="AudioStream" id=9]
-[ext_resource path="res://Resources/Sounds/main_theme_loop.ogg" type="AudioStream" id=10]
+[ext_resource path="res://resources/sounds/Pyramid.mp3" type="AudioStream" id=9]
+[ext_resource path="res://resources/sounds/Menu.mp3" type="AudioStream" id=10]
 [ext_resource path="res://Scenes/OptionsScreen.tscn" type="PackedScene" id=15]
 
 [node name="Root" type="Node2D"]
@@ -43,15 +42,13 @@ stream = ExtResource( 5 )
 bus = "SoundEffects"
 script = ExtResource( 1 )
 
-[node name="MusicIntroPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicLoopPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-autoplay = true
 bus = "Music"
 
-[node name="MusicLoopPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MenuMusicLoopPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 bus = "Music"
-script = ExtResource( 8 )
 
 [connection signal="button_pressed" from="MenuScreenLayer/MenuScreen" to="MenuButtonSoundPlayer" method="_on_MenuScreen_button_pressed"]
 [connection signal="pause" from="MenuScreenLayer/MenuScreen" to="." method="_on_MenuScreen_pause"]
@@ -72,5 +69,3 @@ script = ExtResource( 8 )
 [connection signal="quit_game" from="MenuScreenLayer/DeathScreen" to="." method="_on_DeathScreen_quit_game"]
 [connection signal="restart_game" from="MenuScreenLayer/DeathScreen" to="." method="_on_DeathScreen_restart_game"]
 [connection signal="unpause" from="MenuScreenLayer/DeathScreen" to="." method="_on_DeathScreen_unpause"]
-[connection signal="finished" from="MusicIntroPlayer" to="MusicLoopPlayer" method="_on_MusicIntroPlayer_finished"]
-[connection signal="finished" from="MusicLoopPlayer" to="MusicLoopPlayer" method="_on_MusicLoopPlayer_finished"]

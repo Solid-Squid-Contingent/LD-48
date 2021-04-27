@@ -14,6 +14,7 @@ var currentWire = null
 
 func _ready():
 	player = get_tree().get_nodes_in_group('Player')[0]
+	get_tree().get_nodes_in_group("AudioManager")[0].playPlaceTrapSfx(global_position)
 	
 	#im sorry junber
 	for layout in get_tree().get_nodes_in_group('Layout'):

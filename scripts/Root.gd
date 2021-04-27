@@ -18,10 +18,16 @@ func pauseGame():
 	previousPauseState = get_tree().paused
 	game.inMenu = true
 	get_tree().paused = true
+	$MenuMusicLoopPlayer.playing = true
+	$MusicLoopPlayer.playing = false
+	print("pausing")
 	
 func unpauseGame():
 	get_tree().paused = previousPauseState
 	game.inMenu = false
+	$MenuMusicLoopPlayer.playing = false
+	$MusicLoopPlayer.playing = true
+	print("unpausing")
 
 func quitGame():
 	saveProgress()

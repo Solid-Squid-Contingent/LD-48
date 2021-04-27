@@ -57,10 +57,11 @@ func begin():
 	updateCameraLimits()
 
 func spook():
-	if !$SpookTimer.is_stopped():
+	if !$SpookCooldownTimer.is_stopped():
 		return false
 	
 	$SpookTimer.start()
+	$SpookCooldownTimer.start()
 	$Sprite.region_rect.position.x += 558 * 2
 	return true
 
@@ -154,7 +155,7 @@ func get_input():
 		$Sprite.region_rect.position.y = 1022
 	
 	if velocity.x != 0 and !$SpookTimer.is_stopped():
-			$Sprite.region_rect.position.x += 558 * 2
+		$Sprite.region_rect.position.x += 558 * 2
 	
 	velocity = velocity.normalized() * speed
 	

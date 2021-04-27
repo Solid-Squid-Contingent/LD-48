@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Pyramid.mp3-aebd3afdb9647af50f927acf2410b7cb.mp3str"
+
+[deps]
+
+source_file="res://resources/sounds/Pyramid.mp3"
+dest_files=[ "res://.import/Pyramid.mp3-aebd3afdb9647af50f927acf2410b7cb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -5,6 +5,8 @@ const fireIcon = preload("res://resources/graphics/traps/fireTrap.png")
 onready var particles = [$Particles/FireParticles, $Particles/FireParticles2, $Particles/FireParticles3,
 						$Particles/FireParticles4, $Particles/FireParticles5, $Particles/FireParticles6]
 	
+func _ready():
+	get_tree().get_nodes_in_group("AudioManager")[0].playPlaceTrapSfx(global_position)
 
 static func getIcon():
 	return fireIcon

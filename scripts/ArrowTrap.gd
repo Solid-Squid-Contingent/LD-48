@@ -11,6 +11,7 @@ var player
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().get_nodes_in_group('Player')[0]
+	get_tree().get_nodes_in_group("AudioManager")[0].playPlaceTrapSfx(global_position)
 
 func shoot():
 	var newArrow = arrowScene.instance()
