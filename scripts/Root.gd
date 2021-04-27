@@ -71,3 +71,15 @@ func _on_StartMenuScreen_start_game():
 
 func _on_Game_restartGame():
 	restartLevel()
+
+func _on_DeathScreen_pause():
+	pauseGame()
+
+func _on_DeathScreen_unpause():
+	unpauseGame()
+
+func _on_DeathScreen_quit_game():
+	quitGame()
+
+func _on_DeathScreen_restart_game():
+	restartGame()

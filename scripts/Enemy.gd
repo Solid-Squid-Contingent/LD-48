@@ -137,7 +137,9 @@ func seperateGroup(stats, i):
 func reachedEnd():
 	var levels = get_tree().get_nodes_in_group("PyramidLevel")
 	if layoutIndex >= levels.size() - 1:
-		player.health -= 10 * individualStats.size()
+		player.health -= 5 * individualStats.size()
+		if player.health <= 0:
+			get_tree().get_nodes_in_group("DeathScreen")[0].popup()
 		queue_free()
 	else:
 		get_parent().remove_child(self)
@@ -153,8 +155,8 @@ func getNextWaypoint():
 		else:
 			queue_free()
 			return position
-				
-	if (treasurePosition - global_position).length() < 5:
+	
+	if (treasurePosition - global_position).length() < 50:
 		reachedEnd()
 	
 	treasureRayCast.cast_to = treasurePosition - global_position
