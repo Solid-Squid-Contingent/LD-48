@@ -46,7 +46,7 @@ Place more traps to defeat the rest of these pesky humans. Remember to place lig
 	1.0,
 	
 	"""Ahh. Free at last. You used the time to move your treasure deeper into your buried pyramid.
-Press Q to switch between levels.""",
+Press Q to go down a level and press E to go back up.""",
 	["Player", "switchedLevel"],
 	0.5,
 	
@@ -77,9 +77,13 @@ func doTutorial():
 		elif currentStep is float:
 			yield(get_tree().create_timer(currentStep), "timeout")
 		else:
-			var nodes = get_tree().get_nodes_in_group(currentStep[0])
-			if nodes.empty():
-				break
+			var nodes = []
+			
+			while nodes.empty():
+				nodes = get_tree().get_nodes_in_group(currentStep[0])
+				if nodes.empty():
+					yield(get_tree().create_timer(0.1), "timeout")
+					
 			yield(nodes[0], currentStep[1])
 		tutorialProgress += 1
 	
@@ -101,6 +105,9 @@ func unlockNewPyramidLayer():
 func _on_EnemySpawner_allEnemiesDead():
 	unlockNewPyramidLayer()
 	pyramidProgress += 1
+	call_deferred("showLore")
+
+func showLore():
 	if pyramidProgress == 2:
 		textbox.setText("""You move deeper yet again. Your enemies grow stronger but so do you.
 You can now palce goo traps that slow down enemies.

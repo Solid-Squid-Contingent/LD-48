@@ -270,7 +270,7 @@ func updateRendering():
 	var i = 0
 	for stat in individualStats:
 		var sprite = Sprite.new()
-		sprite.texture = load("res://resources/graphics/enemies/" + groupStats.texturePath)
+		sprite.texture = load("res://resources/graphics/enemies/" + stat.texturePath)
 		sprite.position = Vector2(rand_range(-1, 1) * mult,
 								(rand_range(-0.4, 0.4) + i - individualStats.size()/2) * mult / individualStats.size())
 		sprite.region_enabled = true

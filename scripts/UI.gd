@@ -11,7 +11,7 @@ func _ready():
 
 func _process(_delta):
 	$MoneyLabel.text = String(player.money) + " $"
-	$HealthLabel.text = "Treasure Chamber integrity: " + String(player.health)
+	$HealthLabel.text = "Sarcophagus integrity: " + String(player.health)
 	$LevelLabel.text = "Layer " + String(player.layoutIndex + 1)
 
 

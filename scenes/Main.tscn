@@ -36,6 +36,7 @@ visible = false
 visible = false
 
 [node name="DeathScreen" parent="MenuScreenLayer" instance=ExtResource( 3 )]
+visible = false
 
 [node name="MenuButtonSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )

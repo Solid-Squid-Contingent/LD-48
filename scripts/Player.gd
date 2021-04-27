@@ -104,19 +104,24 @@ func _input(event):
 			setCurrentItem(null, -1)
 	elif event is InputEventKey and event.pressed:
 		if event.scancode == KEY_Q:
-			var levels = get_tree().get_nodes_in_group('PyramidLevel')
+			changePyramidLevel(1)
+		elif event.scancode == KEY_E:
+			changePyramidLevel(-1)
+
+func changePyramidLevel(diff):
+	var levels = get_tree().get_nodes_in_group('PyramidLevel')
 			
-			level.visible = false
-			layout.occluder_light_mask = 0
-			
-			layoutIndex = (layoutIndex + 1) % levels.size()
-			layout = get_tree().get_nodes_in_group('Layout')[layoutIndex]
-			level = levels[layoutIndex]
-			level.visible = true
-			layout.occluder_light_mask = 1
-			
-			updateCameraLimits()
-			emit_signal("switchedLevel")
+	level.visible = false
+	layout.occluder_light_mask = 0
+	
+	layoutIndex = (layoutIndex + diff + levels.size()) % levels.size()
+	layout = get_tree().get_nodes_in_group('Layout')[layoutIndex]
+	level = levels[layoutIndex]
+	level.visible = true
+	layout.occluder_light_mask = 1
+	
+	updateCameraLimits()
+	emit_signal("switchedLevel")
 
 func placeItem(item):
 	if money >= item.getPrice():

@@ -21,7 +21,9 @@
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" groups=[
+"Game",
+]]
 pause_mode = 1
 script = ExtResource( 12 )
 
@@ -157,8 +159,8 @@ bus = "SoundEffects"
 stream = ExtResource( 17 )
 bus = "SoundEffects"
 
-[connection signal="allEnemiesDead" from="PyramidLevel0/EnemySpawner" to="." method="_on_EnemySpawner_allEnemiesDead"]
 [connection signal="allEnemiesDead" from="PyramidLevel0/EnemySpawner" to="UILayer/UI" method="_on_EnemySpawner_allEnemiesDead"]
+[connection signal="allEnemiesDead" from="PyramidLevel0/EnemySpawner" to="." method="_on_EnemySpawner_allEnemiesDead"]
 
 [editable path="PyramidLevel0"]
 [editable path="PyramidLevel1"]

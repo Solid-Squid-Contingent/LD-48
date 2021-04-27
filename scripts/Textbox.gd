@@ -11,7 +11,8 @@ func show():
 	visible = true
 
 func _input(event):
-	if visible and event is InputEventKey and event.pressed and !event.echo and $MinimumShowTime.is_stopped():
+	if visible and event is InputEventKey and event.pressed and !event.echo and \
+		$MinimumShowTime.is_stopped() and !get_tree().get_nodes_in_group("Game")[0].inMenu:
 		get_tree().paused = false
 		visible = false
 		emit_signal("done")

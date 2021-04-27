@@ -34,5 +34,3 @@ func updateTexture():
 
 func unremoveable():
 	return true
-	
-	

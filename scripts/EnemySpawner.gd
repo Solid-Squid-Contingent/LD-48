@@ -16,8 +16,8 @@ onready var enemyScene = preload("res://scenes/Enemy.tscn")
 #corpseTexturePath: String
 var enemyTypes = [
 	Stats.new(false, false, 100, 50, 10, 1, {}, "tourist.png", "touristDead.png"),
-	Stats.new(false, false, 150, 100, 100, 2, {Stats.DamageTypes.NORMAL : 0.1}, "tombRaider.png", "tombRaiderDead.png"),
-	Stats.new(false, true, 300, 50, 50, 3, {}, "sprinter.png", "sprinterDead.png"),
+	Stats.new(false, false, 150, 100, 100, 2, {Stats.DamageTypes.NORMAL : 0.2}, "tombRaider.png", "tombRaiderDead.png"),
+	Stats.new(false, false, 500, 50, 50, 3, {Stats.DamageTypes.CROCODILES : 0.5}, "sprinter.png", "sprinterDead.png"),
 	Stats.new(false, true, 70, 100, 100, 5, {}, "demolitionGuy.png", "demolitionGuyDead.png")
 ]
 
@@ -69,7 +69,7 @@ func begin():
 	generateFirstWave()
 	generateFirstWave()
 	generateFirstWave()
-	generateWave([enemyTypes[0]], 0)
+	generateWave([enemyTypes[0]])
 
 func unremoveable():
 	return true
@@ -94,7 +94,7 @@ func generateFirstWave():
 	wave.append(enemy)
 	waves.append(wave)
 	
-func generateWave(enemyTypesUsed, addedGroupSize):
+func generateWave(enemyTypesUsed):
 	var wave = []
 	for _i in range(rand_range(3,8)):
 		var enemy : Enemy = enemyScene.instance()
@@ -104,7 +104,7 @@ func generateWave(enemyTypesUsed, addedGroupSize):
 			var typeIndex = randi() % enemyTypesUsed.size()
 			type = enemyTypesUsed[typeIndex]
 			
-		for _u in range(rand_range(2,10) + addedGroupSize):
+		for _u in range(rand_range(2,10)):
 			if type:
 				enemy.individualStats.append(type.duplicate())
 			else:
@@ -141,21 +141,23 @@ func spawnEnemy():
 	emit_signal("spawnedWave")
 
 var enemyTypeUnlockProgress = 1
-var groupSizeDifficulty = 5
 var waveNum = 5
 func enemyGroupDied():
 	enemyCount -= 1
 	if enemyCount <= 0 and waves.empty():
 		emit_signal("allEnemiesDead")
 		
+		for type in enemyTypes:
+			type.health *= 1.5
+			type.maxHealth *= 1.5
+		
 		if enemyTypeUnlockProgress == 1:
 			generateFirstWave()
 		while waves.size() < waveNum:
-			generateWave(enemyTypes.slice(0, enemyTypeUnlockProgress), groupSizeDifficulty)
+			generateWave(enemyTypes.slice(0, enemyTypeUnlockProgress))
 			
 		enemyTypeUnlockProgress += 1
-		groupSizeDifficulty += 3
-		waveNum += 2
+		waveNum += 1
 		
 		betweenWaves = true
 		$SpawnTimer.start(rand_range(30.0, 40.0))
