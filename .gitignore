@@ -11,4 +11,5 @@ data_*/
 *.exe
 *.zip
 *.pck
-out/
+build/
+*.bat
