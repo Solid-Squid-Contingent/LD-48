@@ -77,5 +77,6 @@ func _input(event):
 
 func _on_UI_allEnemiesDead():
 	progress += 1
-	selectableScenes = selectableScenesProgression[progress]
-	updateList()
+	if progress < selectableScenesProgression.size():
+		selectableScenes = selectableScenesProgression[progress]
+		updateList()

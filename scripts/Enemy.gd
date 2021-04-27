@@ -28,6 +28,9 @@ var collisionShapes = []
 var individualStats = [Stats.new()]
 var groupStats: Stats = Stats.new()
 
+onready var trueCollisionMask = collision_mask
+onready var trueCollisionLayer = collision_layer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	updateLevel()
@@ -144,6 +147,8 @@ func reachedEnd():
 		queue_free()
 	else:
 		get_parent().remove_child(self)
+		collision_layer = trueCollisionLayer
+		collision_mask = trueCollisionMask
 		levels[layoutIndex + 1].add_child(self)
 		updateLevel()
 		resetNavigation()
@@ -291,6 +296,16 @@ func updateRendering():
 func _physics_process(delta):
 	if (nextWaypoint-position).length() < 5 or nextWaypoint.x < 0:
 		nextWaypoint = getNextWaypoint()
+	
+	# Prevent enemies from getting stuck running into walls
+	if layout.cellAtPosition(nextWaypoint) == 0:
+		if currentTreeNode.parent and currentTreeNode.parent.get_ref():
+			currentTreeNode.parent.get_ref().children.erase(currentTreeNode)
+			currentTreeNode = currentTreeNode.parent.get_ref()
+			nextWaypoint = centeredWorldPosition(currentTreeNode.tileIndex)
+		else:
+			resetNavigation()
+			nextWaypoint = getNextWaypoint()
 	
 	if groupStats.demolition:
 		demolish(delta)
