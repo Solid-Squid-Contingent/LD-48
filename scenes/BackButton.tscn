@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+
+[node name="MarginContainer" type="MarginContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = 360.0
+margin_right = 2880.0
+margin_bottom = 660.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YesButton" type="Button" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 3820.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+text = "Go Back"
+expand_icon = true

@@ -21,25 +21,25 @@ var enemyTypes = [
 	Stats.new(false, true, 70, 100, 100, 5, {}, "demolitionGuy.png", "demolitionGuyDead.png")
 ]
 
-var enemyDescriptions = [
-	["Tourist",
+var enemyDescriptions = {
+	"tourist.png" : ["Tourist",
 		"Isn’t this country wonderful? Wow, these spikes almost look like they could actually kill y-",
 		"Weak. Puny. Nothing of note about them. Like all enemies they like to show up in groups and split up on intersections."],
 	
-	["Tomb Raider",
+	"tombRaider.png" : ["Tomb Raider",
 		"I hope to make enough of an impact on the world to make people want to plunder MY crypt.",
 		"Your average grave robber. Stronger than tourists and other amateurs. More resistant to boring traps like spikes and arrows."],
 	
-	["Sprinter",
+	"sprinter.png" : ["Sprinter",
 		"Running for my life? Yes, I do this sport for a living if that’s what you’re asking.",
 		"Fast. That’s about it. Ahh, and crocodiles like them for some reason."],
 		
-	["Demolition Dude",
+	"demolitionGuy.png" : ["Demolition Dude",
 		"Actually, I’m also a pretty good rapper. Look: ‘Boom.’ Hahahaha… Oh, I blew my leg off.",
 		"Slow but can place bombs that might blow up your pyramid. Right-click bombs to extinguish."],
-]
+}
 
-var enemiesSeen = []
+var enemiesSeen = {}
 
 var waves = []
 var betweenWaves = false
@@ -60,8 +60,8 @@ func begin():
 	
 	layout.addItem(self)
 		
-	for enemyType in enemyTypes:
-		enemiesSeen.append(false)
+	for t in enemyDescriptions:
+		enemiesSeen[t] = false
 		
 	$SpawnTimer.start(999.0)
 	betweenWaves = true
@@ -74,13 +74,13 @@ func begin():
 func unremoveable():
 	return true
 
-func showEnemyInfoIfNeeded(typeIndex):
-	if showEnemyInfos and !enemiesSeen[typeIndex]:
+func showEnemyInfoIfNeeded(texturePath):
+	if showEnemyInfos and !enemiesSeen[texturePath]:
 		if enemyInfo.visible:
 			yield(enemyInfo, "done")
-		enemiesSeen[typeIndex] = true
-		enemyInfo.setSprite(enemyTypes[typeIndex].texturePath)
-		enemyInfo.setText(enemyDescriptions[typeIndex])
+		enemiesSeen[texturePath] = true
+		enemyInfo.setSprite(texturePath)
+		enemyInfo.setText(enemyDescriptions[texturePath])
 		enemyInfo.show()
 
 func generateFirstWave():
@@ -109,7 +109,6 @@ func generateWave(enemyTypesUsed, addedGroupSize):
 				enemy.individualStats.append(type.duplicate())
 			else:
 				var typeIndex = randi() % enemyTypesUsed.size()
-				showEnemyInfoIfNeeded(typeIndex)
 				enemy.individualStats.append(enemyTypesUsed[typeIndex].duplicate())
 		enemy.updateGroupStats()
 		wave.append(enemy)
@@ -129,7 +128,7 @@ func spawnEnemy():
 	enemy.connect("tree_exiting", self, "enemyGroupDied")
 	
 	for stat in enemy.individualStats:
-		showEnemyInfoIfNeeded(enemyTypes.find(stat))
+		showEnemyInfoIfNeeded(stat.texturePath)
 
 	if waves[0].empty():
 		waves.pop_front()

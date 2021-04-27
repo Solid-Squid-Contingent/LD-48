@@ -58,7 +58,7 @@ func set_resolution_button_to_current_resolution():
 
 func popup():
 	visible = true
-	$VBoxContainer/BackContainer/BackButton.grab_focus()
+	$MarginContainer/YesButton.grab_focus()
 	
 	musicSlider.set_value(get_volume("Music"))
 	sfxSlider.set_value(get_volume("SoundEffects"))
@@ -125,10 +125,6 @@ func load_options():
 	if optionsData.has("sfx_volume"):
 		set_volume("SoundEffects", optionsData["sfx_volume"])
 
-func _on_BackButton_pressed():
-	emit_signal("button_pressed")
-	go_away()
-
 func _on_FullscreenToggle_toggled(button_pressed):
 	OS.set_window_fullscreen(button_pressed)
 	emit_signal("button_pressed")
@@ -146,3 +142,8 @@ func _on_MusicSlider_value_changed(value):
 
 func _on_SoundeffectsSlider_value_changed(value):
 	set_volume("SoundEffects", value)
+
+
+func _on_YesButton_pressed():
+	emit_signal("button_pressed")
+	go_away()

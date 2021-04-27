@@ -263,7 +263,7 @@ func updateRendering():
 	collisionShapes = []
 	
 	
-	var mult = min(sqrt(individualStats.size() - 1) * 40, 100)
+	var mult = min(sqrt(individualStats.size() - 1) * 40, 90)
 	var i = 0
 	for stat in individualStats:
 		var sprite = Sprite.new()

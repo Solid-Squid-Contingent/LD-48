@@ -1,7 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 1
 
 [node name="Wire" type="Line2D"]
+material = SubResource( 1 )
 z_index = 6
 points = PoolVector2Array( 0, 0, 0, 0 )
 width = 5.0
-default_color = Color( 0.85098, 0.14902, 0.14902, 1 )
+default_color = Color( 0.48, 0.0864, 0.0864, 1 )
