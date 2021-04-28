@@ -234,7 +234,7 @@ func getNextWaypoint():
 			
 		return centeredWorldPosition(currentTreeNode.tileIndex)
 
-const MAX_DEMOLITION_COOLDOWN = 10.0
+const MAX_DEMOLITION_COOLDOWN = 20.0
 var demolitionCooldown = MAX_DEMOLITION_COOLDOWN
 func demolish(delta):
 	if demolitionCooldown > 0.0:

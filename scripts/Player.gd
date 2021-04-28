@@ -102,6 +102,8 @@ func _input(event):
 	elif event.is_action_pressed("interact"):
 		if currentItem:
 			setCurrentItem(null, -1)
+		elif mode == MODES.REMOVING:
+			mode = MODES.DEFAULT
 	elif event is InputEventKey and event.pressed:
 		if event.scancode == KEY_Q:
 			changePyramidLevel(1)

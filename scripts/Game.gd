@@ -57,7 +57,7 @@ Enemies will still enter on the upper level of the pyramid but they will try to 
 Also, you can now place fire traps that burn enemies while they are active.""",
 
 	"""One more thing about enemies: As you might have noticed, they don't go straight towards the exit because, well, they don't know where it is so they need to split up and search for it.
-The number in their corner is the number of enemies in a group, the red bar their health and the purple bar their bravery left before they run away.""",
+The number in their corner is the number of enemies in a group, the red bar is their health and the purple bar is the bravery they have left before they run away.""",
 
 ]
 
@@ -125,4 +125,4 @@ Finally, your spirit can rest and, just like your body, become one with the eart
 		textbox.setText("""Thank you for playing.""")
 		textbox.show()
 		yield(textbox, "done")
-		get_tree().quit()
+		get_tree().get_nodes_in_group("Root")[0].restartGame()

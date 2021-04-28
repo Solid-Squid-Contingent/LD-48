@@ -11,7 +11,9 @@
 [ext_resource path="res://resources/sounds/Menu.mp3" type="AudioStream" id=10]
 [ext_resource path="res://scenes/OptionsScreen.tscn" type="PackedScene" id=15]
 
-[node name="Root" type="Node2D"]
+[node name="Root" type="Node2D" groups=[
+"Root",
+]]
 pause_mode = 2
 scale = Vector2( 1.00172, 0.998806 )
 script = ExtResource( 2 )
