@@ -85,6 +85,6 @@ func _process(_delta):
 
 
 func checkMoneyIndicator():
-	$NoMoneyIndicator.visible = true #player.money < player.getCurrentItem().getPrice()
+	$NoMoneyIndicator.visible = player.money < player.getCurrentItem().getPrice()
 	$NoMoneyIndicator.scale = Vector2(1.0 / scale.x, 1.0 / scale.y)
 	$NoMoneyIndicator.rotation = -rotation
